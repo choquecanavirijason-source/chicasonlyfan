@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "118765182842",
+    "project_id": "chicasapp",
+    "storage_bucket": "chicasapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118765182842:android:8e3f246dac25af639780c3",
+        "android_client_info": {
+          "package_name": "com.chicasonlyfans.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118765182842-j3nog8oooars9heas5af5hr4g3mp5aqh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chicasonlyfans.app",
+            "certificate_hash": "dce3ac294bbd4dcf56367599c58abe7f26854f0e"
+          }
+        },
+        {
+          "client_id": "118765182842-tdrbhss7alv58rl0j88icd4jai5kh621.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH6j2xPSF-U7oyU0j6nfvxIMOR2hZr994"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118765182842-tdrbhss7alv58rl0j88icd4jai5kh621.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

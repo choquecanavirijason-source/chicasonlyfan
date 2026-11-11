@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/config/aws_config.dart';
 import '../../../../shared/services/streaming_service.dart';
 import '../../../videocall/presentation/screens/videocall_screen.dart';
 
@@ -51,6 +52,38 @@ class ActiveLivesScreen extends StatelessWidget {
                   Text(
                     'Vuelve más tarde para ver streams en vivo',
                     style: TextStyle(fontSize: 14, color: Colors.grey[500]),
+                  ),
+                  const SizedBox(height: 28),
+                  // Acceso directo al canal de AWS IVS.
+                  //
+                  // La lista de arriba se alimenta de Firestore, que exige
+                  // sesión iniciada. Mientras la app corra sin login, este
+                  // botón permite ver la transmisión igual: todas las
+                  // creadoras comparten el mismo canal, así que la URL de
+                  // reproducción es fija.
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const VideoCallScreen(
+                            name: 'Transmisión en vivo',
+                            avatar: '',
+                            playbackUrl: AWSConfig.playbackUrl,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.play_circle_outline),
+                    label: const Text('Ver transmisión'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 28,
+                        vertical: 14,
+                      ),
+                    ),
                   ),
                 ],
               ),

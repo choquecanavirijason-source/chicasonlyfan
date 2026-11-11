@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/foundation.dart'
     show kIsWeb, TargetPlatform, defaultTargetPlatform;
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
@@ -6,13 +5,21 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'Firebase no está configurado para web en el proyecto chicas-a776c. '
+        'Regístralo con: flutterfire configure --project=chicas-a776c '
+        '--platforms=web',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'Firebase no está configurado para iOS en el proyecto chicas-a776c. '
+          'Regístralo con: flutterfire configure --project=chicas-a776c '
+          '--platforms=ios',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -35,29 +42,11 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAH6j2xPSF-U7oyU0j6nfvxIMOR2hZr994',
-    appId: '1:118765182842:web:PLACEHOLDER',
-    messagingSenderId: '118765182842',
-    projectId: 'chicasapp',
-    authDomain: 'chicasapp.firebaseapp.com',
-    storageBucket: 'chicasapp.firebasestorage.app',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAH6j2xPSF-U7oyU0j6nfvxIMOR2hZr994',
-    appId: '1:118765182842:android:8e3f246dac25af639780c3',
-    messagingSenderId: '118765182842',
-    projectId: 'chicasapp',
-    storageBucket: 'chicasapp.firebasestorage.app',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAH6j2xPSF-U7oyU0j6nfvxIMOR2hZr994',
-    appId: '1:118765182842:ios:PLACEHOLDER',
-    messagingSenderId: '118765182842',
-    projectId: 'chicasapp',
-    storageBucket: 'chicasapp.firebasestorage.app',
-    iosBundleId: 'com.chicasonlyfans.app',
+    apiKey: 'AIzaSyDRrX9CVj6s7sEpoU-QRRoHDOa1Ixfc71k',
+    appId: '1:454143068934:android:060dcc8717ebbd20b72c87',
+    messagingSenderId: '454143068934',
+    projectId: 'chicas-a776c',
+    storageBucket: 'chicas-a776c.firebasestorage.app',
   );
 }

@@ -1,0 +1,7 @@
+{
+  "AWS_REGION": "us-east-1",
+  "AWS_CHANNEL_ARN": "arn:aws:ivs:us-east-1:CUENTA:channel/CANAL",
+  "AWS_PLAYBACK_URL": "https://XXXX.us-east-1.playback.live-video.net/api/video/v1/us-east-1.CUENTA.channel.CANAL.m3u8",
+  "AWS_INGEST_ENDPOINT": "rtmp://XXXX.global-contribute.live-video.net:1935/app/",
+  "AWS_STREAM_KEY": "sk_us-east-1_PEGAR_AQUI"
+}

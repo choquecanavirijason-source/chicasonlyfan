@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Credenciales locales: nunca commitear
+aws_config.json
+.env

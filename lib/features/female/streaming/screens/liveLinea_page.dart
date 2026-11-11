@@ -129,35 +129,56 @@ class _LiveScreenState extends State<LiveScreen> {
   // ===== AWS IVS STREAMING =====
   Future<void> _iniciarStreaming() async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) {
-        debugPrint('❌ Usuario no autenticado');
+      // Sin credenciales de AWS no hay nada que intentar: avisar claro en vez
+      // de fallar con un error de red indescifrable.
+      final configError = AWSConfig.getConfigError();
+      if (configError != null) {
+        debugPrint(configError);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Debes estar autenticado para iniciar un live'),
+            SnackBar(
+              content: Text(
+                'Falta configurar AWS IVS: ${AWSConfig.faltantes.join(', ')}',
+              ),
               backgroundColor: Colors.red,
+              duration: const Duration(seconds: 6),
             ),
           );
         }
         return;
       }
 
-      debugPrint('✅ Usuario autenticado: ${user.uid}');
+      // El registro en Firestore es OPCIONAL: solo sirve para que el stream
+      // aparezca en la lista "Lives en Vivo" y para contar espectadores.
+      // La transmisión en sí va directa a AWS IVS y no necesita sesión, así
+      // que si no hay usuario autenticado seguimos igual en modo demo.
+      final user = FirebaseAuth.instance.currentUser;
 
-      // Si no existe un streamId, crear sesión en Firestore
-      if (_streamId == null) {
-        final streamId = await _streamingService.startStreaming(
-          userId: user.uid,
-          userName: '@maria_gz', // TODO: Get from user profile
-          userAvatar: 'assets/model.jpg', // TODO: Get from user profile
+      if (user == null) {
+        debugPrint(
+          'ℹ️ Sin sesión de Firebase: se transmite en modo demo '
+          '(sin registro en Firestore ni contador de espectadores).',
         );
+      } else if (_streamId == null) {
+        debugPrint('✅ Usuario autenticado: ${user.uid}');
+        try {
+          final streamId = await _streamingService.startStreaming(
+            userId: user.uid,
+            userName: '@maria_gz', // TODO: Get from user profile
+            userAvatar: 'assets/model.jpg', // TODO: Get from user profile
+          );
 
-        debugPrint('✅ Stream registrado en Firestore: $streamId');
+          debugPrint('✅ Stream registrado en Firestore: $streamId');
 
-        setState(() {
-          _streamId = streamId;
-        });
+          if (mounted) {
+            setState(() {
+              _streamId = streamId;
+            });
+          }
+        } catch (e) {
+          // Un fallo de Firestore no debe impedir la transmisión.
+          debugPrint('⚠️ No se pudo registrar el stream en Firestore: $e');
+        }
       } else {
         debugPrint('📺 Usando stream existente: $_streamId');
       }

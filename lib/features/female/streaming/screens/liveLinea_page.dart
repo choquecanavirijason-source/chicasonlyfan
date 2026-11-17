@@ -183,6 +183,24 @@ class _LiveScreenState extends State<LiveScreen> {
         debugPrint('📺 Usando stream existente: $_streamId');
       }
 
+      // Soltar la cámara antes de que la tome el encoder.
+      //
+      // La vista previa usa un CameraController del plugin `camera`, y el
+      // streaming usa el suyo propio. En un celular real la cámara solo
+      // admite un consumidor: si no se libera aquí, el encoder se conecta al
+      // servidor y registra la pista H264, pero no recibe ni un frame, así
+      // que publica un stream vacío (width=0, height=0) mientras la UI dice
+      // "EN VIVO". En el emulador no se nota porque la cámara virtual sí
+      // admite dos lectores.
+      if (camaraLista) {
+        try {
+          await _controller.dispose();
+        } catch (e) {
+          debugPrint('⚠️ Error al liberar la cámara de la vista previa: $e');
+        }
+        if (mounted) setState(() => camaraLista = false);
+      }
+
       // Inicializar LiveStreamController
       _liveStreamController = ApiVideoLiveStreamController(
         initialAudioConfig: AudioConfig(),

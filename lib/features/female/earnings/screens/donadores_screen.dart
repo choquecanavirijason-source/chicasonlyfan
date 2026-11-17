@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:chicas_app/core/widgets/foto.dart';
 
 class RankingDonadores extends StatelessWidget {
   const RankingDonadores({super.key});
@@ -135,7 +136,7 @@ class RankingDonadores extends StatelessWidget {
         children: [
           Row(
             children: [
-              CircleAvatar(radius: 25, backgroundImage: NetworkImage(avatar)),
+              CircleAvatar(radius: 25, backgroundImage: fotoProvider(avatar)),
               const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +204,7 @@ class RankingDonadores extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CircleAvatar(radius: 22, backgroundImage: NetworkImage(avatar)),
+          CircleAvatar(radius: 22, backgroundImage: fotoProvider(avatar)),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

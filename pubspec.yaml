@@ -68,7 +68,10 @@ flutter:
     - assets/profile3.jpg
     - assets/profile4.jpg
     - assets/profile5.jpg
+    - assets/model.jpg
     - assets/filtro.png
     - assets/filtro1.jpg
     - assets/filtro2.jpg
     - assets/images/profiles/
+    - assets/images/contenido/
+    - assets/videos/

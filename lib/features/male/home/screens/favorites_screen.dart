@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../shared/services/streaming_service.dart';
 import '../../../videocall/presentation/screens/videocall_screen.dart';
+import 'contenido_video_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -28,16 +29,67 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   // Lista de contenido estático en grid
   final List<Map<String, dynamic>> _content = [
     {
-      'type': 'FOTO',
-      'title': 'Fascinado por ell',
-      'subtitle': 'Nueva foto',
-      'image': 'https://picsum.photos/400/600?random=3',
+      'type': 'VIDEO',
+      'title': 'Tarde de piscina',
+      'subtitle': '@ana · hace 2 h',
+      'image': 'assets/images/contenido/portada1.jpg',
+      'video': 'assets/videos/contenido1.mp4',
     },
     {
       'type': 'VIDEO',
-      'title': 'Vender o renta',
-      'subtitle': 'Nuevo video',
-      'image': 'https://picsum.photos/400/600?random=4',
+      'title': 'Probando el filtro nuevo',
+      'subtitle': '@maria · hace 3 h',
+      'image': 'assets/images/contenido/portada2.jpg',
+      'video': 'assets/videos/contenido2.mp4',
+    },
+    {
+      'type': 'VIDEO',
+      'title': 'Antes del live',
+      'subtitle': '@sofia · hace 5 h',
+      'image': 'assets/images/contenido/portada3.jpg',
+      'video': 'assets/videos/contenido3.mp4',
+    },
+    {
+      'type': 'VIDEO',
+      'title': 'Rutina de la mañana',
+      'subtitle': '@laura · hace 8 h',
+      'image': 'assets/images/contenido/portada4.jpg',
+      'video': 'assets/videos/contenido4.mp4',
+    },
+    {
+      'type': 'VIDEO',
+      'title': 'Gracias por los regalos',
+      'subtitle': '@paula · ayer',
+      'image': 'assets/images/contenido/portada5.jpg',
+      'video': 'assets/videos/contenido5.mp4',
+    },
+    {
+      'type': 'VIDEO',
+      'title': 'Bailando un ratito',
+      'subtitle': '@camila · ayer',
+      'image': 'assets/images/contenido/portada6.jpg',
+      'video': 'assets/videos/contenido6.mp4',
+    },
+    {
+      'type': 'VIDEO',
+      'title': 'Sesión de fotos',
+      'subtitle': '@valentina · ayer',
+      'image': 'assets/images/contenido/portada7.jpg',
+      'video': 'assets/videos/contenido7.mp4',
+    },
+    {
+      'type': 'VIDEO',
+      'title': 'Respondiendo preguntas',
+      'subtitle': '@antonella · hace 2 días',
+      'image': 'assets/images/contenido/portada8.jpg',
+      'video': 'assets/videos/contenido8.mp4',
+    },
+    {
+      'type': 'FOTO',
+      'title': 'Nueva foto subida',
+      'subtitle': '@ana · hace 2 días',
+      'image': 'assets/images/contenido/portada9.jpg',
+      'video': 'assets/videos/contenido9.mp4',
     },
   ];
 
@@ -251,7 +303,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       'subtitle': 'En vivo ahora',
                       'image':
                           data['userAvatar'] ??
-                          'https://picsum.photos/400/600?random=1',
+                          'assets/model.jpg',
                       'isLive': true,
                       'streamId': doc.id,
                       'playbackUrl': data['playbackUrl'] ?? '',
@@ -382,11 +434,16 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             ),
           );
         } else {
-          // Mostrar mensaje para contenido estático
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Abriendo: ${item['title']}'),
-              duration: const Duration(seconds: 1),
+          // Contenido subido: se abre en el reproductor propio.
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => ContenidoVideoScreen(
+                titulo: item['title'],
+                subtitulo: item['subtitle'] ?? '',
+                portada: item['image'],
+                video: item['video'],
+              ),
             ),
           );
         }

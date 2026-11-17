@@ -37,6 +37,41 @@ class _HomeScreenState extends State<HomeScreen>
       'description': 'Coffee lover ☕ and photography enthusiast 📸',
       'image': 'assets/images/profiles/chica3.jpg',
     },
+    {
+      'name': 'Laura',
+      'age': 24,
+      'distance': '12:10',
+      'description': 'Bailando mis canciones favoritas ✨',
+      'image': 'assets/images/profiles/chica4.jpg',
+    },
+    {
+      'name': 'Paula',
+      'age': 26,
+      'distance': '19:05',
+      'description': 'Fin de semana de piscina y sol 🌴',
+      'image': 'assets/images/profiles/chica5.jpg',
+    },
+    {
+      'name': 'Camila',
+      'age': 22,
+      'distance': '16:40',
+      'description': 'Nuevo contenido subido hoy 💜',
+      'image': 'assets/images/contenido/portada2.jpg',
+    },
+    {
+      'name': 'Valentina',
+      'age': 27,
+      'distance': '21:15',
+      'description': 'Preparando el live de esta noche 🔥',
+      'image': 'assets/images/contenido/portada5.jpg',
+    },
+    {
+      'name': 'Antonella',
+      'age': 25,
+      'distance': '14:55',
+      'description': 'Gracias por todos los regalos de ayer 🎁',
+      'image': 'assets/images/contenido/portada9.jpg',
+    },
   ];
 
   @override
@@ -80,7 +115,9 @@ class _HomeScreenState extends State<HomeScreen>
       children: [
         // Imagen de fondo del perfil
         Positioned.fill(
-          child: Image.network(
+          // Las fotos de los perfiles viven en el APK, no en la red:
+          // con Image.network siempre fallaban y se veía el ícono gris.
+          child: Image.asset(
             currentProfile['image'],
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {

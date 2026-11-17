@@ -56,8 +56,8 @@ class LiveFinalizada extends StatelessWidget {
                         // AVATAR
                         ClipRRect(
                           borderRadius: BorderRadius.circular(50),
-                          child: Image.network(
-                            "https://i.postimg.cc/XYNTR7zK/avatar.jpg", // Cambia esto
+                          child: Image.asset(
+                            "assets/model.jpg",
                             width: 65,
                             height: 65,
                             fit: BoxFit.cover,

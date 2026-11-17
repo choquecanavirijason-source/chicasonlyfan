@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
+import 'package:chicas_app/core/widgets/foto.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   final String name;
@@ -88,7 +89,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundImage: NetworkImage(widget.avatar),
+                  backgroundImage: fotoProvider(widget.avatar),
                 ),
                 if (widget.isOnline)
                   Positioned(

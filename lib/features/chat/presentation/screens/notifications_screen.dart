@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../videocall/presentation/screens/videocall_screen.dart';
+import 'package:chicas_app/core/widgets/foto.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
@@ -68,7 +69,7 @@ class NotificationsScreen extends StatelessWidget {
                 children: [
                   _buildNotificationCard(
                     context: context,
-                    avatar: 'https://randomuser.me/api/portraits/women/28.jpg',
+                    avatar: 'assets/images/profiles/chica3.jpg',
                     name: 'Laura Torres',
                     action: 'no aceptó tu solicitud',
                     time: 'Hace 2 horas',
@@ -80,7 +81,7 @@ class NotificationsScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   _buildNotificationCard(
                     context: context,
-                    avatar: 'https://randomuser.me/api/portraits/women/50.jpg',
+                    avatar: 'assets/images/profiles/chica5.jpg',
                     name: 'María González',
                     action: 'aceptó tu solicitud',
                     time: 'Hace 5 minutos',
@@ -140,7 +141,7 @@ class NotificationsScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 24,
-                    backgroundImage: NetworkImage(avatar),
+                    backgroundImage: fotoProvider(avatar),
                   ),
                   Positioned(
                     bottom: -2,

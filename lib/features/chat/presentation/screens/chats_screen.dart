@@ -4,6 +4,7 @@ import 'notifications_screen.dart';
 import 'chat_detail_screen.dart';
 import '../../../male/packages/screens/packages_screen.dart';
 import '../../../profile/presentation/screens/profile_screen.dart';
+import 'package:chicas_app/core/widgets/foto.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -25,7 +26,7 @@ class _ChatsScreenState extends State<ChatsScreen>
       'time': 'ACTIVA AHORA',
       'isOnline': true,
       'unreadCount': 2,
-      'avatar': 'https://randomuser.me/api/portraits/women/32.jpg',
+      'avatar': 'assets/images/profiles/chica1.jpg',
     },
     {
       'name': 'Sofía Ramírez',
@@ -33,7 +34,7 @@ class _ChatsScreenState extends State<ChatsScreen>
       'time': 'hace 1h',
       'isOnline': false,
       'unreadCount': 0,
-      'avatar': 'https://randomuser.me/api/portraits/women/47.jpg',
+      'avatar': 'assets/images/profiles/chica2.jpg',
     },
     {
       'name': 'Laura Torres',
@@ -41,7 +42,7 @@ class _ChatsScreenState extends State<ChatsScreen>
       'time': 'hace 2h',
       'isOnline': false,
       'unreadCount': 0,
-      'avatar': 'https://randomuser.me/api/portraits/women/28.jpg',
+      'avatar': 'assets/images/profiles/chica3.jpg',
     },
   ];
 
@@ -52,21 +53,21 @@ class _ChatsScreenState extends State<ChatsScreen>
       'status': 'Disponible para hablar',
       'badge': 'En Línea',
       'badgeColor': Color(0xFFE991C5),
-      'avatar': 'https://randomuser.me/api/portraits/women/44.jpg',
+      'avatar': 'assets/images/profiles/chica4.jpg',
     },
     {
       'name': 'Valentina Silva',
       'status': 'Disponible para hablar',
       'badge': 'Recomendado',
       'badgeColor': Color(0xFF3D1A4D),
-      'avatar': 'https://randomuser.me/api/portraits/women/65.jpg',
+      'avatar': 'assets/images/profiles/chica5.jpg',
     },
     {
       'name': 'Carolina Ruiz',
       'status': 'Disponible para hablar',
       'badge': 'En Línea',
       'badgeColor': Color(0xFFE991C5),
-      'avatar': 'https://randomuser.me/api/portraits/women/68.jpg',
+      'avatar': 'assets/images/contenido/portada4.jpg',
     },
   ];
 
@@ -279,7 +280,7 @@ class _ChatsScreenState extends State<ChatsScreen>
               children: [
                 CircleAvatar(
                   radius: 28,
-                  backgroundImage: NetworkImage(chat['avatar']),
+                  backgroundImage: fotoProvider(chat['avatar']),
                 ),
                 if (chat['isOnline'])
                   Positioned(

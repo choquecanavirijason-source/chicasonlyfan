@@ -7,6 +7,7 @@ import '../../../male/packages/screens/packages_screen.dart';
 import '../../../chat/presentation/screens/chats_screen.dart';
 import '../../../male/home/screens/favorites_screen.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
+import 'package:chicas_app/core/widgets/foto.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -419,10 +420,10 @@ class ProfileScreen extends ConsumerWidget {
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 20,
-                    backgroundImage: NetworkImage(
-                      'https://randomuser.me/api/portraits/women/1.jpg',
+                    backgroundImage: fotoProvider(
+                      'assets/images/profiles/chica1.jpg',
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -536,10 +537,10 @@ class ProfileScreen extends ConsumerWidget {
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 18,
-                    backgroundImage: NetworkImage(
-                      'https://randomuser.me/api/portraits/women/4.jpg',
+                    backgroundImage: fotoProvider(
+                      'assets/images/profiles/chica4.jpg',
                     ),
                   ),
                   const SizedBox(width: 12),

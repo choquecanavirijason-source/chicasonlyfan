@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chicas_app/features/female/streaming/screens/sala_Screen.dart';
 import 'package:chicas_app/features/female/streaming/screens/live2_page.dart';
 import 'package:chicas_app/features/female/streaming/screens/camera_page.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class CrearContenidoPage extends StatelessWidget {
   const CrearContenidoPage({super.key});
@@ -45,7 +46,7 @@ class CrearContenidoPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _opcionCard(
-                  colores: [Colors.redAccent, Colors.pinkAccent],
+                  colores: [Colors.redAccent, Tok.oro],
                   icon: Icons.wifi_tethering,
                   titulo: "Iniciar\nLive",
                   onTap: () {

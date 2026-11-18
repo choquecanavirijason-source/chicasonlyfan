@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:video_player/video_player.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../shared/services/streaming_service.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class VideoCallScreen extends StatefulWidget {
   final String name;
@@ -638,7 +639,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
                 child: Container(
                   width: 240,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Tok.superficie,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
@@ -750,7 +751,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
               width: MediaQuery.of(context).size.width * 0.85,
               constraints: const BoxConstraints(maxWidth: 350),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Tok.superficie,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -891,7 +892,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Solicitud enviada: $minutes por $price'),
-            backgroundColor: const Color(0xFFE991C5),
+            backgroundColor: Tok.oro,
             duration: const Duration(seconds: 2),
           ),
         );
@@ -899,7 +900,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Tok.superficie,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.grey[300]!, width: 1),
         ),
@@ -929,7 +930,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFE991C5),
+                color: Tok.oro,
               ),
             ),
           ],

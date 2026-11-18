@@ -8,6 +8,7 @@ import 'package:chicas_app/features/female/content/screens/contenido_screen.dart
 import 'package:chicas_app/shared/services/streaming_service.dart';
 import 'package:chicas_app/core/config/aws_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class LiveScreen extends StatefulWidget {
   final String? existingStreamId;
@@ -375,12 +376,12 @@ class _LiveScreenState extends State<LiveScreen> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: const LinearGradient(
-                            colors: [Colors.pinkAccent, Colors.orange],
+                            colors: [Tok.oro, Colors.orange],
                           ),
                         ),
                         child: const CircleAvatar(
                           radius: 22,
-                          backgroundImage: AssetImage("assets/model.jpg"),
+                          backgroundImage: AssetImage("assets/images/profiles/avatar_model.jpg"),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -619,7 +620,7 @@ class _LiveScreenState extends State<LiveScreen> {
                   height: 45,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [Colors.pinkAccent, Colors.orange],
+                      colors: [Tok.oro, Colors.orange],
                     ),
                     shape: BoxShape.circle,
                   ),
@@ -706,7 +707,7 @@ class _LiveScreenState extends State<LiveScreen> {
             height: 55,
             decoration: BoxDecoration(
               color: activo
-                  ? Colors.pinkAccent
+                  ? Tok.oro
                   : Colors.white.withOpacity(0.20),
               shape: BoxShape.circle,
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {
@@ -10,7 +11,7 @@ class AppTheme {
         primary: AppColors.primary,
         surface: AppColors.background,
       ),
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: Tok.fondo,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -35,7 +36,9 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.textWhite,
+          // Sobre el oro el texto va en tinta: blanco sobre oro no llega
+          // al contraste minimo.
+          foregroundColor: Tok.tinta,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),

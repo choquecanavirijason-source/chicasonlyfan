@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import 'package:chicas_app/core/widgets/foto.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   final String name;
@@ -75,9 +76,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Tok.fondo,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Tok.fondo,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
@@ -184,7 +185,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Tok.superficie,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.1),
@@ -225,7 +226,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   const SizedBox(width: 8),
                   Container(
                     decoration: const BoxDecoration(
-                      color: Color(0xFFE991C5),
+                      color: Tok.oro,
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
@@ -272,7 +273,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     vertical: 12,
                   ),
                   decoration: BoxDecoration(
-                    color: isSent ? const Color(0xFFE991C5) : Colors.grey[200],
+                    color: isSent ? Tok.oro : Colors.grey[200],
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(16),
                       topRight: const Radius.circular(16),

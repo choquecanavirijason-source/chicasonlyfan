@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../auth/presentation/controllers/auth_controller.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/config/auth_config.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 /// Layout persistente para el módulo Male (Suscriptores)
 /// Contiene el BottomNavigationBar que se mantiene cargado
@@ -105,23 +106,17 @@ class _MaleLayoutState extends ConsumerState<MaleLayout> {
 
   Widget _buildBottomNavigationBar() {
     return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF1C1C1E),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, -3),
-          ),
-        ],
+      decoration: const BoxDecoration(
+        color: Tok.superficie,
+        border: Border(top: BorderSide(color: Tok.borde, width: 1)),
       ),
       child: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0xFF1C1C1E),
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Tok.superficie,
+        selectedItemColor: Tok.oro,
+        unselectedItemColor: Tok.humo,
         showUnselectedLabels: true,
         selectedFontSize: 12,
         unselectedFontSize: 12,
@@ -160,7 +155,7 @@ class _MaleLayoutState extends ConsumerState<MaleLayout> {
   Widget _buildNavIcon(IconData icon, bool isActive) {
     return Icon(
       icon,
-      color: isActive ? AppColors.primary : Colors.grey,
+      color: isActive ? Tok.oro : Tok.humo,
       size: 24,
     );
   }

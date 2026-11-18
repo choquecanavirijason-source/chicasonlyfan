@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../videocall/presentation/screens/videocall_screen.dart';
 import 'package:chicas_app/core/widgets/foto.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
@@ -17,10 +18,13 @@ class NotificationsScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
-                color: AppColors.primary,
+                color: Tok.superficie,
+                border: Border(
+                  bottom: BorderSide(color: Tok.borde, width: 1),
+                ),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(Tok.rL),
+                  bottomRight: Radius.circular(Tok.rL),
                 ),
               ),
               child: Row(
@@ -46,7 +50,7 @@ class NotificationsScreen extends StatelessWidget {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE991C5),
+                      color: Tok.oro,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text(
@@ -69,7 +73,7 @@ class NotificationsScreen extends StatelessWidget {
                 children: [
                   _buildNotificationCard(
                     context: context,
-                    avatar: 'assets/images/profiles/chica3.jpg',
+                    avatar: 'assets/images/profiles/avatar3.jpg',
                     name: 'Laura Torres',
                     action: 'no aceptó tu solicitud',
                     time: 'Hace 2 horas',
@@ -81,13 +85,13 @@ class NotificationsScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   _buildNotificationCard(
                     context: context,
-                    avatar: 'assets/images/profiles/chica5.jpg',
+                    avatar: 'assets/images/profiles/avatar5.jpg',
                     name: 'María González',
                     action: 'aceptó tu solicitud',
                     time: 'Hace 5 minutos',
                     description: null,
                     icon: Icons.check_circle_rounded,
-                    iconColor: const Color(0xFFE991C5),
+                    iconColor: Tok.oro,
                     isAccepted: true,
                     appointmentDate: 'Martes 4 de Noviembre',
                     appointmentTime: 'Hora: 15:30',
@@ -117,7 +121,7 @@ class NotificationsScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Tok.superficie,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey[200]!, width: 1),
         boxShadow: [
@@ -149,7 +153,7 @@ class NotificationsScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(2),
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: Tok.superficie,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(icon, size: 16, color: iconColor),
@@ -234,7 +238,7 @@ class NotificationsScreen extends StatelessWidget {
                       const Icon(
                         Icons.calendar_today,
                         size: 16,
-                        color: Color(0xFFE991C5),
+                        color: Tok.oro,
                       ),
                       const SizedBox(width: 8),
                       Text(
@@ -253,7 +257,7 @@ class NotificationsScreen extends StatelessWidget {
                       const Icon(
                         Icons.access_time,
                         size: 16,
-                        color: Color(0xFFE991C5),
+                        color: Tok.oro,
                       ),
                       const SizedBox(width: 8),
                       Text(
@@ -291,7 +295,7 @@ class NotificationsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFE991C5),
+                  backgroundColor: Tok.oro,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(

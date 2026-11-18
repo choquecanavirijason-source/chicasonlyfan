@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/chicas_tokens.dart';
 import '../../../../shared/services/streaming_service.dart';
 import '../../../videocall/presentation/screens/videocall_screen.dart';
 import 'contenido_video_screen.dart';
@@ -17,14 +19,39 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   final TextEditingController _searchController = TextEditingController();
   final StreamingService _streamingService = StreamingService();
 
-  // Lista de favoritos (círculos superiores)
-  final List<Map<String, String>> _favorites = [
-    {'name': 'Ana', 'image': 'assets/images/profiles/chica1.jpg'},
-    {'name': 'María', 'image': 'assets/images/profiles/chica2.jpg'},
-    {'name': 'Sofia', 'image': 'assets/images/profiles/chica3.jpg'},
-    {'name': 'Laura', 'image': 'assets/images/profiles/chica4.jpg'},
-    {'name': 'Paula', 'image': 'assets/images/profiles/chica5.jpg'},
+  // Lista de favoritos (círculos superiores).
+  // 'fav' marca a las que el usuario tiene como favoritas: llevan corazón
+  // y borde resaltado. El resto aparecen como sugerencias.
+  final List<Map<String, dynamic>> _favorites = [
+    {
+      'name': 'Ana',
+      'image': 'assets/images/profiles/avatar1.jpg',
+      'fav': true,
+    },
+    {
+      'name': 'María',
+      'image': 'assets/images/profiles/avatar2.jpg',
+      'fav': true,
+    },
+    {
+      'name': 'Sofia',
+      'image': 'assets/images/profiles/avatar3.jpg',
+      'fav': true,
+    },
+    {
+      'name': 'Laura',
+      'image': 'assets/images/profiles/avatar4.jpg',
+      'fav': false,
+    },
+    {
+      'name': 'Paula',
+      'image': 'assets/images/profiles/avatar5.jpg',
+      'fav': false,
+    },
   ];
+
+  int get _cantidadFavoritas =>
+      _favorites.where((f) => f['fav'] == true).length;
 
   // Lista de contenido estático en grid
   final List<Map<String, dynamic>> _content = [
@@ -101,29 +128,68 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header con título
+    return Container(
+      color: Tok.fondo,
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          // Header con título.
+          // Antes usaba textPrimary (#212121) sobre fondo negro: el texto
+          // quedaba invisible. Ahora va en marfil, con la serif de display.
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+            padding: const EdgeInsets.fromLTRB(
+              Tok.s5,
+              Tok.s5,
+              Tok.s5,
+              Tok.s2,
+            ),
             child: Center(
               child: RichText(
-                text: const TextSpan(
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  children: [
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 30,
+                    height: 1.13,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  children: const [
                     TextSpan(
                       text: 'Interactúa con tu ',
-                      style: TextStyle(color: AppColors.textPrimary),
+                      style: TextStyle(color: Tok.marfil),
                     ),
                     TextSpan(
                       text: 'favorita',
-                      style: TextStyle(color: Color(0xFFFF69B4)),
+                      style: TextStyle(color: Tok.rosa),
                     ),
                   ],
                 ),
               ),
+            ),
+          ),
+
+          // Cuántas favoritas tiene el usuario, para que la fila de arriba
+          // se entienda como "mis favoritas" y no como una lista cualquiera.
+          Padding(
+            padding: const EdgeInsets.fromLTRB(Tok.s5, Tok.s1, Tok.s5, Tok.s3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.favorite, size: 12, color: Tok.oro),
+                const SizedBox(width: Tok.s2),
+                // Etiqueta en mayúscula espaciada: la mitad del aire caro
+                // del sistema sale de este detalle.
+                Text(
+                  '$_cantidadFavoritas FAVORITAS',
+                  style: GoogleFonts.jost(
+                    fontSize: 12,
+                    height: 1.33,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.4,
+                    color: Tok.oro,
+                  ),
+                ),
+              ],
             ),
           ),
 
@@ -133,39 +199,30 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             child: TextField(
               controller: _searchController,
               textAlign: TextAlign.center,
+              style: GoogleFonts.jost(color: Tok.marfil, fontSize: 14),
               decoration: InputDecoration(
                 hintText: 'Buscar...',
-                hintStyle: const TextStyle(
-                  color: AppColors.textHint,
-                  fontSize: 14,
-                ),
+                hintStyle: GoogleFonts.jost(color: Tok.humo, fontSize: 14),
                 prefixIcon: const Icon(
                   Icons.search,
-                  color: AppColors.textHint,
+                  color: Tok.humo,
                   size: 20,
                 ),
                 filled: true,
-                fillColor: AppColors.background,
+                fillColor: Tok.superficieAlta,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.1),
-                    width: 0.5,
-                  ),
+                  borderRadius: BorderRadius.circular(Tok.rPill),
+                  borderSide: const BorderSide(color: Tok.borde, width: 1),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  borderSide: BorderSide(
-                    color: Colors.grey.withOpacity(0.1),
-                    width: 0.5,
-                  ),
+                  borderRadius: BorderRadius.circular(Tok.rPill),
+                  borderSide: const BorderSide(color: Tok.borde, width: 1),
                 ),
+                // Al enfocar aparece el hilo de oro: el campo activo es lo
+                // único que lo lleva en esta pantalla.
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  borderSide: BorderSide(
-                    color: AppColors.primary.withOpacity(0.3),
-                    width: 1,
-                  ),
+                  borderRadius: BorderRadius.circular(Tok.rPill),
+                  borderSide: const BorderSide(color: Tok.oro, width: 1),
                 ),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -190,29 +247,60 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   padding: const EdgeInsets.only(right: 16),
                   child: Column(
                     children: [
-                      Container(
-                        width: 64,
-                        height: 64,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.primary,
-                            width: 2.5,
+                      Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Container(
+                            width: 64,
+                            height: 64,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: favorite['fav'] == true
+                                    ? Tok.oro
+                                    : Tok.borde,
+                                width: 1.5,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(3),
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage(
+                                  favorite['image'] as String,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3),
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage(favorite['image']!),
-                          ),
-                        ),
+                          if (favorite['fav'] == true)
+                            Positioned(
+                              right: -2,
+                              bottom: -2,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: const BoxDecoration(
+                                  color: Tok.oro,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.favorite,
+                                  size: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        favorite['name']!,
-                        style: const TextStyle(
+                        favorite['name'] as String,
+                        style: GoogleFonts.jost(
                           fontSize: 12,
-                          color: AppColors.textSecondary,
+                          color: favorite['fav'] == true
+                              ? Tok.champan
+                              : Tok.humo,
+                          fontWeight: favorite['fav'] == true
+                              ? FontWeight.w600
+                              : FontWeight.normal,
                         ),
                       ),
                     ],
@@ -383,7 +471,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               },
             ),
           ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -396,19 +485,28 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           _selectedFilter = index;
         });
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 120),
+        curve: Curves.easeOut,
+        padding: const EdgeInsets.symmetric(
+          horizontal: Tok.s5,
+          vertical: Tok.s2 + 2,
+        ),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary : Colors.transparent,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.primary, width: 1.5),
+          color: isSelected ? Tok.superficieAlta : Colors.transparent,
+          borderRadius: BorderRadius.circular(Tok.rPill),
+          border: Border.all(
+            color: isSelected ? Tok.oro : Tok.borde,
+            width: 1,
+          ),
         ),
         child: Text(
-          label,
-          style: TextStyle(
-            color: isSelected ? Colors.white : AppColors.primary,
+          label.toUpperCase(),
+          style: GoogleFonts.jost(
+            color: isSelected ? Tok.champan : Tok.humo,
             fontWeight: FontWeight.w600,
-            fontSize: 14,
+            fontSize: 12,
+            letterSpacing: 1.4,
           ),
         ),
       ),
@@ -450,14 +548,20 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(Tok.rL),
+          color: Tok.superficie,
+          // El hilo de oro solo en el live: es lo que hay que mirar.
+          border: isLive ? Tok.hiloOro : Tok.hiloTenue,
+          // La del live es la única que resplandece: es lo que hay que mirar.
+          boxShadow: isLive
+              ? const [Tok.glowOroCarta, Tok.sombraCarta]
+              : const [Tok.sombraCarta],
         ),
         child: Stack(
           children: [
             // Imagen de fondo
             ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Tok.rL),
               child: item['image'].startsWith('http')
                   ? Image.network(
                       item['image'],
@@ -482,7 +586,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       height: double.infinity,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          color: Colors.grey[300],
+                          color: Tok.superficieAlta,
                           child: const Icon(
                             Icons.image,
                             size: 50,

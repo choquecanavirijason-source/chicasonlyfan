@@ -1,6 +1,7 @@
 import 'package:chicas_app/features/female/content/screens/contenido_screen.dart';
 import 'package:chicas_app/features/female/streaming/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ContnScreen extends StatelessWidget {
   const ContnScreen({super.key});
@@ -8,7 +9,7 @@ class ContnScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Tok.fondo,
       bottomNavigationBar: _bottomNavBar(context, 0),
       body: SafeArea(
         child: SingleChildScrollView(

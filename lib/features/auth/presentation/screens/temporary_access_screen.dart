@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../data/services/phone_auth_service.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Pantalla de acceso temporal (modo sin inicio de sesión).
 ///
@@ -81,7 +83,7 @@ class _TemporaryAccessScreenState extends State<TemporaryAccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF4A148C),
+      backgroundColor: Tok.fondo,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -90,20 +92,21 @@ class _TemporaryAccessScreenState extends State<TemporaryAccessScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
+                Text(
                   'ChicasApp',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
+                  style: GoogleFonts.playfairDisplay(
+                    color: Tok.marfil,
                     fontSize: 40,
-                    fontWeight: FontWeight.bold,
+                    height: 1.05,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   'Modo temporal sin inicio de sesión',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white70, fontSize: 16),
+                  style: GoogleFonts.jost(color: Tok.humo, fontSize: 16),
                 ),
                 const SizedBox(height: 36),
                 if (_error != null) ...[

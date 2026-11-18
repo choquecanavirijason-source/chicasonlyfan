@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../auth/presentation/controllers/auth_controller.dart';
 import '../../../../core/config/auth_config.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 /// Layout persistente para el módulo Female (Creadoras)
 /// Contiene el BottomNavigationBar que se mantiene cargado
@@ -105,7 +106,7 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
   Widget _buildBottomNavigationBar() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Tok.superficie,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -118,7 +119,7 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
+        backgroundColor: Tok.fondo,
         selectedItemColor: const Color(0xff4c3a57),
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,

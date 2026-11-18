@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:chicas_app/features/female/streaming/screens/live3_pague.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class SalaScreen extends StatefulWidget {
   const SalaScreen({super.key});
@@ -322,7 +323,7 @@ class _SalaScreenState extends State<SalaScreen> {
             padding: padding ?? const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: active
-                  ? Colors.pinkAccent
+                  ? Tok.oro
                   : Colors.white.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),

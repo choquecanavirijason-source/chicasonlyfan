@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen>
   // Lista de perfiles de ejemplo
   final List<Map<String, dynamic>> _profiles = [
     {
+      'siguiendo': true,
       'name': 'Carla',
       'age': 25,
       'distance': '18:32',
@@ -24,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen>
       'image': 'assets/images/profiles/chica1.jpg',
     },
     {
+      'siguiendo': true,
       'name': 'María',
       'age': 23,
       'distance': '15:20',
@@ -31,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen>
       'image': 'assets/images/profiles/chica2.jpg',
     },
     {
+      'siguiendo': true,
       'name': 'Sofia',
       'age': 28,
       'distance': '20:45',
@@ -38,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen>
       'image': 'assets/images/profiles/chica3.jpg',
     },
     {
+      'siguiendo': false,
       'name': 'Laura',
       'age': 24,
       'distance': '12:10',
@@ -45,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen>
       'image': 'assets/images/profiles/chica4.jpg',
     },
     {
+      'siguiendo': false,
       'name': 'Paula',
       'age': 26,
       'distance': '19:05',
@@ -52,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen>
       'image': 'assets/images/profiles/chica5.jpg',
     },
     {
+      'siguiendo': false,
       'name': 'Camila',
       'age': 22,
       'distance': '16:40',
@@ -59,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen>
       'image': 'assets/images/contenido/portada2.jpg',
     },
     {
+      'siguiendo': false,
       'name': 'Valentina',
       'age': 27,
       'distance': '21:15',
@@ -66,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen>
       'image': 'assets/images/contenido/portada5.jpg',
     },
     {
+      'siguiendo': false,
       'name': 'Antonella',
       'age': 25,
       'distance': '14:55',
@@ -74,10 +83,26 @@ class _HomeScreenState extends State<HomeScreen>
     },
   ];
 
+  /// "Siguiendo" muestra solo a las creadoras que el usuario ya sigue;
+  /// "Para Ti" muestra el resto, a modo de descubrimiento. Antes las dos
+  /// pestañas mostraban exactamente lo mismo.
+  List<Map<String, dynamic>> get _perfilesVisibles {
+    final enSiguiendo = _tabController.index == 0;
+    return _profiles
+        .where((p) => (p['siguiendo'] == true) == enSiguiendo)
+        .toList();
+  }
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    // Al cambiar de pestaña cambia la lista, así que hay que volver al
+    // primer perfil para no quedar fuera de rango.
+    _tabController.addListener(() {
+      if (!mounted) return;
+      setState(() => _currentProfileIndex = 0);
+    });
   }
 
   @override
@@ -88,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _nextProfile() {
     setState(() {
-      if (_currentProfileIndex < _profiles.length - 1) {
+      if (_currentProfileIndex < _perfilesVisibles.length - 1) {
         _currentProfileIndex++;
       } else {
         _currentProfileIndex = 0;
@@ -109,7 +134,11 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    final currentProfile = _profiles[_currentProfileIndex];
+    final visibles = _perfilesVisibles;
+    final currentProfile = visibles[_currentProfileIndex.clamp(
+      0,
+      visibles.length - 1,
+    )];
 
     return Stack(
       children: [
@@ -184,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen>
                   vertical: 8,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Tok.superficie,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -251,6 +280,27 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    // Sin esto parecía que hubiera un solo perfil: la pantalla
+                    // muestra uno por vez y nada indicaba que hubiera más.
+                    Row(
+                      children: List.generate(
+                        visibles.length,
+                        (i) => Container(
+                          width: i == _currentProfileIndex ? 20 : 6,
+                          height: 6,
+                          margin: const EdgeInsets.only(right: 4),
+                          decoration: BoxDecoration(
+                            color: i == _currentProfileIndex
+                                ? Colors.white
+                                : Colors.white38,
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),

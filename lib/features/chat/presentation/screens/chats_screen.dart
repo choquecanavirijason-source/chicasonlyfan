@@ -5,6 +5,7 @@ import 'chat_detail_screen.dart';
 import '../../../male/packages/screens/packages_screen.dart';
 import '../../../profile/presentation/screens/profile_screen.dart';
 import 'package:chicas_app/core/widgets/foto.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -26,7 +27,7 @@ class _ChatsScreenState extends State<ChatsScreen>
       'time': 'ACTIVA AHORA',
       'isOnline': true,
       'unreadCount': 2,
-      'avatar': 'assets/images/profiles/chica1.jpg',
+      'avatar': 'assets/images/profiles/avatar1.jpg',
     },
     {
       'name': 'Sofía Ramírez',
@@ -34,7 +35,7 @@ class _ChatsScreenState extends State<ChatsScreen>
       'time': 'hace 1h',
       'isOnline': false,
       'unreadCount': 0,
-      'avatar': 'assets/images/profiles/chica2.jpg',
+      'avatar': 'assets/images/profiles/avatar2.jpg',
     },
     {
       'name': 'Laura Torres',
@@ -42,7 +43,7 @@ class _ChatsScreenState extends State<ChatsScreen>
       'time': 'hace 2h',
       'isOnline': false,
       'unreadCount': 0,
-      'avatar': 'assets/images/profiles/chica3.jpg',
+      'avatar': 'assets/images/profiles/avatar3.jpg',
     },
   ];
 
@@ -52,21 +53,21 @@ class _ChatsScreenState extends State<ChatsScreen>
       'name': 'Ana López',
       'status': 'Disponible para hablar',
       'badge': 'En Línea',
-      'badgeColor': Color(0xFFE991C5),
+      'badgeColor': Tok.oro,
       'avatar': 'assets/images/profiles/chica4.jpg',
     },
     {
       'name': 'Valentina Silva',
       'status': 'Disponible para hablar',
       'badge': 'Recomendado',
-      'badgeColor': Color(0xFF3D1A4D),
+      'badgeColor': Tok.oro,
       'avatar': 'assets/images/profiles/chica5.jpg',
     },
     {
       'name': 'Carolina Ruiz',
       'status': 'Disponible para hablar',
       'badge': 'En Línea',
-      'badgeColor': Color(0xFFE991C5),
+      'badgeColor': Tok.oro,
       'avatar': 'assets/images/contenido/portada4.jpg',
     },
   ];
@@ -87,7 +88,7 @@ class _ChatsScreenState extends State<ChatsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: Tok.fondo,
       body: SafeArea(
         child: Column(
           children: [
@@ -124,7 +125,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                           child: Container(
                             padding: const EdgeInsets.all(4),
                             decoration: const BoxDecoration(
-                              color: Color(0xFFE991C5),
+                              color: Tok.oro,
                               shape: BoxShape.circle,
                             ),
                             constraints: const BoxConstraints(
@@ -166,7 +167,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                     size: 20,
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Tok.superficieAlta,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25),
                     borderSide: BorderSide(color: Colors.grey[300]!, width: 1),
@@ -174,7 +175,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25),
                     borderSide: const BorderSide(
-                      color: Color(0xFFE991C5),
+                      color: Tok.oro,
                       width: 1,
                     ),
                   ),
@@ -198,11 +199,11 @@ class _ChatsScreenState extends State<ChatsScreen>
               child: TabBar(
                 controller: _tabController,
                 indicator: BoxDecoration(
-                  color: const Color(0xFFE991C5),
+                  color: Tok.oro,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 indicatorSize: TabBarIndicatorSize.tab,
-                labelColor: Colors.white,
+                labelColor: Tok.tinta,
                 unselectedLabelColor: AppColors.textSecondary,
                 labelStyle: const TextStyle(
                   fontSize: 14,
@@ -269,9 +270,9 @@ class _ChatsScreenState extends State<ChatsScreen>
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey[200]!, width: 1),
+          color: Tok.superficie,
+          borderRadius: BorderRadius.circular(Tok.rL),
+          border: Tok.hiloTenue,
         ),
         child: Row(
           children: [
@@ -324,7 +325,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                           style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFFE991C5),
+                            color: Tok.oro,
                           ),
                         ),
                       ],
@@ -369,7 +370,7 @@ class _ChatsScreenState extends State<ChatsScreen>
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE991C5),
+                  color: Tok.oro,
                   shape: BoxShape.circle,
                 ),
                 constraints: const BoxConstraints(minWidth: 24, minHeight: 24),
@@ -393,9 +394,9 @@ class _ChatsScreenState extends State<ChatsScreen>
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey[200]!, width: 1),
+        color: Tok.superficie,
+        borderRadius: BorderRadius.circular(Tok.rL),
+        border: Tok.hiloTenue,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.1),
@@ -418,35 +419,12 @@ class _ChatsScreenState extends State<ChatsScreen>
                   height: 250,
                   width: double.infinity,
                   color: Colors.grey[200],
-                  child: Image.network(
+                  // Las fotos son archivos del APK: con Image.network
+                  // la tarjeta quedaba gris con el ícono de persona.
+                  child: foto(
                     profile['avatar'],
                     height: 250,
                     width: double.infinity,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                              : null,
-                          color: const Color(0xFFE991C5),
-                        ),
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        child: const Center(
-                          child: Icon(
-                            Icons.person,
-                            size: 80,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      );
-                    },
                   ),
                 ),
               ),
@@ -484,7 +462,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE991C5),
+                      color: Tok.oro,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Text(
@@ -520,7 +498,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                   profile['status'],
                   style: const TextStyle(
                     fontSize: 14,
-                    color: Color(0xFFE991C5),
+                    color: Tok.oro,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -533,12 +511,12 @@ class _ChatsScreenState extends State<ChatsScreen>
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('Iniciar chat con ${profile['name']}'),
-                          backgroundColor: const Color(0xFFE991C5),
+                          backgroundColor: Tok.oro,
                         ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE991C5),
+                      backgroundColor: Tok.oro,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
@@ -572,11 +550,14 @@ class _ChatsScreenState extends State<ChatsScreen>
 
   Widget _buildBottomNav() {
     return Container(
+      // Una barra no es un color de marca: es una superficie. El oro
+      // aparece solo en el icono activo.
       decoration: const BoxDecoration(
-        color: AppColors.primary,
+        color: Tok.superficie,
+        border: Border(top: BorderSide(color: Tok.borde, width: 1)),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radius.circular(Tok.rL),
+          topRight: Radius.circular(Tok.rL),
         ),
       ),
       child: SafeArea(

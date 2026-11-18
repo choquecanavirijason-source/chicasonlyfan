@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 import 'core/theme/app_theme.dart';
 import 'app_module.dart';
 import 'features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -85,7 +86,7 @@ class AuthWrapper extends StatelessWidget {
         // Mientras se verifica el estado de autenticación
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
-            backgroundColor: Color(0xFF4A148C),
+            backgroundColor: Tok.fondo,
             body: Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),

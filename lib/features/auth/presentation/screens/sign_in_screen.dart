@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../controllers/auth_controller.dart';
 import '../controllers/auth_state.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class SignInScreen extends ConsumerWidget {
   const SignInScreen({super.key});
@@ -54,7 +55,7 @@ class SignInScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      backgroundColor: const Color(0xFF4A148C),
+      backgroundColor: Tok.fondo,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -90,7 +91,7 @@ class SignInScreen extends ConsumerWidget {
                 _SocialButton(
                   text: 'INICIAR SESIÓN CON GOOGLE',
                   icon: Icons.g_mobiledata,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Tok.fondo,
                   textColor: Colors.black87,
                   onPressed: () {
                     print('🔵 BOTÓN DE GOOGLE PRESIONADO (SignInScreen)');
@@ -106,7 +107,7 @@ class SignInScreen extends ConsumerWidget {
                 _SocialButton(
                   text: 'INICIAR SESIÓN CON APPLE',
                   icon: Icons.apple,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Tok.fondo,
                   textColor: Colors.black87,
                   onPressed: () {
                     // TODO: Implementar Apple Sign In
@@ -119,7 +120,7 @@ class SignInScreen extends ConsumerWidget {
                 _SocialButton(
                   text: 'INICIAR SESIÓN',
                   icon: Icons.phone_android,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Tok.fondo,
                   textColor: Colors.black87,
                   onPressed: () {
                     Modular.to.pushNamed(

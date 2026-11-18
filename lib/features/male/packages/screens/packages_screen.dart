@@ -3,6 +3,9 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../chat/presentation/screens/chats_screen.dart';
 import '../../../profile/presentation/screens/profile_screen.dart';
 import '../../home/screens/favorites_screen.dart';
+import 'package:chicas_app/core/widgets/fondo_video.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class PackagesScreen extends StatefulWidget {
   const PackagesScreen({super.key});
@@ -16,7 +19,9 @@ class _PackagesScreenState extends State<PackagesScreen> {
   final List<Map<String, dynamic>> _premiumPackages = [
     {
       'name': 'Popular',
-      'color': Color(0xFFE991C5),
+      'color': Tok.oro,
+      'video': 'assets/videos/contenido6.mp4',
+      'portada': 'assets/images/contenido/portada6.jpg',
       'icon': Icons.favorite,
       'minutes': 30,
       'price': 25,
@@ -24,7 +29,10 @@ class _PackagesScreenState extends State<PackagesScreen> {
     },
     {
       'name': 'Mejor Valor',
-      'color': Color(0xFF4A1942),
+      'destacado': true,
+      'color': Tok.vino,
+      'video': 'assets/videos/contenido2.mp4',
+      'portada': 'assets/images/contenido/portada2.jpg',
       'icon': Icons.workspace_premium,
       'minutes': 60,
       'price': 40,
@@ -33,6 +41,8 @@ class _PackagesScreenState extends State<PackagesScreen> {
     {
       'name': 'Super Pack',
       'color': Color(0xFF9E9E9E),
+      'video': 'assets/videos/contenido5.mp4',
+      'portada': 'assets/images/contenido/portada5.jpg',
       'icon': Icons.diamond,
       'minutes': 120,
       'price': 60,
@@ -85,7 +95,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
             child: Container(
               constraints: const BoxConstraints(maxWidth: 400),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Tok.superficie,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: SingleChildScrollView(
@@ -200,7 +210,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                           hintText: '1234 5678 9012 3456',
                           hintStyle: const TextStyle(color: AppColors.textHint),
                           filled: true,
-                          fillColor: AppColors.background,
+                          fillColor: Tok.superficieAlta,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: BorderSide.none,
@@ -245,7 +255,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                                       color: AppColors.textHint,
                                     ),
                                     filled: true,
-                                    fillColor: AppColors.background,
+                                    fillColor: Tok.superficieAlta,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
                                       borderSide: BorderSide.none,
@@ -286,7 +296,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                                       color: AppColors.textHint,
                                     ),
                                     filled: true,
-                                    fillColor: AppColors.background,
+                                    fillColor: Tok.superficieAlta,
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(8),
                                       borderSide: BorderSide.none,
@@ -349,7 +359,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                               : null,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: isFormValid
-                                ? const Color(0xFFE991C5)
+                                ? Tok.oro
                                 : Colors.grey[300],
                             disabledBackgroundColor: Colors.grey[300],
                             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -384,7 +394,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: Tok.fondo,
       body: SafeArea(
         child: Column(
           children: [
@@ -402,26 +412,28 @@ class _PackagesScreenState extends State<PackagesScreen> {
                       Center(
                         child: Column(
                           children: [
-                            const Text(
+                            Text(
                               'Compra tus minutos',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary,
+                              style: GoogleFonts.playfairDisplay(
+                                fontSize: 30,
+                                height: 1.13,
+                                fontWeight: FontWeight.w600,
+                                color: Tok.marfil,
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            Icon(
+                            const SizedBox(height: Tok.s3),
+                            const Icon(
                               Icons.access_time,
-                              size: 40,
-                              color: AppColors.textSecondary,
+                              size: 30,
+                              color: Tok.oro,
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: Tok.s3),
                             Text(
                               'Selecciona un paquete y paga con tu tarjeta',
-                              style: TextStyle(
+                              style: GoogleFonts.jost(
                                 fontSize: 14,
-                                color: AppColors.textSecondary,
+                                height: 1.43,
+                                color: Tok.humo,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -432,12 +444,13 @@ class _PackagesScreenState extends State<PackagesScreen> {
                       const SizedBox(height: 24),
 
                       // Título Premium
-                      const Text(
+                      Text(
                         'Paquetes Premium',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 22,
+                          height: 1.27,
+                          fontWeight: FontWeight.w500,
+                          color: Tok.marfil,
                         ),
                       ),
 
@@ -454,12 +467,13 @@ class _PackagesScreenState extends State<PackagesScreen> {
                       const SizedBox(height: 24),
 
                       // Título Básicos
-                      const Text(
+                      Text(
                         'Paquetes Básicos',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 22,
+                          height: 1.27,
+                          fontWeight: FontWeight.w500,
+                          color: Tok.marfil,
                         ),
                       ),
 
@@ -499,21 +513,41 @@ class _PackagesScreenState extends State<PackagesScreen> {
       onTap: () => _showPaymentModal(package),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [package['color'], package['color'].withOpacity(0.8)],
-          ),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: package['color'].withOpacity(0.3),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
+          color: Tok.superficie,
+          borderRadius: BorderRadius.circular(Tok.rL),
+          // El hilo de oro marca el paquete recomendado; los otros dos
+          // llevan el borde tenue. Si los tres lo llevaran, no destacaría ninguno.
+          border: package['destacado'] == true ? Tok.hiloOro : Tok.hiloTenue,
+          boxShadow: package['destacado'] == true
+              ? const [Tok.glowOroCarta, Tok.sombraCarta]
+              : const [Tok.sombraCarta],
         ),
-        child: Padding(
+        // Cada paquete lleva de fondo un video corto en bucle y sin sonido.
+        // Antes el velo iba en el color del paquete y tapaba el video; ahora
+        // es un velo oscuro, que deja ver la imagen y mantiene legible el texto.
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(Tok.rL),
+          child: Stack(
+            fit: StackFit.passthrough,
+            children: [
+              Positioned.fill(
+                child: FondoVideo(
+                  video: package['video'],
+                  portada: package['portada'],
+                ),
+              ),
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [Color(0xF0060606), Color(0x66060606)],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -528,13 +562,13 @@ class _PackagesScreenState extends State<PackagesScreen> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
+                      color: Tok.superficieAlta,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
                       package['name'],
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: Tok.champan,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
@@ -545,10 +579,10 @@ class _PackagesScreenState extends State<PackagesScreen> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Tok.superficieAlta,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(package['icon'], color: Colors.white, size: 28),
+                    child: Icon(package['icon'], color: Tok.oro, size: 24),
                   ),
                 ],
               ),
@@ -559,7 +593,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
               Text(
                 '${package['price']} Bs.',
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Tok.marfil,
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
@@ -567,7 +601,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
               Text(
                 package['description'],
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.9),
+                  color: Tok.humo,
                   fontSize: 13,
                 ),
               ),
@@ -581,7 +615,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                   Text(
                     '${package['minutes']}',
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Tok.oro,
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
                     ),
@@ -593,7 +627,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                 children: [
                   const Text(
                     'minutos',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Tok.humo, fontSize: 16),
                   ),
                 ],
               ),
@@ -608,19 +642,29 @@ class _PackagesScreenState extends State<PackagesScreen> {
                     vertical: 12,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25),
+                    // La acción de la tarjeta: oro y resplandor, uno por paquete.
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Tok.oro, Color(0xFF9D7C14)],
+                    ),
+                    borderRadius: BorderRadius.circular(Tok.rPill),
+                    boxShadow: const [Tok.glowOro],
                   ),
                   child: Text(
-                    'Comprar',
-                    style: TextStyle(
-                      color: package['color'],
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    'COMPRAR',
+                    style: GoogleFonts.jost(
+                      color: const Color(0xFF140F02),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.4,
                     ),
                   ),
                 ),
               ),
+            ],
+          ),
+        ),
             ],
           ),
         ),
@@ -631,16 +675,10 @@ class _PackagesScreenState extends State<PackagesScreen> {
   Widget _buildBasicCard(Map<String, dynamic> package) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.withOpacity(0.2), width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: Tok.superficie,
+        borderRadius: BorderRadius.circular(Tok.rL),
+        border: Tok.hiloTenue,
+        boxShadow: const [Tok.sombraCarta],
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -649,14 +687,14 @@ class _PackagesScreenState extends State<PackagesScreen> {
             // Ícono
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFE991C5).withOpacity(0.1),
+              decoration: const BoxDecoration(
+                color: Tok.superficieAlta,
                 shape: BoxShape.circle,
               ),
               child: const Icon(
                 Icons.access_time,
-                color: Color(0xFFE991C5),
-                size: 24,
+                color: Tok.oro,
+                size: 22,
               ),
             ),
 
@@ -666,14 +704,14 @@ class _PackagesScreenState extends State<PackagesScreen> {
             Text(
               '${package['minutes']}',
               style: const TextStyle(
-                color: AppColors.textPrimary,
+                color: Tok.marfil,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const Text(
               'minutos',
-              style: TextStyle(color: AppColors.textSecondary, fontSize: 11),
+              style: TextStyle(color: Tok.humo, fontSize: 11),
             ),
 
             const SizedBox(height: 12),
@@ -682,7 +720,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
             Text(
               '${package['price']} Bs.',
               style: const TextStyle(
-                color: AppColors.textPrimary,
+                color: Tok.champan,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -699,19 +737,28 @@ class _PackagesScreenState extends State<PackagesScreen> {
                 'description': 'Paga con tarjeta',
               }),
               style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFFE991C5),
-                side: const BorderSide(color: Color(0xFFE991C5)),
+                foregroundColor: Tok.champan,
+                side: const BorderSide(color: Tok.borde),
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
+                  horizontal: Tok.s2,
                   vertical: 6,
                 ),
+                minimumSize: const Size(0, 34),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(Tok.rPill),
                 ),
               ),
+              // La tarjeta básica es angosta: con el espaciado de la etiqueta
+              // grande, "COMPRAR" se partía en dos líneas.
               child: const Text(
-                'Comprar',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                'COMPRAR',
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.8,
+                ),
               ),
             ),
           ],
@@ -722,11 +769,16 @@ class _PackagesScreenState extends State<PackagesScreen> {
 
   Widget _buildBottomNav() {
     return Container(
+      // El morado venía del diseño claro anterior. Sobre negro con oro
+      // competía en vez de acompañar: saturaciones muy distintas y tonos
+      // casi opuestos. La barra pasa a ser una superficie del sistema y
+      // el oro marca lo que está activo.
       decoration: const BoxDecoration(
-        color: AppColors.primary,
+        color: Tok.superficie,
+        border: Border(top: BorderSide(color: Tok.borde, width: 1)),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radius.circular(Tok.rL),
+          topRight: Radius.circular(Tok.rL),
         ),
       ),
       child: SafeArea(
@@ -778,12 +830,15 @@ class _PackagesScreenState extends State<PackagesScreen> {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected
-              ? Colors.white.withOpacity(0.2)
-              : Colors.transparent,
+          color: isSelected ? Tok.superficieAlta : Colors.transparent,
           shape: BoxShape.circle,
+          border: isSelected ? Tok.hiloOro : null,
         ),
-        child: Icon(icon, color: Colors.white, size: 28),
+        child: Icon(
+          icon,
+          color: isSelected ? Tok.oro : Tok.humo,
+          size: 24,
+        ),
       ),
     );
   }

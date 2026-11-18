@@ -4,6 +4,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/config/aws_config.dart';
 import '../../../../shared/services/streaming_service.dart';
 import '../../../videocall/presentation/screens/videocall_screen.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ActiveLivesScreen extends StatelessWidget {
   const ActiveLivesScreen({super.key});
@@ -294,7 +295,7 @@ class ActiveLivesScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 24,
-                      backgroundColor: Colors.white,
+                      backgroundColor: Tok.fondo,
                       child: userAvatar.isNotEmpty
                           ? ClipOval(
                               child: Image.asset(

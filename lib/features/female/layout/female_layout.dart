@@ -86,13 +86,13 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff7e9f5),
+      backgroundColor: Tok.fondo,
       appBar: AppBar(
-        backgroundColor: const Color(0xfff7e9f5),
+        backgroundColor: Tok.fondo,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout, color: Color(0xff4c3a57)),
+            icon: const Icon(Icons.logout, color: Tok.oro),
             tooltip: authenticationEnabled ? 'Cerrar Sesión' : 'Cambiar perfil',
             onPressed: _handleLogout,
           ),
@@ -120,8 +120,8 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Tok.fondo,
-        selectedItemColor: const Color(0xff4c3a57),
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Tok.oro,
+        unselectedItemColor: Tok.humo,
         showUnselectedLabels: true,
         selectedFontSize: 12,
         unselectedFontSize: 12,
@@ -150,7 +150,7 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
   Widget _buildNavIcon(IconData icon, bool isActive) {
     return Icon(
       icon,
-      color: isActive ? const Color(0xff4c3a57) : Colors.grey,
+      color: isActive ? Tok.oro : Tok.humo,
       size: 24,
     );
   }

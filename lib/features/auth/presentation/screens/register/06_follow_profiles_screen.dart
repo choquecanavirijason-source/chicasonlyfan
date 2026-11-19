@@ -176,7 +176,7 @@ class _FollowProfilesScreenState extends ConsumerState<FollowProfilesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: Tok.fondo,
       appBar: AppBar(
         leading: CustomBackButton(color: AppColors.textSecondary),
         backgroundColor: Colors.transparent,

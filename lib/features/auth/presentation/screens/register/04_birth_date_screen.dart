@@ -7,6 +7,7 @@ import '../../../../../core/widgets/atoms/custom_back_button.dart';
 import '../../../../../core/widgets/atoms/primary_button.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/enums/user_type.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class BirthDateScreen extends StatefulWidget {
   final String phoneNumber;
@@ -103,7 +104,7 @@ class _BirthDateScreenState extends State<BirthDateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.textWhite,
+      backgroundColor: Tok.fondo,
       appBar: AppBar(
         leading: CustomBackButton(color: AppColors.textSecondary),
         backgroundColor: Colors.transparent,

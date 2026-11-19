@@ -3,40 +3,45 @@ import 'package:chicas_app/features/female/streaming/screens/sala_Screen.dart';
 import 'package:chicas_app/features/female/streaming/screens/live2_page.dart';
 import 'package:chicas_app/features/female/streaming/screens/camera_page.dart';
 import 'package:chicas_app/core/theme/chicas_tokens.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CrearContenidoPage extends StatelessWidget {
   const CrearContenidoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
+    return Container(
+      color: Tok.fondo,
+      child: SafeArea(
+        child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
-            const Text(
-              "Crear Contenido",
-              style: TextStyle(
-                fontSize: 18,
-                color: Color(0xff4c3a57),
-                fontWeight: FontWeight.w400,
+            Text(
+              "CREAR CONTENIDO",
+              style: GoogleFonts.jost(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.4,
+                color: Tok.oro,
               ),
             ),
             const SizedBox(height: 5),
-            const Text(
+            Text(
               "¿Qué deseas crear?",
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: Color(0xff4c3a57),
+              style: GoogleFonts.playfairDisplay(
+                fontSize: 30,
+                height: 1.13,
+                fontWeight: FontWeight.w600,
+                color: Tok.marfil,
               ),
             ),
             const SizedBox(height: 6),
-            const Text(
+            Text(
               "Elige una opción para comenzar",
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              style: GoogleFonts.jost(fontSize: 14, color: Tok.humo),
             ),
 
             const SizedBox(height: 40),
@@ -46,7 +51,7 @@ class CrearContenidoPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _opcionCard(
-                  colores: [Colors.redAccent, Tok.oro],
+                  destacada: true,
                   icon: Icons.wifi_tethering,
                   titulo: "Iniciar\nLive",
                   onTap: () {
@@ -59,7 +64,7 @@ class CrearContenidoPage extends StatelessWidget {
 
                 // OPCIÓN 3
                 _opcionCard(
-                  colores: [Color(0xff3d0647), Color(0xffb56bd8)],
+
                   icon: Icons.groups_2_outlined,
                   titulo: "Crear\nSala 7-9",
                   onTap: () {
@@ -77,7 +82,7 @@ class CrearContenidoPage extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: _opcionCard(
-                colores: [Color(0xffe774ff), Color(0xffff8ab9)],
+
                 icon: Icons.upload_rounded,
                 titulo: "Subir\ncontenido",
                 width: 150,
@@ -93,7 +98,8 @@ class CrearContenidoPage extends StatelessWidget {
               ),
             ),
             //2
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -101,7 +107,7 @@ class CrearContenidoPage extends StatelessWidget {
 
   // ---------------- TARJETA DE OPCIÓN --------------------
   Widget _opcionCard({
-    required List<Color> colores,
+    bool destacada = false,
     required IconData icon,
     required String titulo,
     double width = 150,
@@ -113,26 +119,22 @@ class CrearContenidoPage extends StatelessWidget {
         width: width,
         height: 150,
         padding: const EdgeInsets.all(18),
+        // Las tres eran degradados de color distintos, sin jerarquía.
+        // Ahora comparten superficie y sólo "Iniciar Live", que es la
+        // acción principal de la creadora, lleva el hilo de oro.
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(26),
-          gradient: LinearGradient(
-            colors: colores,
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12.withValues(alpha: 0.2),
-              blurRadius: 15,
-              offset: const Offset(3, 5),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(Tok.rL),
+          color: Tok.superficie,
+          border: destacada ? Tok.hiloOro : Tok.hiloTenue,
+          boxShadow: destacada
+              ? const [Tok.glowOroCarta, Tok.sombraCarta]
+              : const [Tok.sombraCarta],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: Colors.white, size: 38),
+            Icon(icon, color: destacada ? Tok.oro : Tok.humo, size: 34),
             const SizedBox(height: 15),
             Text(
               titulo,

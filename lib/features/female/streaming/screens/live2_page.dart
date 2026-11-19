@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 void main() {
   runApp(const ConfiguracionLive2Page());
@@ -13,7 +14,7 @@ class ConfiguracionLive2Page extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(85, 69, 2, 62),
+        backgroundColor: Color(0xCC060606),
         body: SafeArea(child: Center(child: AjustesFinalesPanel())),
       ),
     );
@@ -53,13 +54,9 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
                   height: 1000,
                   padding: const EdgeInsets.all(22),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(
-                      255,
-                      66,
-                      20,
-                      90,
-                    ).withOpacity(0.95),
-                    borderRadius: BorderRadius.circular(30),
+                    color: Tok.superficie,
+                    border: Tok.hiloTenue,
+                    borderRadius: BorderRadius.circular(Tok.rL),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.50),
@@ -91,7 +88,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
                             },
                             child: Icon(
                               Icons.close,
-                              color: Colors.white.withOpacity(0.75),
+                              color: Tok.humo,
                               size: 25,
                             ),
                           ),
@@ -101,7 +98,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
 
                       const Text(
                         "Configura los detalles de tu demo",
-                        style: TextStyle(color: Colors.white70, fontSize: 13),
+                        style: TextStyle(color: Tok.humo, fontSize: 13),
                       ),
                       const SizedBox(height: 25),
                       const Text(
@@ -119,7 +116,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color: Color.fromARGB(255, 182, 45, 157),
+                            color: Tok.oro,
                             width: 3,
                           ),
                         ),
@@ -151,7 +148,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
                       const SizedBox(height: 20),
                       const Text(
                         "Descripción",
-                        style: TextStyle(color: Colors.white70, fontSize: 13),
+                        style: TextStyle(color: Tok.humo, fontSize: 13),
                       ),
                       const SizedBox(height: 6),
                       _inputField(
@@ -185,7 +182,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.10),
+        color: Tok.superficieAlta,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.white.withOpacity(0.15), width: 1.2),
       ),

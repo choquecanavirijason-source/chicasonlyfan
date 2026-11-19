@@ -112,7 +112,7 @@ class _CameraPageState extends State<CameraPage> {
                     padding: const EdgeInsets.all(12),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 156, 67, 151),
+                        color: Tok.superficieAlta,
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: IconButton(
@@ -377,9 +377,7 @@ class _CameraPageState extends State<CameraPage> {
           Text(
             label,
             style: TextStyle(
-              color: active
-                  ? const Color.fromARGB(255, 244, 94, 144)
-                  : const Color.fromARGB(255, 255, 255, 255),
+              color: active ? Tok.oro : Tok.marfil,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),

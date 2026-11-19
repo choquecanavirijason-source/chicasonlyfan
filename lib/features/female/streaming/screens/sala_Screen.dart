@@ -110,7 +110,7 @@ class _SalaScreenState extends State<SalaScreen> {
                     padding: const EdgeInsets.all(12),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 156, 67, 151),
+                        color: Tok.superficieAlta,
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: IconButton(
@@ -249,11 +249,16 @@ class _SalaScreenState extends State<SalaScreen> {
                       width: 270,
                       height: 55,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 250, 142, 234),
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Tok.oro, Tok.oroHondo],
+                        ),
+                        boxShadow: const [Tok.glowOro],
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: const Color.fromARGB(255, 244, 94, 144),
-                          width: 1,
+                          color: Colors.transparent,
+                          width: 0,
                         ),
                       ),
                       child: TextButton(
@@ -266,10 +271,13 @@ class _SalaScreenState extends State<SalaScreen> {
                           );
                         },
                         child: const Text(
-                          "Iniciar Sala",
+                          "INICIAR SALA",
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
+                            // Sobre el oro el texto va en tinta: blanco
+                            // sobre oro no llega al contraste minimo.
+                            color: Tok.tinta,
+                            letterSpacing: 1.4,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -339,9 +347,7 @@ class _SalaScreenState extends State<SalaScreen> {
           Text(
             label,
             style: TextStyle(
-              color: active
-                  ? const Color.fromARGB(255, 244, 94, 144)
-                  : const Color.fromARGB(255, 255, 255, 255),
+              color: active ? Tok.oro : Tok.marfil,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),

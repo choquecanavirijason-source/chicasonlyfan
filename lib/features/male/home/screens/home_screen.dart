@@ -101,7 +101,6 @@ class _HomeScreenState extends State<HomeScreen>
     },
   ];
 
-
   /// "Siguiendo" muestra solo a las creadoras que el usuario ya sigue;
   /// "Para Ti" muestra el resto, a modo de descubrimiento. Antes las dos
   /// pestañas mostraban exactamente lo mismo.
@@ -142,6 +141,17 @@ class _HomeScreenState extends State<HomeScreen>
     if (_fotos.hasClients) _fotos.jumpToPage(0);
   }
 
+  void _perfilAnterior() {
+    setState(() {
+      if (_currentProfileIndex > 0) {
+        _currentProfileIndex--;
+      } else {
+        _currentProfileIndex = _perfilesVisibles.length - 1;
+      }
+      _reiniciarGaleria();
+    });
+  }
+
   void _nextProfile() {
     setState(() {
       if (_currentProfileIndex < _perfilesVisibles.length - 1) {
@@ -167,10 +177,8 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     final visibles = _perfilesVisibles;
-    final currentProfile = visibles[_currentProfileIndex.clamp(
-      0,
-      visibles.length - 1,
-    )];
+    final currentProfile =
+        visibles[_currentProfileIndex.clamp(0, visibles.length - 1)];
 
     final fotos = (currentProfile['fotos'] as List).cast<String>();
 
@@ -179,19 +187,28 @@ class _HomeScreenState extends State<HomeScreen>
         // La galería del perfil. Se recorre deslizando al costado; antes
         // había una sola foto fija y los puntos no llevaban a ninguna parte.
         Positioned.fill(
-          child: PageView.builder(
-            controller: _fotos,
-            itemCount: fotos.length,
-            onPageChanged: (i) => setState(() => _fotoActual = i),
-            itemBuilder: (context, i) => Image.asset(
-              fotos[i],
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Container(
-                color: Tok.superficie,
-                child: const Icon(
-                  Icons.person,
-                  size: 100,
-                  color: Tok.humo,
+          // Deslizar hacia arriba pasa al siguiente perfil, hacia abajo al
+          // anterior. El PageView de las fotos sólo reclama los arrastres
+          // horizontales, así que los verticales llegan hasta acá.
+          child: GestureDetector(
+            onVerticalDragEnd: (d) {
+              final v = d.primaryVelocity ?? 0;
+              if (v < -300) {
+                _nextProfile();
+              } else if (v > 300) {
+                _perfilAnterior();
+              }
+            },
+            child: PageView.builder(
+              controller: _fotos,
+              itemCount: fotos.length,
+              onPageChanged: (i) => setState(() => _fotoActual = i),
+              itemBuilder: (context, i) => Image.asset(
+                fotos[i],
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  color: Tok.superficie,
+                  child: const Icon(Icons.person, size: 100, color: Tok.humo),
                 ),
               ),
             ),

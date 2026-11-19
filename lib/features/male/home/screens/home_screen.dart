@@ -14,7 +14,15 @@ class _HomeScreenState extends State<HomeScreen>
   late TabController _tabController;
   int _currentProfileIndex = 0;
 
+  /// Qué foto de la galería se está viendo, y el controlador que permite
+  /// recorrerlas deslizando al costado.
+  int _fotoActual = 0;
+  final PageController _fotos = PageController();
+
   // Lista de perfiles de ejemplo
+  // Cada perfil tiene su galería: varias fotos de la misma chica, que se
+  // recorren deslizando al costado. Antes había una sola foto por perfil y
+  // los puntos no llevaban a ninguna parte.
   final List<Map<String, dynamic>> _profiles = [
     {
       'siguiendo': true,
@@ -23,7 +31,14 @@ class _HomeScreenState extends State<HomeScreen>
       'distance': '18:32',
       'description':
           'Monday is closer and I dont want to get angry. Just get happy 🎉',
-      'image': 'assets/images/profiles/chica1.jpg',
+      'fotos': [
+        'assets/images/galeria/carla/1.jpg',
+        'assets/images/galeria/carla/2.jpg',
+        'assets/images/galeria/carla/3.jpg',
+        'assets/images/galeria/carla/4.jpg',
+        'assets/images/galeria/carla/5.jpg',
+        'assets/images/galeria/carla/6.jpg',
+      ],
     },
     {
       'siguiendo': true,
@@ -31,7 +46,11 @@ class _HomeScreenState extends State<HomeScreen>
       'age': 23,
       'distance': '15:20',
       'description': 'Love traveling and meeting new people ✈️',
-      'image': 'assets/images/profiles/chica2.jpg',
+      'fotos': [
+        'assets/images/galeria/maria/1.jpg',
+        'assets/images/galeria/maria/2.jpg',
+        'assets/images/galeria/maria/3.jpg',
+      ],
     },
     {
       'siguiendo': true,
@@ -39,7 +58,11 @@ class _HomeScreenState extends State<HomeScreen>
       'age': 28,
       'distance': '20:45',
       'description': 'Coffee lover ☕ and photography enthusiast 📸',
-      'image': 'assets/images/profiles/chica3.jpg',
+      'fotos': [
+        'assets/images/galeria/sofia/1.jpg',
+        'assets/images/galeria/sofia/2.jpg',
+        'assets/images/galeria/sofia/3.jpg',
+      ],
     },
     {
       'siguiendo': false,
@@ -47,7 +70,11 @@ class _HomeScreenState extends State<HomeScreen>
       'age': 24,
       'distance': '12:10',
       'description': 'Bailando mis canciones favoritas ✨',
-      'image': 'assets/images/profiles/chica4.jpg',
+      'fotos': [
+        'assets/images/galeria/laura/1.jpg',
+        'assets/images/galeria/laura/2.jpg',
+        'assets/images/galeria/laura/3.jpg',
+      ],
     },
     {
       'siguiendo': false,
@@ -55,7 +82,11 @@ class _HomeScreenState extends State<HomeScreen>
       'age': 26,
       'distance': '19:05',
       'description': 'Fin de semana de piscina y sol 🌴',
-      'image': 'assets/images/profiles/chica5.jpg',
+      'fotos': [
+        'assets/images/galeria/paula/1.jpg',
+        'assets/images/galeria/paula/2.jpg',
+        'assets/images/galeria/paula/3.jpg',
+      ],
     },
     {
       'siguiendo': false,
@@ -63,25 +94,13 @@ class _HomeScreenState extends State<HomeScreen>
       'age': 22,
       'distance': '16:40',
       'description': 'Nuevo contenido subido hoy 💜',
-      'image': 'assets/images/contenido/portada2.jpg',
-    },
-    {
-      'siguiendo': false,
-      'name': 'Valentina',
-      'age': 27,
-      'distance': '21:15',
-      'description': 'Preparando el live de esta noche 🔥',
-      'image': 'assets/images/contenido/portada5.jpg',
-    },
-    {
-      'siguiendo': false,
-      'name': 'Antonella',
-      'age': 25,
-      'distance': '14:55',
-      'description': 'Gracias por todos los regalos de ayer 🎁',
-      'image': 'assets/images/contenido/portada9.jpg',
+      'fotos': [
+        'assets/images/galeria/camila/1.jpg',
+        'assets/images/galeria/camila/2.jpg',
+      ],
     },
   ];
+
 
   /// "Siguiendo" muestra solo a las creadoras que el usuario ya sigue;
   /// "Para Ti" muestra el resto, a modo de descubrimiento. Antes las dos
@@ -101,14 +120,26 @@ class _HomeScreenState extends State<HomeScreen>
     // primer perfil para no quedar fuera de rango.
     _tabController.addListener(() {
       if (!mounted) return;
-      setState(() => _currentProfileIndex = 0);
+      setState(() {
+        _currentProfileIndex = 0;
+        _fotoActual = 0;
+      });
+      if (_fotos.hasClients) _fotos.jumpToPage(0);
     });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _fotos.dispose();
     super.dispose();
+  }
+
+  /// Al cambiar de perfil la galería vuelve a empezar, si no el nuevo
+  /// perfil se abriría en la foto 4 porque el anterior estaba ahí.
+  void _reiniciarGaleria() {
+    _fotoActual = 0;
+    if (_fotos.hasClients) _fotos.jumpToPage(0);
   }
 
   void _nextProfile() {
@@ -118,6 +149,7 @@ class _HomeScreenState extends State<HomeScreen>
       } else {
         _currentProfileIndex = 0;
       }
+      _reiniciarGaleria();
     });
   }
 
@@ -140,41 +172,50 @@ class _HomeScreenState extends State<HomeScreen>
       visibles.length - 1,
     )];
 
+    final fotos = (currentProfile['fotos'] as List).cast<String>();
+
     return Stack(
       children: [
-        // Imagen de fondo del perfil
+        // La galería del perfil. Se recorre deslizando al costado; antes
+        // había una sola foto fija y los puntos no llevaban a ninguna parte.
         Positioned.fill(
-          // Las fotos de los perfiles viven en el APK, no en la red:
-          // con Image.network siempre fallaban y se veía el ícono gris.
-          child: Image.asset(
-            currentProfile['image'],
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                color: Colors.grey[800],
+          child: PageView.builder(
+            controller: _fotos,
+            itemCount: fotos.length,
+            onPageChanged: (i) => setState(() => _fotoActual = i),
+            itemBuilder: (context, i) => Image.asset(
+              fotos[i],
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Container(
+                color: Tok.superficie,
                 child: const Icon(
                   Icons.person,
                   size: 100,
-                  color: Colors.white54,
+                  color: Tok.humo,
                 ),
-              );
-            },
+              ),
+            ),
           ),
         ),
 
-        // Gradiente oscuro en la parte inferior
+        // Gradiente oscuro en la parte inferior.
+        // IgnorePointer es lo que hace que la galería se pueda deslizar:
+        // esta capa cubre toda la pantalla y, sin esto, se quedaba con el
+        // gesto antes de que llegara a las fotos.
         Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.8),
-                ],
-                stops: const [0.0, 0.5, 1.0],
+          child: IgnorePointer(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.transparent,
+                    Colors.black.withOpacity(0.8),
+                  ],
+                  stops: const [0.0, 0.5, 1.0],
+                ),
               ),
             ),
           ),
@@ -186,13 +227,15 @@ class _HomeScreenState extends State<HomeScreen>
             children: [
               // Tabs superiores
               Container(
-                color: AppColors.primary,
+                // El oro es una línea, no una superficie: la barra va en
+                // negro y el oro marca sólo la pestaña activa.
+                color: Tok.fondo,
                 child: TabBar(
                   controller: _tabController,
-                  indicatorColor: Colors.white,
-                  indicatorWeight: 3,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.white70,
+                  indicatorColor: Tok.oro,
+                  indicatorWeight: 2,
+                  labelColor: Tok.oro,
+                  unselectedLabelColor: Tok.humo,
                   labelStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -287,16 +330,18 @@ class _HomeScreenState extends State<HomeScreen>
                     // Sin esto parecía que hubiera un solo perfil: la pantalla
                     // muestra uno por vez y nada indicaba que hubiera más.
                     Row(
+                      // Un punto por foto de la galería, no por perfil:
+                      // es lo que el gesto de deslizar recorre.
                       children: List.generate(
-                        visibles.length,
-                        (i) => Container(
-                          width: i == _currentProfileIndex ? 20 : 6,
+                        fotos.length,
+                        (i) => AnimatedContainer(
+                          duration: const Duration(milliseconds: 180),
+                          curve: Curves.easeOut,
+                          width: i == _fotoActual ? 20 : 6,
                           height: 6,
                           margin: const EdgeInsets.only(right: 4),
                           decoration: BoxDecoration(
-                            color: i == _currentProfileIndex
-                                ? Colors.white
-                                : Colors.white38,
+                            color: i == _fotoActual ? Tok.oro : Colors.white38,
                             borderRadius: BorderRadius.circular(3),
                           ),
                         ),

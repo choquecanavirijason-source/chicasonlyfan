@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class LiveFinalizada extends StatelessWidget {
   const LiveFinalizada({super.key});
@@ -15,7 +16,7 @@ class LiveFinalizada extends StatelessWidget {
             children: [
               const Icon(
                 Icons.emoji_events,
-                color: Color(0xFFE6B6FF),
+                color: Tok.champan,
                 size: 70,
               ),
 
@@ -175,7 +176,7 @@ Widget _metricTile({
       children: [
         Row(
           children: [
-            Icon(icon, color: Color(0xFFE6B6FF)),
+            Icon(icon, color: Tok.champan),
             const SizedBox(width: 15),
             Text(
               title,
@@ -211,7 +212,7 @@ Widget _smallMetric({
     ),
     child: Column(
       children: [
-        Icon(icon, color: Color(0xFFE6B6FF)),
+        Icon(icon, color: Tok.champan),
         const SizedBox(height: 10),
         Text(
           value,

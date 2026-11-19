@@ -186,12 +186,7 @@ class _CameraPageState extends State<CameraPage> {
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: selectedImage == i
-                                                    ? const Color.fromARGB(
-                                                        255,
-                                                        241,
-                                                        50,
-                                                        104,
-                                                      )
+                                                    ? Tok.oro
                                                     : Colors.transparent,
                                                 width: 3,
                                               ),

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:chicas_app/features/female/streaming/screens/liveLinea_page.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 52, 10, 97),
+        backgroundColor: Tok.superficie,
         body: SafeArea(child: Center(child: AjustesFinalesPanel())),
       ),
     );
@@ -54,7 +55,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
                   height: 1000,
                   padding: const EdgeInsets.all(22),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 68, 17, 94),
+                    color: Tok.superficie,
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
@@ -160,7 +161,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFF28ED8),
+                            backgroundColor: Tok.oro,
                             minimumSize: const Size(double.infinity, 50),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -220,12 +221,12 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: isSelected
-            ? const Color(0xFFF084D3).withOpacity(0.22)
+            ? Tok.oro.withOpacity(0.22)
             : Colors.white.withOpacity(0.07),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isSelected
-              ? const Color(0xFFF084D3)
+              ? Tok.oro
               : Colors.white.withOpacity(0.15),
           width: isSelected ? 2 : 1.2,
         ),

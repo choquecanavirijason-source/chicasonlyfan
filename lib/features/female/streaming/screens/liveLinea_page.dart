@@ -654,8 +654,8 @@ class _LiveScreenState extends State<LiveScreen> {
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [
-                      Color.fromARGB(255, 84, 21, 89),
-                      Color.fromARGB(255, 249, 101, 177),
+                      Tok.superficie,
+                      Tok.oro,
                     ],
                   ),
                   borderRadius: BorderRadius.circular(40),

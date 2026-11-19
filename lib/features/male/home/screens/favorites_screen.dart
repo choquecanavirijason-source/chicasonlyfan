@@ -160,7 +160,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     ),
                     TextSpan(
                       text: 'favorita',
-                      style: TextStyle(color: Tok.rosa),
+                      style: TextStyle(color: Tok.oro),
                     ),
                   ],
                 ),
@@ -261,6 +261,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                     : Tok.borde,
                                 width: 1.5,
                               ),
+                              // Las favoritas respiran; las sugerencias no.
+                              boxShadow: favorite['fav'] == true
+                                  ? const [Tok.glowSuave]
+                                  : null,
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(3),
@@ -610,16 +614,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   color: item['type'] == 'EN VIVO'
                       ? Colors.red
                       : AppColors.primary,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(Tok.rPill),
                   boxShadow: item['type'] == 'EN VIVO'
-                      ? [
-                          BoxShadow(
-                            color: Colors.red.withOpacity(0.4),
-                            blurRadius: 8,
-                            spreadRadius: 2,
-                          ),
-                        ]
-                      : null,
+                      ? const [Tok.glowVivo]
+                      : const [Tok.glowSuave],
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

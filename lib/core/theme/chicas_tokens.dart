@@ -73,6 +73,21 @@ class Tok {
     blurRadius: 24,
   );
 
+  /// El resplandor del estado EN VIVO. Va en rojo, que es la convención
+  /// de "en directo", y es el único acento que compite con el oro.
+  static const glowVivo = BoxShadow(
+    color: Color(0x80E33D4E),
+    blurRadius: 20,
+    spreadRadius: 1,
+  );
+
+  /// Resplandor contenido, para destacar una caja sin que grite: tarjetas
+  /// de una lista, avatares en línea, el paquete recomendado de una fila.
+  static const glowSuave = BoxShadow(
+    color: Color(0x33C9A227),
+    blurRadius: 20,
+  );
+
   static const sombraCarta = BoxShadow(
     color: Color(0x73000000),
     blurRadius: 24,

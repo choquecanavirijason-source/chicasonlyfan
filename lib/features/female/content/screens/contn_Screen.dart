@@ -209,7 +209,7 @@ class ContnScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff4c2050),
+                backgroundColor: Tok.superficie,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
@@ -280,7 +280,7 @@ class ContnScreen extends StatelessWidget {
   Widget _bottomNavBar(BuildContext context, int currentIndex) {
     return BottomNavigationBar(
       currentIndex: currentIndex,
-      backgroundColor: const Color(0xff4c2050),
+      backgroundColor: Tok.superficie,
       selectedItemColor: Tok.oro,
       unselectedItemColor: Colors.white60,
       showSelectedLabels: false,

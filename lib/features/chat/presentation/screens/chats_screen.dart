@@ -253,6 +253,7 @@ class _ChatsScreenState extends State<ChatsScreen>
   }
 
   Widget _buildChatItem(Map<String, dynamic> chat) {
+    final enLinea = chat['isOnline'] == true;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -272,7 +273,12 @@ class _ChatsScreenState extends State<ChatsScreen>
         decoration: BoxDecoration(
           color: Tok.superficie,
           borderRadius: BorderRadius.circular(Tok.rL),
-          border: Tok.hiloTenue,
+          // Quien está en línea ahora es lo que el usuario busca al entrar:
+          // esa conversación lleva el hilo de oro y resplandece.
+          border: enLinea ? Tok.hiloOro : Tok.hiloTenue,
+          boxShadow: enLinea
+              ? const [Tok.glowSuave, Tok.sombraCarta]
+              : const [Tok.sombraCarta],
         ),
         child: Row(
           children: [

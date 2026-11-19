@@ -217,17 +217,17 @@ class ProfileScreen extends ConsumerWidget {
     required String remaining,
     required Color color,
   }) {
+    final esLive = color == Tok.oro;
     return Container(
       decoration: BoxDecoration(
         color: Tok.superficie,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(Tok.rL),
+        // La de minutos de live es la caja principal de la pantalla:
+        // lleva el hilo de oro y el resplandor. La de salas, no.
+        border: esLive ? Tok.hiloOro : Tok.hiloTenue,
+        boxShadow: esLive
+            ? const [Tok.glowOroCarta, Tok.sombraCarta]
+            : const [Tok.sombraCarta],
       ),
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -293,16 +293,21 @@ class ProfileScreen extends ConsumerWidget {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: color,
-                foregroundColor: Colors.white,
+                // Sobre el oro el texto va en tinta; sobre el vino, en marfil.
+                foregroundColor: esLive ? Tok.tinta : Tok.marfil,
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(Tok.rPill),
                 ),
                 elevation: 0,
               ),
               child: const Text(
-                'Comprar',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                'COMPRAR',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1.4,
+                ),
               ),
             ),
           ),
@@ -379,14 +384,11 @@ class ProfileScreen extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         color: Tok.superficie,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(Tok.rL),
+        // La de minutos de live es la caja principal de la pantalla:
+        // lleva el hilo de oro y el resplandor. La de salas, no.
+        border: Tok.hiloTenue,
+        boxShadow: const [Tok.sombraCarta],
       ),
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -516,14 +518,11 @@ class ProfileScreen extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         color: Tok.superficie,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(Tok.rL),
+        // La de minutos de live es la caja principal de la pantalla:
+        // lleva el hilo de oro y el resplandor. La de salas, no.
+        border: Tok.hiloTenue,
+        boxShadow: const [Tok.sombraCarta],
       ),
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -531,7 +530,7 @@ class ProfileScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.history, color: Color(0xFF4A1A4A), size: 20),
+              const Icon(Icons.history, color: Tok.superficie, size: 20),
               const SizedBox(width: 8),
               const Text(
                 'Historial VIP',
@@ -583,7 +582,7 @@ class ProfileScreen extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF4A1A4A),
+                      color: Tok.superficie,
                     ),
                   ),
                 ],
@@ -677,7 +676,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           child: const Icon(
             Icons.credit_card,
-            color: Color(0xFF4A1A4A),
+            color: Tok.superficie,
             size: 20,
           ),
         ),

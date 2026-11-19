@@ -16,7 +16,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff3b0a42),
+      backgroundColor: Tok.superficie,
       bottomNavigationBar: _bottomNavBar(context, 2),
       body: SafeArea(
         child: Padding(
@@ -248,7 +248,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget _bottomNavBar(BuildContext context, int currentIndex) {
     return BottomNavigationBar(
       currentIndex: currentIndex,
-      backgroundColor: const Color(0xff4c2050),
+      backgroundColor: Tok.superficie,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white60,
       showSelectedLabels: false,

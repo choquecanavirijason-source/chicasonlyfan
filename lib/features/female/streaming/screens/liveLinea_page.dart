@@ -456,7 +456,7 @@ class _LiveScreenState extends State<LiveScreen> {
                       },
                       child: _miniViewer(
                         "assets/view1.jpg",
-                        Colors.yellow,
+                        Tok.oro,
                         "1",
                       ),
                     ),
@@ -472,7 +472,7 @@ class _LiveScreenState extends State<LiveScreen> {
                       },
                       child: _miniViewer(
                         "assets/view2.jpg",
-                        Colors.purple,
+                        Tok.champan,
                         "2",
                       ),
                     ),
@@ -488,7 +488,7 @@ class _LiveScreenState extends State<LiveScreen> {
                       },
                       child: _miniViewer(
                         "assets/view3.jpg",
-                        Colors.orange,
+                        Tok.oroHondo,
                         "3",
                       ),
                     ),

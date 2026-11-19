@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:chicas_app/features/female/content/screens/contn_screen.dart';
 import 'package:chicas_app/features/female/content/screens/contenido_screen.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -230,7 +231,7 @@ class _ChatPageState extends State<ChatPage> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.purpleAccent,
+                color: Tok.oro,
                 shape: BoxShape.circle,
               ),
               child: Text(

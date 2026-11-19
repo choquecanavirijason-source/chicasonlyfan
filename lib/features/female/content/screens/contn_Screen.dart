@@ -253,7 +253,7 @@ class ContnScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.purple.shade50,
+              color: Tok.superficieAlta,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(Icons.star, color: Tok.humo),

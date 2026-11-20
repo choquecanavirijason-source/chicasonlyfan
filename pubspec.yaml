@@ -64,6 +64,9 @@ flutter:
   generate: true
 
   assets:
+    # Las tipografías empaquetadas: google_fonts las encuentra acá
+    # y deja de bajarlas de internet.
+    - google_fonts/
     - assets/profile1.jpg
     - assets/profile2.jpg
     - assets/profile3.jpg

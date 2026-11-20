@@ -1,0 +1,272 @@
+<!doctype html>
+<!--
+  PLANTILLA · Caso de estudio de una app móvil (A4, Coder Blend)
+  ----------------------------------------------------------------------------
+  Cómo se usa:
+    1. Copiar esta carpeta entera a la del proyecto nuevo.
+    2. Dejar las capturas en img/ y el logo en img/logo.png.
+    3. Reemplazar lo que está entre ⟦corchetes⟧ y borrar las páginas que sobren.
+    4. Generar el PDF con el comando que está en el README.
+
+  Las páginas son bloques sueltos: se copian, se reordenan y se borran sin
+  tocar nada más. Acordarse de renumerar el <span class="num"> del pie.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>⟦Nombre de la app⟧ · Caso de estudio</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║ BLOQUE 1 · PORTADA                                                   ║
+     ║ El nombre en grande de fondo, un teléfono al centro y el halo detrás.║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<section class="pagina">
+  <div class="cabecera"><img src="img/logo.png" alt="Coder Blend"><span>Caso de estudio</span></div>
+  <div class="cuerpo portada">
+    <div class="brillo" style="width:190mm;height:190mm;left:50%;top:40mm;transform:translateX(-50%)"></div>
+    <div class="marca">⟦NOMBRE⟧</div>
+    <div class="tel"><img src="img/01-principal.jpg" alt="Pantalla principal"></div>
+    <div class="arriba">
+      <div class="chips"><span>Caso de estudio</span><span>UI/UX</span><span>App móvil</span><span>⟦año⟧</span></div>
+    </div>
+    <div class="abajo">
+      <h1>⟦Nombre de la app⟧</h1>
+      <p style="font-size:12.5pt;color:var(--acento-suave);margin-top:3mm">
+        ⟦Una línea que diga qué hace la app, sin adjetivos de relleno.⟧
+      </p>
+    </div>
+  </div>
+  <div class="pie"><span>WWW.CODERBLEND.COM</span><span class="num">01</span></div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║ BLOQUE 2 · DISEÑO UI · cinco teléfonos en abanico                    ║
+     ║ Las capturas más vistosas van al centro (t3) y las de apoyo afuera.  ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<section class="pagina">
+  <div class="cabecera"><img src="img/logo.png" alt="Coder Blend"><span>Diseño UI</span></div>
+  <div class="cuerpo">
+    <div class="brillo" style="width:200mm;height:160mm;left:-10mm;bottom:-30mm"></div>
+    <div class="capa">
+      <span class="etiqueta">Diseño UI</span>
+      <h2>⟦Una frase sobre cómo se diseñó, con <span class="acento">dos o tres palabras
+          resaltadas</span> en el color del proyecto.⟧</h2>
+      <p style="margin-top:5mm;max-width:150mm">
+        ⟦Dos renglones explicando la decisión principal de la interfaz.⟧
+      </p>
+      <div class="escalera" style="margin-top:18mm">
+        <div class="tel t1"><img src="img/00-ingreso.jpg"   alt=""></div>
+        <div class="tel t2"><img src="img/05-lista.jpg"     alt=""></div>
+        <div class="tel t3"><img src="img/01-principal.jpg" alt=""></div>
+        <div class="tel t2"><img src="img/03-seccion.jpg"   alt=""></div>
+        <div class="tel t1"><img src="img/07-perfil.jpg"    alt=""></div>
+      </div>
+    </div>
+  </div>
+  <div class="pie"><span>WWW.CODERBLEND.COM</span><span class="num">02</span></div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║ BLOQUE 3 · ENFOQUE · dos cartas + un panel ampliado                  ║
+     ║ El panel es un RECORTE de la pantalla real, no la pantalla entera.   ║
+     ║ Para el cliente va en positivo; la versión interna puede decir       ║
+     ║ "Problema / Solución" cambiando el texto de .tag.                    ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<section class="pagina">
+  <div class="cabecera"><img src="img/logo.png" alt="Coder Blend"><span>Enfoque</span></div>
+  <div class="cuerpo">
+    <div class="brillo" style="width:150mm;height:150mm;right:-30mm;top:40mm"></div>
+    <div class="capa">
+      <span class="etiqueta">Enfoque &amp; experiencia</span>
+      <h2>⟦TITULAR EN DOS PARTES, <span class="acento">LA SEGUNDA EN COLOR</span>⟧</h2>
+      <div class="dos" style="margin-top:9mm;align-items:start">
+        <div>
+          <div class="carta" style="margin-bottom:6mm">
+            <span class="tag">⟦El concepto⟧</span>
+            <p>⟦Qué idea sostiene el diseño.⟧</p>
+          </div>
+          <div class="carta">
+            <span class="tag">⟦El camino al objetivo⟧</span>
+            <p>⟦Cómo la interfaz lleva al usuario a hacer lo que el negocio necesita.⟧</p>
+          </div>
+        </div>
+        <div class="panel">
+          <img src="img/det-uno.jpg" alt="">
+          <div class="pie-panel"><p>⟦Qué se está mirando en este recorte.⟧</p></div>
+        </div>
+      </div>
+      <div class="dos" style="margin-top:7mm;align-items:center">
+        <div class="panel"><img src="img/det-dos.jpg" alt=""></div>
+        <div class="carta">
+          <h3>⟦Título corto⟧</h3>
+          <p style="margin-top:3mm">⟦Tres renglones sobre ese detalle.⟧</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pie"><span>WWW.CODERBLEND.COM</span><span class="num">03</span></div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║ BLOQUE 4 · TRES PANTALLAS CON PIE                                    ║
+     ║ Duplicar este bloque por cada sección grande de la app.              ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<section class="pagina">
+  <div class="cabecera"><img src="img/logo.png" alt="Coder Blend"><span>⟦Sección⟧</span></div>
+  <div class="cuerpo">
+    <div class="brillo" style="width:180mm;height:150mm;left:15mm;top:55mm"></div>
+    <div class="capa">
+      <span class="etiqueta">⟦Sección⟧</span>
+      <h2>⟦Titular de la sección, <span class="acento">con su remate</span>⟧</h2>
+      <p style="margin-top:5mm;max-width:150mm">⟦Dos renglones de contexto.⟧</p>
+      <div class="rejilla3" style="margin-top:12mm">
+        <figure>
+          <div class="tel"><img src="img/01-principal.jpg" alt=""></div>
+          <figcaption><b>⟦Pantalla⟧</b>⟦Qué hace, en un renglón.⟧</figcaption>
+        </figure>
+        <figure>
+          <div class="tel"><img src="img/02-variante.jpg" alt=""></div>
+          <figcaption><b>⟦Pantalla⟧</b>⟦Qué hace, en un renglón.⟧</figcaption>
+        </figure>
+        <figure>
+          <div class="tel"><img src="img/03-seccion.jpg" alt=""></div>
+          <figcaption><b>⟦Pantalla⟧</b>⟦Qué hace, en un renglón.⟧</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <div class="pie"><span>WWW.CODERBLEND.COM</span><span class="num">04</span></div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║ BLOQUE 5 · PANEL ARRIBA + TRES PANTALLAS                             ║
+     ║ Cuando hay un detalle que merece verse grande antes de las pantallas.║
+     ║ Con pie de foto, la rejilla lleva .con-pie para que no se corte.     ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<section class="pagina">
+  <div class="cabecera"><img src="img/logo.png" alt="Coder Blend"><span>⟦Sección⟧</span></div>
+  <div class="cuerpo">
+    <div class="brillo" style="width:170mm;height:140mm;right:-20mm;top:85mm"></div>
+    <div class="capa">
+      <span class="etiqueta">⟦Sección⟧</span>
+      <h2>⟦Titular⟧</h2>
+      <div class="panel" style="margin-top:8mm">
+        <img src="img/det-tres.jpg" alt="">
+        <div class="pie-panel"><p>⟦Qué muestra este recorte y por qué importa.⟧</p></div>
+      </div>
+      <div class="rejilla3 con-pie" style="margin-top:9mm">
+        <figure>
+          <div class="tel"><img src="img/04-a.jpg" alt=""></div>
+          <figcaption><b>⟦Pantalla⟧</b>⟦Un renglón.⟧</figcaption>
+        </figure>
+        <figure>
+          <div class="tel"><img src="img/04-b.jpg" alt=""></div>
+          <figcaption><b>⟦Pantalla⟧</b>⟦Un renglón.⟧</figcaption>
+        </figure>
+        <figure>
+          <div class="tel"><img src="img/04-c.jpg" alt=""></div>
+          <figcaption><b>⟦Pantalla⟧</b>⟦Un renglón.⟧</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+  <div class="pie"><span>WWW.CODERBLEND.COM</span><span class="num">05</span></div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║ BLOQUE 6 · CUATRO PANTALLAS SECUNDARIAS                              ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<section class="pagina">
+  <div class="cabecera"><img src="img/logo.png" alt="Coder Blend"><span>Pantallas</span></div>
+  <div class="cuerpo">
+    <div class="brillo" style="width:160mm;height:140mm;left:-20mm;top:95mm"></div>
+    <div class="capa">
+      <span class="etiqueta">⟦Las demás pantallas⟧</span>
+      <h2>⟦Titular⟧</h2>
+      <div class="dos" style="margin-top:8mm;align-items:center">
+        <div class="panel"><img src="img/det-cuatro.jpg" alt=""></div>
+        <div class="carta">
+          <h3>⟦Título corto⟧</h3>
+          <p style="margin-top:3mm">⟦Tres renglones.⟧</p>
+        </div>
+      </div>
+      <div class="rejilla4 con-pie" style="margin-top:9mm">
+        <figure><div class="tel"><img src="img/05-a.jpg" alt=""></div><figcaption><b>⟦Pantalla⟧</b>⟦Breve.⟧</figcaption></figure>
+        <figure><div class="tel"><img src="img/05-b.jpg" alt=""></div><figcaption><b>⟦Pantalla⟧</b>⟦Breve.⟧</figcaption></figure>
+        <figure><div class="tel"><img src="img/05-c.jpg" alt=""></div><figcaption><b>⟦Pantalla⟧</b>⟦Breve.⟧</figcaption></figure>
+        <figure><div class="tel"><img src="img/05-d.jpg" alt=""></div><figcaption><b>⟦Pantalla⟧</b>⟦Breve.⟧</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="pie"><span>WWW.CODERBLEND.COM</span><span class="num">06</span></div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║ BLOQUE 7 · SISTEMA VISUAL                                            ║
+     ║ Paleta, el recurso de marca, tipografías y reglas.                   ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<section class="pagina">
+  <div class="cabecera"><img src="img/logo.png" alt="Coder Blend"><span>Sistema visual</span></div>
+  <div class="cuerpo">
+    <div class="brillo" style="width:150mm;height:130mm;right:-25mm;bottom:-10mm"></div>
+    <div class="capa">
+      <span class="etiqueta">Sistema visual</span>
+      <h2>⟦Una sola hoja de reglas para <span class="acento">toda la app</span>⟧</h2>
+
+      <h3 style="margin:9mm 0 4mm">Paleta</h3>
+      <div class="paleta">
+        <div class="muestra"><div class="color" style="background:#060606"></div><div class="txt"><b>⟦Fondo⟧</b>#060606</div></div>
+        <div class="muestra"><div class="color" style="background:#121212"></div><div class="txt"><b>⟦Superficie⟧</b>#121212</div></div>
+        <div class="muestra"><div class="color" style="background:#c9a227"></div><div class="txt"><b>⟦Acento⟧</b>#C9A227</div></div>
+        <div class="muestra"><div class="color" style="background:#e8d9a0"></div><div class="txt"><b>⟦Acento suave⟧</b>#E8D9A0</div></div>
+        <div class="muestra"><div class="color" style="background:#f5f1e8"></div><div class="txt"><b>⟦Texto⟧</b>#F5F1E8</div></div>
+      </div>
+
+      <h3 style="margin:9mm 0 4mm">⟦El recurso de marca⟧</h3>
+      <div class="dos">
+        <div class="carta" style="display:flex;align-items:center;justify-content:center;padding:9mm">
+          <div style="width:38mm;height:38mm;border-radius:50%;border:1px solid var(--acento);
+                      box-shadow:0 0 12mm rgba(201,162,39,.55);display:flex;
+                      align-items:center;justify-content:center;background:#0b0a09">
+            <span style="font-family:Titulo;font-size:15pt;color:var(--acento)">⟦ICONO⟧</span>
+          </div>
+        </div>
+        <div class="carta">
+          <p style="color:var(--texto);font-size:10.5pt">
+            ⟦Qué significa ese recurso y cuándo se usa. Si no significa nada, sobra.⟧
+          </p>
+        </div>
+      </div>
+
+      <div class="dos" style="margin-top:9mm">
+        <div class="carta">
+          <h3>Tipografía</h3>
+          <p style="font-family:Titulo;font-size:24pt;color:var(--texto);margin:3mm 0 1mm">⟦Fuente de títulos⟧</p>
+          <p>⟦Dónde se usa.⟧</p>
+          <p style="font-size:16pt;color:var(--texto);margin:5mm 0 1mm;font-weight:500">⟦Fuente de textos⟧</p>
+          <p>⟦Dónde se usa.⟧</p>
+        </div>
+        <div class="carta">
+          <h3>Reglas</h3>
+          <ul class="lista" style="margin-top:4mm">
+            <li><b>⟦Regla uno.⟧</b></li>
+            <li><b>⟦Regla dos.⟧</b></li>
+            <li><b>⟦Regla tres.⟧</b></li>
+            <li><b>⟦Regla cuatro.⟧</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top:8mm;font-size:9.5pt;color:var(--acento-suave)">
+        Todas las capturas son de la aplicación funcionando en el celular.
+      </p>
+    </div>
+  </div>
+  <div class="pie"><span>WWW.CODERBLEND.COM</span><span class="num">07</span></div>
+</section>
+
+</body>
+</html>

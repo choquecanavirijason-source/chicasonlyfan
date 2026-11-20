@@ -1,0 +1,171 @@
+/* ===========================================================================
+   Plantilla de caso de estudio — Coder Blend
+   ---------------------------------------------------------------------------
+   Hoja única para presentar una app móvil en A4. Se arma con bloques:
+   portada, escalera de teléfonos, paneles de detalle, grillas y
+   sistema visual. Todo el color sale de las variables de abajo, así que
+   para otro proyecto se cambian esas siete líneas y nada más.
+
+   Reglas que sostienen la presentación:
+   · La captura nunca lleva transparencia. El brillo va DETRÁS, en .brillo,
+     o por fuera del marco, en la sombra de .tel.
+   · El marco del teléfono es sólido: si se transparenta, la captura se ve
+     lavada y parece un mockup mal hecho.
+   · Cada página tiene membrete arriba y pie abajo; el contenido vive en
+     .cuerpo y nunca lo pisa.
+   =========================================================================== */
+
+/* --- Marca del proyecto: esto es lo único que se cambia por cliente ------ */
+:root {
+  --navy: #041030;        /* barra de membrete y pie (Coder Blend) */
+  --fondo: #050505;       /* fondo de la página */
+  --superficie: #131211;  /* cartas */
+  --acento: #c9a227;      /* el color de la app que se presenta */
+  --acento-suave: #e8d9a0;
+  --texto: #f5f1e8;
+  --texto-tenue: #a9a29b;
+  --borde: #2a2724;
+  --tinta: #140f02;       /* texto sobre el acento: nunca blanco */
+}
+
+/* --- Tipografías: dejar los .ttf en ./fuentes --------------------------- */
+@font-face { font-family: Titulo; src: url('fuentes/PlayfairDisplay-SemiBold.ttf'); font-weight: 600; }
+@font-face { font-family: Titulo; src: url('fuentes/PlayfairDisplay-Bold.ttf');     font-weight: 700; }
+@font-face { font-family: Texto;  src: url('fuentes/Jost-Regular.ttf');  font-weight: 400; }
+@font-face { font-family: Texto;  src: url('fuentes/Jost-Medium.ttf');   font-weight: 500; }
+@font-face { font-family: Texto;  src: url('fuentes/Jost-SemiBold.ttf'); font-weight: 600; }
+@font-face { font-family: Texto;  src: url('fuentes/Jost-Bold.ttf');     font-weight: 700; }
+
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Texto, sans-serif; color: var(--texto); background: #555; }
+
+/* --- Página ------------------------------------------------------------- */
+.pagina {
+  width: 210mm; height: 297mm;
+  background: var(--fondo);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  page-break-after: always;
+}
+.pagina:last-child { page-break-after: auto; }
+
+.cabecera {
+  height: 17mm; background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14mm 0 0; flex: none; position: relative; z-index: 5;
+}
+.cabecera img { height: 17mm; display: block; }   /* el logo ya trae su fondo */
+.cabecera span { font-size: 8.5pt; letter-spacing: .18em; color: #8fb6c9; text-transform: uppercase; }
+
+.pie {
+  height: 12mm; background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14mm; flex: none; position: relative; z-index: 5;
+  font-size: 8.5pt; letter-spacing: .14em; color: #fff;
+}
+.pie .num { color: #6f8aa8; }
+
+.cuerpo { flex: 1; padding: 13mm 14mm 10mm; position: relative; overflow: hidden; }
+
+/* --- Resplandor: SIEMPRE detrás ----------------------------------------- */
+.brillo {
+  position: absolute; border-radius: 50%; z-index: 0;
+  background: radial-gradient(circle,
+              rgba(201,162,39,.38) 0%,
+              rgba(201,162,39,.12) 45%,
+              rgba(5,5,5,0) 70%);
+}
+.capa { position: relative; z-index: 2; }  /* el contenido va sobre el brillo */
+
+/* --- Texto -------------------------------------------------------------- */
+h1 { font-family: Titulo; font-size: 46pt; line-height: 1; font-weight: 700; letter-spacing: -.01em; }
+h2 { font-family: Titulo; font-size: 23pt; line-height: 1.16; font-weight: 600; }
+h3 { font-family: Titulo; font-size: 13pt; font-weight: 600; }
+p  { font-size: 10pt; line-height: 1.55; color: var(--texto-tenue); }
+.acento { color: var(--acento); }
+
+.etiqueta {
+  display: inline-block; font-size: 8pt; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--acento);
+  border: 1px solid var(--acento); border-radius: 999px;
+  padding: 2.2mm 5mm; margin-bottom: 7mm;
+}
+.chips { display: flex; gap: 3mm; justify-content: flex-end; }
+.chips span {
+  font-size: 7.5pt; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--acento-suave); border: 1px solid rgba(201,162,39,.6);
+  border-radius: 999px; padding: 1.8mm 4.5mm;
+}
+
+/* --- Teléfono ----------------------------------------------------------- */
+.tel {
+  border: 1.2mm solid #26231f; border-radius: 6mm;
+  background: #000; overflow: hidden; display: block; position: relative;
+  box-shadow: 0 0 10mm rgba(201,162,39,.45), 0 6mm 12mm rgba(0,0,0,.75);
+}
+.tel img { width: 100%; display: block; opacity: 1; }
+
+/* Fila escalonada: el del medio manda */
+.escalera { display: flex; align-items: flex-end; justify-content: center; gap: 4mm; }
+.escalera .tel { flex: none; }
+.escalera .t1 { width: 29mm; margin-bottom: 15mm; }
+.escalera .t2 { width: 35mm; margin-bottom: 7mm; }
+.escalera .t3 { width: 42mm; }
+
+/* --- Panel de detalle: un pedazo de la interfaz, ampliado ---------------- */
+.panel {
+  border: 1px solid rgba(201,162,39,.45); border-radius: 5mm;
+  overflow: hidden; background: #000;
+  box-shadow: 0 0 12mm rgba(201,162,39,.32);
+}
+.panel img { width: 100%; display: block; }
+.panel .pie-panel { padding: 5mm 6mm; background: var(--superficie); }
+.panel .pie-panel p { color: var(--texto); font-size: 10pt; }
+
+/* --- Cartas y grillas ---------------------------------------------------- */
+.carta {
+  background: var(--superficie); border: 1px solid var(--borde);
+  border-radius: 4mm; padding: 7mm;
+}
+.carta h3 { margin-bottom: 3mm; }
+.carta .tag {
+  display: inline-block; font-size: 7.5pt; letter-spacing: .16em; text-transform: uppercase;
+  padding: 1.6mm 4mm; border-radius: 999px; margin-bottom: 4mm;
+  background: var(--acento); color: var(--tinta);
+}
+
+.dos      { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; }
+.rejilla3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
+.rejilla4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5mm; }
+figure { margin: 0; }
+figcaption { font-size: 8.5pt; color: var(--texto-tenue); margin-top: 3mm; line-height: 1.35; }
+figcaption b { color: var(--texto); font-weight: 600; display: block; font-size: 9.5pt; }
+
+/* Con tres o cuatro teléfonos y pie de foto, la fila necesita aire lateral
+   o los pies se cortan contra el pie de página. */
+.rejilla3.con-pie { padding: 0 16mm; }
+.rejilla4.con-pie { padding: 0 8mm; }
+
+/* --- Portada ------------------------------------------------------------- */
+.portada { padding: 0; }
+.portada .marca {
+  position: absolute; left: 50%; top: 34mm; transform: translateX(-50%);
+  font-family: Titulo; font-weight: 700; font-size: 92pt;
+  color: rgba(201,162,39,.16); white-space: nowrap; z-index: 1;
+}
+.portada .tel { width: 74mm; position: absolute; left: 50%; top: 62mm; transform: translateX(-50%); z-index: 3; }
+.portada .arriba { position: absolute; top: 12mm; left: 14mm; right: 14mm; z-index: 4; }
+.portada .abajo  { position: absolute; bottom: 12mm; left: 14mm; right: 14mm; z-index: 4; }
+
+/* --- Sistema visual ------------------------------------------------------ */
+.paleta { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; }
+.muestra { border-radius: 3mm; overflow: hidden; border: 1px solid var(--borde); }
+.muestra .color { height: 20mm; }
+.muestra .txt { padding: 2.5mm 3mm; font-size: 7.5pt; color: var(--texto-tenue); }
+.muestra .txt b { display: block; color: var(--texto); font-size: 9pt; font-weight: 600; }
+
+.lista { list-style: none; }
+.lista li { font-size: 10pt; color: var(--texto-tenue); line-height: 1.5; padding-left: 6mm; position: relative; margin-bottom: 2.5mm; }
+.lista li::before { content: ''; position: absolute; left: 0; top: 2.1mm; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--acento); }
+.lista li b { color: var(--texto); font-weight: 600; }

@@ -89,6 +89,44 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       'image': 'assets/images/profiles/avatar5.jpg',
       'fav': false,
     },
+    {
+      'name': 'Valentina',
+      'fotos': [
+        'assets/images/galeria/valentina/1.jpg',
+        'assets/images/galeria/valentina/2.jpg',
+        'assets/images/galeria/valentina/3.jpg',
+        'assets/images/galeria/valentina/4.jpg',
+      ],
+      'video': 'assets/videos/feed/7.mp4',
+      'portada': 'assets/images/feed/portada7.jpg',
+      'image': 'assets/images/galeria/valentina/1.jpg',
+      'fav': false,
+    },
+    {
+      'name': 'Antonella',
+      'fotos': [
+        'assets/images/galeria/antonella/1.jpg',
+        'assets/images/galeria/antonella/2.jpg',
+        'assets/images/galeria/antonella/3.jpg',
+      ],
+      'video': 'assets/videos/feed/8.mp4',
+      'portada': 'assets/images/feed/portada8.jpg',
+      'image': 'assets/images/galeria/antonella/1.jpg',
+      'fav': false,
+    },
+    {
+      'name': 'Daniela',
+      'fotos': [
+        'assets/images/galeria/daniela/1.jpg',
+        'assets/images/galeria/daniela/2.jpg',
+        'assets/images/galeria/daniela/3.jpg',
+        'assets/images/galeria/daniela/4.jpg',
+      ],
+      'video': 'assets/videos/feed/9.mp4',
+      'portada': 'assets/images/feed/portada9.jpg',
+      'image': 'assets/images/galeria/daniela/1.jpg',
+      'fav': false,
+    },
   ];
 
   int get _cantidadFavoritas =>

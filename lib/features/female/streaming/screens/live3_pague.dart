@@ -274,9 +274,7 @@ class _ConfiguracionSalaPanelState extends State<ConfiguracionSalaPanel> {
             : Colors.white.withOpacity(0.07),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected
-              ? Tok.oro
-              : Colors.white.withOpacity(0.15),
+          color: isSelected ? Tok.oro : Colors.white.withOpacity(0.15),
           width: isSelected ? 2 : 1.2,
         ),
       ),
@@ -318,9 +316,7 @@ class _ConfiguracionSalaPanelState extends State<ConfiguracionSalaPanel> {
             : Colors.white.withOpacity(0.07),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected
-              ? Tok.oro
-              : Colors.white.withOpacity(0.15),
+          color: isSelected ? Tok.oro : Colors.white.withOpacity(0.15),
           width: isSelected ? 2 : 1.2,
         ),
       ),

@@ -548,123 +548,124 @@ class _PackagesScreenState extends State<PackagesScreen> {
                 ),
               ),
               Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Badge
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 4,
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Badge
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Tok.superficieAlta,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            package['name'],
+                            style: const TextStyle(
+                              color: Tok.champan,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+
+                        // Ícono
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Tok.superficieAlta,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            package['icon'],
+                            color: Tok.oro,
+                            size: 24,
+                          ),
+                        ),
+                      ],
                     ),
-                    decoration: BoxDecoration(
-                      color: Tok.superficieAlta,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      package['name'],
+
+                    const SizedBox(height: 16),
+
+                    // Precio
+                    Text(
+                      '${package['price']} Bs.',
                       style: const TextStyle(
-                        color: Tok.champan,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                        color: Tok.marfil,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-
-                  // Ícono
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Tok.superficieAlta,
-                      shape: BoxShape.circle,
+                    Text(
+                      package['description'],
+                      style: TextStyle(color: Tok.humo, fontSize: 13),
                     ),
-                    child: Icon(package['icon'], color: Tok.oro, size: 24),
-                  ),
-                ],
-              ),
 
-              const SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
-              // Precio
-              Text(
-                '${package['price']} Bs.',
-                style: const TextStyle(
-                  color: Tok.marfil,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
+                    // Minutos
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          '${package['minutes']}',
+                          style: const TextStyle(
+                            color: Tok.oro,
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        const Text(
+                          'minutos',
+                          style: TextStyle(color: Tok.humo, fontSize: 16),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Botón Comprar centrado
+                    Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 12,
+                        ),
+                        decoration: BoxDecoration(
+                          // La acción de la tarjeta: oro y resplandor, uno por paquete.
+                          gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Tok.oro, Color(0xFF9D7C14)],
+                          ),
+                          borderRadius: BorderRadius.circular(Tok.rPill),
+                          boxShadow: const [Tok.glowOro],
+                        ),
+                        child: Text(
+                          'COMPRAR',
+                          style: GoogleFonts.jost(
+                            color: const Color(0xFF140F02),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.4,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                package['description'],
-                style: TextStyle(
-                  color: Tok.humo,
-                  fontSize: 13,
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              // Minutos
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    '${package['minutes']}',
-                    style: const TextStyle(
-                      color: Tok.oro,
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Text(
-                    'minutos',
-                    style: TextStyle(color: Tok.humo, fontSize: 16),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 16),
-
-              // Botón Comprar centrado
-              Center(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 12,
-                  ),
-                  decoration: BoxDecoration(
-                    // La acción de la tarjeta: oro y resplandor, uno por paquete.
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Tok.oro, Color(0xFF9D7C14)],
-                    ),
-                    borderRadius: BorderRadius.circular(Tok.rPill),
-                    boxShadow: const [Tok.glowOro],
-                  ),
-                  child: Text(
-                    'COMPRAR',
-                    style: GoogleFonts.jost(
-                      color: const Color(0xFF140F02),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.4,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
             ],
           ),
         ),
@@ -691,11 +692,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
                 color: Tok.superficieAlta,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
-                Icons.access_time,
-                color: Tok.oro,
-                size: 22,
-              ),
+              child: const Icon(Icons.access_time, color: Tok.oro, size: 22),
             ),
 
             const SizedBox(height: 12),
@@ -834,11 +831,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
           shape: BoxShape.circle,
           border: isSelected ? Tok.hiloOro : null,
         ),
-        child: Icon(
-          icon,
-          color: isSelected ? Tok.oro : Tok.humo,
-          size: 24,
-        ),
+        child: Icon(icon, color: isSelected ? Tok.oro : Tok.humo, size: 24),
       ),
     );
   }

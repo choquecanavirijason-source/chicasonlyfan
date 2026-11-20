@@ -14,90 +14,88 @@ class CrearContenidoPage extends StatelessWidget {
       color: Tok.fondo,
       child: SafeArea(
         child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            Text(
-              "CREAR CONTENIDO",
-              style: GoogleFonts.jost(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 1.4,
-                color: Tok.oro,
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+              Text(
+                "CREAR CONTENIDO",
+                style: GoogleFonts.jost(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1.4,
+                  color: Tok.oro,
+                ),
               ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              "¿Qué deseas crear?",
-              style: GoogleFonts.playfairDisplay(
-                fontSize: 30,
-                height: 1.13,
-                fontWeight: FontWeight.w600,
-                color: Tok.marfil,
+              const SizedBox(height: 5),
+              Text(
+                "¿Qué deseas crear?",
+                style: GoogleFonts.playfairDisplay(
+                  fontSize: 30,
+                  height: 1.13,
+                  fontWeight: FontWeight.w600,
+                  color: Tok.marfil,
+                ),
               ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              "Elige una opción para comenzar",
-              style: GoogleFonts.jost(fontSize: 14, color: Tok.humo),
-            ),
+              const SizedBox(height: 6),
+              Text(
+                "Elige una opción para comenzar",
+                style: GoogleFonts.jost(fontSize: 14, color: Tok.humo),
+              ),
 
-            const SizedBox(height: 40),
+              const SizedBox(height: 40),
 
-            // FILA SUPERIOR
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _opcionCard(
-                  destacada: true,
-                  icon: Icons.wifi_tethering,
-                  titulo: "Iniciar\nLive",
+              // FILA SUPERIOR
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _opcionCard(
+                    destacada: true,
+                    icon: Icons.wifi_tethering,
+                    titulo: "Iniciar\nLive",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const CameraPage()),
+                      );
+                    },
+                  ),
+
+                  // OPCIÓN 3
+                  _opcionCard(
+                    icon: Icons.groups_2_outlined,
+                    titulo: "Crear\nSala 7-9",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const SalaScreen()),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // OPCIÓN INFERIOR
+              Align(
+                alignment: Alignment.centerLeft,
+                child: _opcionCard(
+                  icon: Icons.upload_rounded,
+                  titulo: "Subir\ncontenido",
+                  width: 150,
                   onTap: () {
+                    // Acción al subir contenido
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const CameraPage()),
+                      MaterialPageRoute(
+                        builder: (_) => const ConfiguracionLive2Page(),
+                      ),
                     );
                   },
                 ),
-
-                // OPCIÓN 3
-                _opcionCard(
-
-                  icon: Icons.groups_2_outlined,
-                  titulo: "Crear\nSala 7-9",
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const SalaScreen()),
-                    );
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            // OPCIÓN INFERIOR
-            Align(
-              alignment: Alignment.centerLeft,
-              child: _opcionCard(
-
-                icon: Icons.upload_rounded,
-                titulo: "Subir\ncontenido",
-                width: 150,
-                onTap: () {
-                  // Acción al subir contenido
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const ConfiguracionLive2Page(),
-                    ),
-                  );
-                },
               ),
-            ),
-            //2
+              //2
             ],
           ),
         ),

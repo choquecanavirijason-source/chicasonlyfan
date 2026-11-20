@@ -156,9 +156,7 @@ class _ContenidoVideoScreenState extends State<ContenidoVideoScreen> {
         children: [
           Image.asset(widget.portada, fit: BoxFit.cover),
           Container(color: Colors.black38),
-          const Center(
-            child: CircularProgressIndicator(color: Colors.white),
-          ),
+          const Center(child: CircularProgressIndicator(color: Colors.white)),
         ],
       );
     }
@@ -169,10 +167,7 @@ class _ContenidoVideoScreenState extends State<ContenidoVideoScreen> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          AspectRatio(
-            aspectRatio: c.value.aspectRatio,
-            child: VideoPlayer(c),
-          ),
+          AspectRatio(aspectRatio: c.value.aspectRatio, child: VideoPlayer(c)),
           if (!c.value.isPlaying)
             const Icon(Icons.play_arrow, color: Colors.white70, size: 80),
         ],

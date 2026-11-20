@@ -174,10 +174,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25),
-                    borderSide: const BorderSide(
-                      color: Tok.oro,
-                      width: 1,
-                    ),
+                    borderSide: const BorderSide(color: Tok.oro, width: 1),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 16,

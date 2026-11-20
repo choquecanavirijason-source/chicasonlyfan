@@ -86,11 +86,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
                                 const SnackBar(content: Text("Cerrar panel")),
                               );
                             },
-                            child: Icon(
-                              Icons.close,
-                              color: Tok.humo,
-                              size: 25,
-                            ),
+                            child: Icon(Icons.close, color: Tok.humo, size: 25),
                           ),
                         ],
                       ),
@@ -115,10 +111,7 @@ class _AjustesFinalesPanelState extends State<AjustesFinalesPanel> {
                         margin: const EdgeInsets.all(3),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: Tok.oro,
-                            width: 3,
-                          ),
+                          border: Border.all(color: Tok.oro, width: 3),
                         ),
                         clipBehavior: Clip.antiAlias,
                         child: ClipRRect(

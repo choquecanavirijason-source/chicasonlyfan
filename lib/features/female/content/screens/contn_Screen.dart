@@ -139,10 +139,7 @@ class ContnScreen extends StatelessWidget {
               color: Tok.oro,
             ),
           ),
-          Text(
-            label,
-            style: TextStyle(fontSize: 12, color: Tok.humo),
-          ),
+          Text(label, style: TextStyle(fontSize: 12, color: Tok.humo)),
         ],
       ),
     );

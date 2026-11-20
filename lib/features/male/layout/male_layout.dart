@@ -153,11 +153,7 @@ class _MaleLayoutState extends ConsumerState<MaleLayout> {
   }
 
   Widget _buildNavIcon(IconData icon, bool isActive) {
-    return Icon(
-      icon,
-      color: isActive ? Tok.oro : Tok.humo,
-      size: 24,
-    );
+    return Icon(icon, color: isActive ? Tok.oro : Tok.humo, size: 24);
   }
 
   /// Determina el índice del tab basándose en la ruta actual

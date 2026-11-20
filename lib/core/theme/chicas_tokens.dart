@@ -68,10 +68,7 @@ class Tok {
 
   /// Sólo para EN VIVO. Es lo único de la app que se mueve sin que
   /// nadie lo toque, y ese privilegio es lo que lo hace funcionar.
-  static const glowRosa = BoxShadow(
-    color: Color(0x4DE24F9A),
-    blurRadius: 24,
-  );
+  static const glowRosa = BoxShadow(color: Color(0x4DE24F9A), blurRadius: 24);
 
   /// El resplandor del estado EN VIVO. Va en rojo, que es la convención
   /// de "en directo", y es el único acento que compite con el oro.
@@ -83,10 +80,7 @@ class Tok {
 
   /// Resplandor contenido, para destacar una caja sin que grite: tarjetas
   /// de una lista, avatares en línea, el paquete recomendado de una fila.
-  static const glowSuave = BoxShadow(
-    color: Color(0x33C9A227),
-    blurRadius: 20,
-  );
+  static const glowSuave = BoxShadow(color: Color(0x33C9A227), blurRadius: 20);
 
   static const sombraCarta = BoxShadow(
     color: Color(0x73000000),

@@ -355,9 +355,7 @@ class _CameraPageState extends State<CameraPage> {
             duration: const Duration(milliseconds: 200),
             padding: padding ?? const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: active
-                  ? Tok.oro
-                  : Colors.white.withValues(alpha: 0.15),
+              color: active ? Tok.oro : Colors.white.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(

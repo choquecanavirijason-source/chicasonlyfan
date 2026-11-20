@@ -381,7 +381,9 @@ class _LiveScreenState extends State<LiveScreen> {
                         ),
                         child: const CircleAvatar(
                           radius: 22,
-                          backgroundImage: AssetImage("assets/images/profiles/avatar_model.jpg"),
+                          backgroundImage: AssetImage(
+                            "assets/images/profiles/avatar_model.jpg",
+                          ),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -653,10 +655,7 @@ class _LiveScreenState extends State<LiveScreen> {
                 ),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [
-                      Tok.superficie,
-                      Tok.oro,
-                    ],
+                    colors: [Tok.superficie, Tok.oro],
                   ),
                   borderRadius: BorderRadius.circular(40),
                 ),
@@ -706,9 +705,7 @@ class _LiveScreenState extends State<LiveScreen> {
             width: 55,
             height: 55,
             decoration: BoxDecoration(
-              color: activo
-                  ? Tok.oro
-                  : Colors.white.withOpacity(0.20),
+              color: activo ? Tok.oro : Colors.white.withOpacity(0.20),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: Colors.white, size: 28),

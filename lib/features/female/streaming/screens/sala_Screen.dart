@@ -251,10 +251,7 @@ class _SalaScreenState extends State<SalaScreen> {
                         ),
                         boxShadow: const [Tok.glowOro],
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: Colors.transparent,
-                          width: 0,
-                        ),
+                        border: Border.all(color: Colors.transparent, width: 0),
                       ),
                       child: TextButton(
                         onPressed: () {
@@ -325,9 +322,7 @@ class _SalaScreenState extends State<SalaScreen> {
             duration: const Duration(milliseconds: 200),
             padding: padding ?? const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: active
-                  ? Tok.oro
-                  : Colors.white.withValues(alpha: 0.15),
+              color: active ? Tok.oro : Colors.white.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(

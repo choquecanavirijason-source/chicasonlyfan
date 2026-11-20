@@ -23,40 +23,43 @@ class AppTheme {
       // Playfair Display queda para los tamaños de display y titular,
       // que es donde su alto contraste se aprecia; por debajo de 22px
       // pierde justamente eso y conviene la sans.
-      textTheme: GoogleFonts.jostTextTheme(
-        ThemeData(brightness: Brightness.dark).textTheme,
-      ).copyWith(
-        displayLarge: GoogleFonts.playfairDisplay(
-          fontSize: 40,
-          height: 1.05,
-          fontWeight: FontWeight.w600,
-          color: Tok.marfil,
-        ),
-        displayMedium: GoogleFonts.playfairDisplay(
-          fontSize: 34,
-          height: 1.1,
-          fontWeight: FontWeight.w600,
-          color: Tok.marfil,
-        ),
-        displaySmall: GoogleFonts.playfairDisplay(
-          fontSize: 30,
-          height: 1.13,
-          fontWeight: FontWeight.w600,
-          color: Tok.marfil,
-        ),
-        headlineLarge: GoogleFonts.playfairDisplay(
-          fontSize: 26,
-          height: 1.15,
-          fontWeight: FontWeight.w600,
-          color: Tok.marfil,
-        ),
-        headlineMedium: GoogleFonts.playfairDisplay(
-          fontSize: 22,
-          height: 1.27,
-          fontWeight: FontWeight.w500,
-          color: Tok.marfil,
-        ),
-      ).apply(bodyColor: Tok.marfil, displayColor: Tok.marfil),
+      textTheme:
+          GoogleFonts.jostTextTheme(
+                ThemeData(brightness: Brightness.dark).textTheme,
+              )
+              .copyWith(
+                displayLarge: GoogleFonts.playfairDisplay(
+                  fontSize: 40,
+                  height: 1.05,
+                  fontWeight: FontWeight.w600,
+                  color: Tok.marfil,
+                ),
+                displayMedium: GoogleFonts.playfairDisplay(
+                  fontSize: 34,
+                  height: 1.1,
+                  fontWeight: FontWeight.w600,
+                  color: Tok.marfil,
+                ),
+                displaySmall: GoogleFonts.playfairDisplay(
+                  fontSize: 30,
+                  height: 1.13,
+                  fontWeight: FontWeight.w600,
+                  color: Tok.marfil,
+                ),
+                headlineLarge: GoogleFonts.playfairDisplay(
+                  fontSize: 26,
+                  height: 1.15,
+                  fontWeight: FontWeight.w600,
+                  color: Tok.marfil,
+                ),
+                headlineMedium: GoogleFonts.playfairDisplay(
+                  fontSize: 22,
+                  height: 1.27,
+                  fontWeight: FontWeight.w500,
+                  color: Tok.marfil,
+                ),
+              )
+              .apply(bodyColor: Tok.marfil, displayColor: Tok.marfil),
       primaryTextTheme: GoogleFonts.jostTextTheme(
         ThemeData(brightness: Brightness.dark).textTheme,
       ).apply(bodyColor: Tok.marfil, displayColor: Tok.marfil),

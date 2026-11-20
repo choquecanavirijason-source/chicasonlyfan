@@ -230,10 +230,7 @@ class _ChatPageState extends State<ChatPage> {
           if (notificaciones > 0)
             Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Tok.oro,
-                shape: BoxShape.circle,
-              ),
+              decoration: BoxDecoration(color: Tok.oro, shape: BoxShape.circle),
               child: Text(
                 "$notificaciones",
                 style: const TextStyle(color: Colors.white, fontSize: 12),

@@ -674,11 +674,7 @@ class ProfileScreen extends ConsumerWidget {
             color: const Color(0xFFF5F5F5),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(
-            Icons.credit_card,
-            color: Tok.superficie,
-            size: 20,
-          ),
+          child: const Icon(Icons.credit_card, color: Tok.superficie, size: 20),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -850,10 +846,7 @@ class ProfileScreen extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: color ?? Tok.marfil,
-                    ),
+                    style: TextStyle(fontSize: 14, color: color ?? Tok.marfil),
                   ),
                 ),
                 Icon(

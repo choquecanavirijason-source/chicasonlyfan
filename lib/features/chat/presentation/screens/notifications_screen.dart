@@ -19,9 +19,7 @@ class NotificationsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
                 color: Tok.superficie,
-                border: Border(
-                  bottom: BorderSide(color: Tok.borde, width: 1),
-                ),
+                border: Border(bottom: BorderSide(color: Tok.borde, width: 1)),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Tok.rL),
                   bottomRight: Radius.circular(Tok.rL),
@@ -254,11 +252,7 @@ class NotificationsScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.access_time,
-                        size: 16,
-                        color: Tok.oro,
-                      ),
+                      const Icon(Icons.access_time, size: 16, color: Tok.oro),
                       const SizedBox(width: 8),
                       Text(
                         appointmentTime,

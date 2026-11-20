@@ -117,9 +117,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
       // una URL de red y no cambia nada.
       _videoController = widget.playbackUrl!.startsWith('assets/')
           ? VideoPlayerController.asset(widget.playbackUrl!)
-          : VideoPlayerController.networkUrl(
-              Uri.parse(widget.playbackUrl!),
-            );
+          : VideoPlayerController.networkUrl(Uri.parse(widget.playbackUrl!));
 
       await _videoController!.initialize();
       if (widget.playbackUrl!.startsWith('assets/')) {

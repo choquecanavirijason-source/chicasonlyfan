@@ -54,7 +54,7 @@ class NotificationsScreen extends StatelessWidget {
                     child: const Text(
                       '2 nuevas',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Tok.tinta,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),

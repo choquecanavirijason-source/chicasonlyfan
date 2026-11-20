@@ -135,7 +135,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                             child: const Text(
                               '2',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Tok.tinta,
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -380,7 +380,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                 child: Text(
                   '${chat['unreadCount']}',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Tok.tinta,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
@@ -471,7 +471,7 @@ class _ChatsScreenState extends State<ChatsScreen>
                     child: const Text(
                       'En Línea',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Tok.tinta,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),

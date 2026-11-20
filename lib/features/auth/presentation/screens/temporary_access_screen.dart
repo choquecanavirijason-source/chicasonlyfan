@@ -93,7 +93,7 @@ class _TemporaryAccessScreenState extends State<TemporaryAccessScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'ChicasApp',
+                  'Hot Spot',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.playfairDisplay(
                     color: Tok.marfil,

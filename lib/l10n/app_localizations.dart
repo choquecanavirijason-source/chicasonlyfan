@@ -97,7 +97,7 @@ abstract class AppLocalizations {
   /// El título de la aplicación
   ///
   /// In es, this message translates to:
-  /// **'Chicas App'**
+  /// **'Hot Spot'**
   String get appTitle;
 }
 

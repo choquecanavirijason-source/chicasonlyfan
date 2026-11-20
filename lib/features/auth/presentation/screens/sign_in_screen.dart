@@ -67,7 +67,7 @@ class SignInScreen extends ConsumerWidget {
 
               // Logo o título de la app
               const Text(
-                'ChicasApp',
+                'Hot Spot',
                 style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Tokens del sistema visual de ChicasApp.
+/// Tokens del sistema visual de Hot Spot.
 ///
 /// Los nombres son los mismos que en el manual de diseño, para que una
 /// pantalla pueda leerse contra él sin traducir nada.

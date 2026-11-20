@@ -111,7 +111,7 @@ class ProfileScreen extends ConsumerWidget {
                   child: const Text(
                     'ELITE',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Tok.tinta,
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
                     ),
@@ -420,7 +420,7 @@ class ProfileScreen extends ConsumerWidget {
                 child: Text(
                   '$count',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Tok.tinta,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
@@ -705,7 +705,7 @@ class ProfileScreen extends ConsumerWidget {
                       child: const Text(
                         'Principal',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Tok.tinta,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                         ),

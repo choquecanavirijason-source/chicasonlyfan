@@ -143,7 +143,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              icon: const Icon(Icons.videocam, color: Colors.white, size: 22),
+              icon: const Icon(Icons.videocam, color: Tok.tinta, size: 22),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -201,15 +201,17 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey[100],
+                        color: Tok.superficieAlta,
+                        border: Border.all(color: Tok.borde),
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: TextField(
                         controller: _messageController,
+                        style: const TextStyle(color: Tok.marfil, fontSize: 14),
                         decoration: InputDecoration(
                           hintText: 'Escribe un mensaje...',
-                          hintStyle: TextStyle(
-                            color: Colors.grey[500],
+                          hintStyle: const TextStyle(
+                            color: Tok.humo,
                             fontSize: 14,
                           ),
                           border: InputBorder.none,
@@ -230,11 +232,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
-                      icon: const Icon(
-                        Icons.send,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+                      icon: const Icon(Icons.send, color: Tok.tinta, size: 20),
                       onPressed: _sendMessage,
                     ),
                   ),
@@ -273,7 +271,12 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     vertical: 12,
                   ),
                   decoration: BoxDecoration(
-                    color: isSent ? Tok.oro : Colors.grey[200],
+                    // La burbuja recibida iba en gris casi blanco y el texto
+                    // en marfil: no se leía nada. Ahora va oscura con su
+                    // borde, y la enviada lleva el texto en tinta, que sobre
+                    // el oro sí tiene contraste.
+                    color: isSent ? Tok.oro : Tok.superficieAlta,
+                    border: isSent ? null : Border.all(color: Tok.borde),
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(16),
                       topRight: const Radius.circular(16),
@@ -284,7 +287,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   child: Text(
                     text,
                     style: TextStyle(
-                      color: isSent ? Colors.white : AppColors.textPrimary,
+                      color: isSent ? Tok.tinta : Tok.marfil,
                       fontSize: 14,
                       height: 1.4,
                     ),
@@ -295,7 +298,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Text(
                     time,
-                    style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+                    style: const TextStyle(fontSize: 11, color: Tok.humo),
                   ),
                 ),
               ],

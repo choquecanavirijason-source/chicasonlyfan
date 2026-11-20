@@ -233,7 +233,7 @@ class _ChatPageState extends State<ChatPage> {
               decoration: BoxDecoration(color: Tok.oro, shape: BoxShape.circle),
               child: Text(
                 "$notificaciones",
-                style: const TextStyle(color: Colors.white, fontSize: 12),
+                style: const TextStyle(color: Tok.tinta, fontSize: 12),
               ),
             ),
         ],

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Chicas App',
+      title: 'Hot Spot',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       localizationsDelegates: const [

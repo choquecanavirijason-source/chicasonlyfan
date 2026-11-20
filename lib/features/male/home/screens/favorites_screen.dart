@@ -84,8 +84,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         'assets/images/galeria/paula/2.jpg',
         'assets/images/galeria/paula/3.jpg',
       ],
-      'video': 'assets/videos/contenido9.mp4',
-      'portada': 'assets/images/contenido/portada9.jpg',
+      // El clip anterior se iba a negro a los tres segundos y el círculo
+      // de Paula quedaba en negro en la fila de historias.
+      'video': 'assets/videos/feed/5.mp4',
+      'portada': 'assets/images/feed/portada5.jpg',
       'image': 'assets/images/profiles/avatar5.jpg',
       'fav': false,
     },
@@ -417,7 +419,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                     child: const Icon(
                                       Icons.favorite,
                                       size: 12,
-                                      color: Colors.white,
+                                      color: Tok.tinta,
                                     ),
                                   ),
                                 ),

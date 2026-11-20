@@ -6,6 +6,7 @@ import '../../../../core/theme/chicas_tokens.dart';
 import '../../../../shared/services/streaming_service.dart';
 import '../../../videocall/presentation/screens/videocall_screen.dart';
 import 'contenido_video_screen.dart';
+import 'historia_screen.dart';
 import 'package:chicas_app/core/widgets/fondo_video.dart';
 import 'package:chicas_app/core/widgets/foto.dart';
 
@@ -27,6 +28,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   final List<Map<String, dynamic>> _favorites = [
     {
       'name': 'Ana',
+      'fotos': [
+        'assets/images/galeria/carla/1.jpg',
+        'assets/images/galeria/carla/2.jpg',
+        'assets/images/galeria/carla/3.jpg',
+        'assets/images/galeria/carla/4.jpg',
+        'assets/images/galeria/carla/5.jpg',
+        'assets/images/galeria/carla/6.jpg',
+      ],
       'video': 'assets/videos/contenido1.mp4',
       'portada': 'assets/images/contenido/portada1.jpg',
       'image': 'assets/images/profiles/avatar1.jpg',
@@ -34,6 +43,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     },
     {
       'name': 'María',
+      'fotos': [
+        'assets/images/galeria/maria/1.jpg',
+        'assets/images/galeria/maria/2.jpg',
+        'assets/images/galeria/maria/3.jpg',
+      ],
       'video': 'assets/videos/contenido3.mp4',
       'portada': 'assets/images/contenido/portada3.jpg',
       'image': 'assets/images/profiles/avatar2.jpg',
@@ -41,6 +55,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     },
     {
       'name': 'Sofia',
+      'fotos': [
+        'assets/images/galeria/sofia/1.jpg',
+        'assets/images/galeria/sofia/2.jpg',
+        'assets/images/galeria/sofia/3.jpg',
+      ],
       'video': 'assets/videos/contenido5.mp4',
       'portada': 'assets/images/contenido/portada5.jpg',
       'image': 'assets/images/profiles/avatar3.jpg',
@@ -48,6 +67,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     },
     {
       'name': 'Laura',
+      'fotos': [
+        'assets/images/galeria/laura/1.jpg',
+        'assets/images/galeria/laura/2.jpg',
+        'assets/images/galeria/laura/3.jpg',
+      ],
       'video': 'assets/videos/contenido7.mp4',
       'portada': 'assets/images/contenido/portada7.jpg',
       'image': 'assets/images/profiles/avatar4.jpg',
@@ -55,6 +79,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     },
     {
       'name': 'Paula',
+      'fotos': [
+        'assets/images/galeria/paula/1.jpg',
+        'assets/images/galeria/paula/2.jpg',
+        'assets/images/galeria/paula/3.jpg',
+      ],
       'video': 'assets/videos/contenido9.mp4',
       'portada': 'assets/images/contenido/portada9.jpg',
       'image': 'assets/images/profiles/avatar5.jpg',
@@ -66,6 +95,34 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       _favorites.where((f) => f['fav'] == true).length;
 
   // Lista de contenido estático en grid
+  /// Lives de demostración. Aparecen sólo cuando no hay ninguno real en
+  /// Firestore, para que la sección nunca se vea vacía al mostrar la app.
+  /// Apuntan a un video del APK, así funcionan sin servidor ni conexión.
+  final List<Map<String, dynamic>> _livesDemo = [
+    {
+      'type': 'EN VIVO',
+      'title': '@ana_gz',
+      'subtitle': 'En vivo ahora',
+      'image': 'assets/images/contenido/portada2.jpg',
+      'video': 'assets/videos/contenido2.mp4',
+      'isLive': true,
+      'streamId': 'demo-1',
+      'playbackUrl': 'assets/videos/contenido2.mp4',
+      'viewerCount': 128,
+    },
+    {
+      'type': 'EN VIVO',
+      'title': '@sofi',
+      'subtitle': 'En vivo ahora',
+      'image': 'assets/images/contenido/portada6.jpg',
+      'video': 'assets/videos/contenido6.mp4',
+      'isLive': true,
+      'streamId': 'demo-2',
+      'playbackUrl': 'assets/videos/contenido6.mp4',
+      'viewerCount': 47,
+    },
+  ];
+
   final List<Map<String, dynamic>> _content = [
     {
       'type': 'VIDEO',
@@ -148,353 +205,378 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          // Header con título.
-          // Antes usaba textPrimary (#212121) sobre fondo negro: el texto
-          // quedaba invisible. Ahora va en marfil, con la serif de display.
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              Tok.s5,
-              Tok.s5,
-              Tok.s5,
-              Tok.s2,
-            ),
-            child: Center(
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: GoogleFonts.playfairDisplay(
-                    fontSize: 30,
-                    height: 1.13,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  children: const [
-                    TextSpan(
-                      text: 'Interactúa con tu ',
-                      style: TextStyle(color: Tok.marfil),
-                    ),
-                    TextSpan(
-                      text: 'favorita',
-                      style: TextStyle(color: Tok.oro),
-                    ),
-                  ],
-                ),
+            // Header con título.
+            // Antes usaba textPrimary (#212121) sobre fondo negro: el texto
+            // quedaba invisible. Ahora va en marfil, con la serif de display.
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Tok.s5,
+                Tok.s5,
+                Tok.s5,
+                Tok.s2,
               ),
-            ),
-          ),
-
-          // Cuántas favoritas tiene el usuario, para que la fila de arriba
-          // se entienda como "mis favoritas" y no como una lista cualquiera.
-          Padding(
-            padding: const EdgeInsets.fromLTRB(Tok.s5, Tok.s1, Tok.s5, Tok.s3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.favorite, size: 12, color: Tok.oro),
-                const SizedBox(width: Tok.s2),
-                // Etiqueta en mayúscula espaciada: la mitad del aire caro
-                // del sistema sale de este detalle.
-                Text(
-                  '$_cantidadFavoritas FAVORITAS',
-                  style: GoogleFonts.jost(
-                    fontSize: 12,
-                    height: 1.33,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.4,
-                    color: Tok.oro,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Barra de búsqueda
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
-            child: TextField(
-              controller: _searchController,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.jost(color: Tok.marfil, fontSize: 14),
-              decoration: InputDecoration(
-                hintText: 'Buscar...',
-                hintStyle: GoogleFonts.jost(color: Tok.humo, fontSize: 14),
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: Tok.humo,
-                  size: 20,
-                ),
-                filled: true,
-                fillColor: Tok.superficieAlta,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(Tok.rPill),
-                  borderSide: const BorderSide(color: Tok.borde, width: 1),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(Tok.rPill),
-                  borderSide: const BorderSide(color: Tok.borde, width: 1),
-                ),
-                // Al enfocar aparece el hilo de oro: el campo activo es lo
-                // único que lo lleva en esta pantalla.
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(Tok.rPill),
-                  borderSide: const BorderSide(color: Tok.oro, width: 1),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 10,
-                ),
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 12),
-
-          // Carrusel horizontal de favoritos
-          SizedBox(
-            height: 100,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: _favorites.length,
-              itemBuilder: (context, index) {
-                final favorite = _favorites[index];
-                return Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Column(
-                    children: [
-                      Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          Container(
-                            width: 64,
-                            height: 64,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: favorite['fav'] == true
-                                    ? Tok.oro
-                                    : Tok.borde,
-                                width: 1.5,
-                              ),
-                              // Las favoritas respiran; las sugerencias no.
-                              boxShadow: favorite['fav'] == true
-                                  ? const [Tok.glowSuave]
-                                  : null,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(3),
-                              // El estado se ve en movimiento, como en
-                              // cualquier app de historias.
-                              child: ClipOval(
-                                child: FondoVideo(
-                                  video: favorite['video'] as String,
-                                  portada: favorite['image'] as String,
-                                ),
-                              ),
-                            ),
-                          ),
-                          if (favorite['fav'] == true)
-                            Positioned(
-                              right: -2,
-                              bottom: -2,
-                              child: Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: const BoxDecoration(
-                                  color: Tok.oro,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.favorite,
-                                  size: 12,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                        ],
+              child: Center(
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: GoogleFonts.playfairDisplay(
+                      fontSize: 30,
+                      height: 1.13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    children: const [
+                      TextSpan(
+                        text: 'Interactúa con tu ',
+                        style: TextStyle(color: Tok.marfil),
                       ),
-                      const SizedBox(height: 6),
-                      Text(
-                        favorite['name'] as String,
-                        style: GoogleFonts.jost(
-                          fontSize: 12,
-                          color: favorite['fav'] == true
-                              ? Tok.champan
-                              : Tok.humo,
-                          fontWeight: favorite['fav'] == true
-                              ? FontWeight.w600
-                              : FontWeight.normal,
-                        ),
+                      TextSpan(
+                        text: 'favorita',
+                        style: TextStyle(color: Tok.oro),
                       ),
                     ],
                   ),
-                );
-              },
+                ),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 16),
-
-          // Botones de filtro
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                _buildFilterButton('Lives', 0),
-                const SizedBox(width: 12),
-                _buildFilterButton('Salas', 1),
-                const SizedBox(width: 12),
-                _buildFilterButton('Todo', 2),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Grid de contenido con StreamBuilder
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: _streamingService.getActiveStreamsStream(),
-              builder: (context, snapshot) {
-                // Debug: Log del estado
-                print(
-                  '🔍 StreamBuilder - ConnectionState: ${snapshot.connectionState}',
-                );
-                print('🔍 StreamBuilder - HasData: ${snapshot.hasData}');
-                if (snapshot.hasError) {
-                  print('❌ StreamBuilder Error: ${snapshot.error}');
-                }
-
-                // Mostrar loading
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(color: AppColors.primary),
-                  );
-                }
-
-                // Mostrar error si hay
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.error_outline,
-                          size: 60,
-                          color: Colors.red,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Error: ${snapshot.error}',
-                          style: const TextStyle(color: Colors.red),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+            // Cuántas favoritas tiene el usuario, para que la fila de arriba
+            // se entienda como "mis favoritas" y no como una lista cualquiera.
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Tok.s5,
+                Tok.s1,
+                Tok.s5,
+                Tok.s3,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.favorite, size: 12, color: Tok.oro),
+                  const SizedBox(width: Tok.s2),
+                  // Etiqueta en mayúscula espaciada: la mitad del aire caro
+                  // del sistema sale de este detalle.
+                  Text(
+                    '$_cantidadFavoritas FAVORITAS',
+                    style: GoogleFonts.jost(
+                      fontSize: 12,
+                      height: 1.33,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.4,
+                      color: Tok.oro,
                     ),
-                  );
-                }
+                  ),
+                ],
+              ),
+            ),
 
-                // Lista de lives activos
-                final activeStreams = snapshot.hasData
-                    ? snapshot.data!.docs
-                    : [];
+            // Barra de búsqueda
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+              child: TextField(
+                controller: _searchController,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.jost(color: Tok.marfil, fontSize: 14),
+                decoration: InputDecoration(
+                  hintText: 'Buscar...',
+                  hintStyle: GoogleFonts.jost(color: Tok.humo, fontSize: 14),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Tok.humo,
+                    size: 20,
+                  ),
+                  filled: true,
+                  fillColor: Tok.superficieAlta,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(Tok.rPill),
+                    borderSide: const BorderSide(color: Tok.borde, width: 1),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(Tok.rPill),
+                    borderSide: const BorderSide(color: Tok.borde, width: 1),
+                  ),
+                  // Al enfocar aparece el hilo de oro: el campo activo es lo
+                  // único que lo lleva en esta pantalla.
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(Tok.rPill),
+                    borderSide: const BorderSide(color: Tok.oro, width: 1),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
+                ),
+              ),
+            ),
 
-                print('📺 Lives activos encontrados: ${activeStreams.length}');
-                for (var doc in activeStreams) {
-                  print('  - ${doc.id}: ${doc.data()}');
-                }
+            const SizedBox(height: 12),
 
-                // Combinar lives activos con contenido estático
-                final allContent = [
-                  ...activeStreams.map((doc) {
-                    final data = doc.data() as Map<String, dynamic>;
-                    return {
-                      'type': 'EN VIVO',
-                      'title': data['userName'] ?? 'Live',
-                      'subtitle': 'En vivo ahora',
-                      'image':
-                          data['userAvatar'] ??
-                          'assets/model.jpg',
-                      // Para la demo la miniatura del live va en movimiento,
-                      // que es lo que un live debería parecer.
-                      'video': 'assets/videos/contenido4.mp4',
-                      'isLive': true,
-                      'streamId': doc.id,
-                      'playbackUrl': data['playbackUrl'] ?? '',
-                      'viewerCount': data['viewerCount'] ?? 0,
-                    };
-                  }),
-                  ..._content,
-                ];
-
-                // Filtrar según el botón seleccionado
-                List<Map<String, dynamic>> filteredContent = allContent;
-                if (_selectedFilter == 0) {
-                  // Solo Lives
-                  filteredContent = allContent
-                      .where((item) => item['type'] == 'EN VIVO')
-                      .toList();
-                } else if (_selectedFilter == 1) {
-                  // Solo Salas (contenido estático)
-                  filteredContent = allContent
-                      .where((item) => item['type'] != 'EN VIVO')
-                      .toList();
-                }
-
-                print(
-                  '🎯 Contenido filtrado: ${filteredContent.length} items (filtro: $_selectedFilter)',
-                );
-
-                if (filteredContent.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.live_tv_outlined,
-                          size: 60,
-                          color: Colors.grey[400],
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          _selectedFilter == 0
-                              ? 'No hay lives activos'
-                              : 'No hay contenido disponible',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey[600],
+            // Carrusel horizontal de favoritos
+            SizedBox(
+              height: 100,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                itemCount: _favorites.length,
+                itemBuilder: (context, index) {
+                  final favorite = _favorites[index];
+                  return GestureDetector(
+                    // Por el navegador raíz, para que la historia tape
+                    // también la barra inferior y se vea a pantalla completa.
+                    onTap: () =>
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                            builder: (_) => HistoriaScreen(
+                              creadoras: _favorites,
+                              inicial: index,
+                            ),
                           ),
                         ),
-                        if (_selectedFilter == 0) ...[
-                          const SizedBox(height: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: Column(
+                        children: [
+                          Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Container(
+                                width: 64,
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: favorite['fav'] == true
+                                        ? Tok.oro
+                                        : Tok.borde,
+                                    width: 1.5,
+                                  ),
+                                  // Las favoritas respiran; las sugerencias no.
+                                  boxShadow: favorite['fav'] == true
+                                      ? const [Tok.glowSuave]
+                                      : null,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(3),
+                                  // El estado se ve en movimiento, como en
+                                  // cualquier app de historias.
+                                  child: ClipOval(
+                                    child: FondoVideo(
+                                      video: favorite['video'] as String,
+                                      portada: favorite['image'] as String,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              if (favorite['fav'] == true)
+                                Positioned(
+                                  right: -2,
+                                  bottom: -2,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: const BoxDecoration(
+                                      color: Tok.oro,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(
+                                      Icons.favorite,
+                                      size: 12,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          const SizedBox(height: 6),
                           Text(
-                            'Espera a que tus favoritas inicien live',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[500],
+                            favorite['name'] as String,
+                            style: GoogleFonts.jost(
+                              fontSize: 12,
+                              color: favorite['fav'] == true
+                                  ? Tok.champan
+                                  : Tok.humo,
+                              fontWeight: favorite['fav'] == true
+                                  ? FontWeight.w600
+                                  : FontWeight.normal,
                             ),
                           ),
                         ],
-                      ],
+                      ),
                     ),
                   );
-                }
-
-                return GridView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 0.7,
-                  ),
-                  itemCount: filteredContent.length,
-                  itemBuilder: (context, index) {
-                    final item = filteredContent[index];
-                    return _buildContentCard(item);
-                  },
-                );
-              },
+                },
+              ),
             ),
-          ),
+
+            const SizedBox(height: 16),
+
+            // Botones de filtro
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  _buildFilterButton('Lives', 0),
+                  const SizedBox(width: 12),
+                  _buildFilterButton('Salas', 1),
+                  const SizedBox(width: 12),
+                  _buildFilterButton('Todo', 2),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Grid de contenido con StreamBuilder
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: _streamingService.getActiveStreamsStream(),
+                builder: (context, snapshot) {
+                  // Debug: Log del estado
+                  print(
+                    '🔍 StreamBuilder - ConnectionState: ${snapshot.connectionState}',
+                  );
+                  print('🔍 StreamBuilder - HasData: ${snapshot.hasData}');
+                  if (snapshot.hasError) {
+                    print('❌ StreamBuilder Error: ${snapshot.error}');
+                  }
+
+                  // Mostrar loading
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
+                    );
+                  }
+
+                  // Mostrar error si hay
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.error_outline,
+                            size: 60,
+                            color: Colors.red,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'Error: ${snapshot.error}',
+                            style: const TextStyle(color: Colors.red),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  // Lista de lives activos
+                  final activeStreams = snapshot.hasData
+                      ? snapshot.data!.docs
+                      : [];
+
+                  print(
+                    '📺 Lives activos encontrados: ${activeStreams.length}',
+                  );
+                  for (var doc in activeStreams) {
+                    print('  - ${doc.id}: ${doc.data()}');
+                  }
+
+                  // Combinar lives activos con contenido estático
+                  final allContent = [
+                    // Los lives reales van primero; detrás quedan los de
+                    // demostración, así la sección nunca se ve vacía aunque
+                    // nadie esté transmitiendo.
+                    ...activeStreams.map((doc) {
+                      final data = doc.data() as Map<String, dynamic>;
+                      return {
+                        'type': 'EN VIVO',
+                        'title': data['userName'] ?? 'Live',
+                        'subtitle': 'En vivo ahora',
+                        'image': data['userAvatar'] ?? 'assets/model.jpg',
+                        // Para la demo la miniatura del live va en movimiento,
+                        // que es lo que un live debería parecer.
+                        'video': 'assets/videos/contenido4.mp4',
+                        'isLive': true,
+                        'streamId': doc.id,
+                        'playbackUrl': data['playbackUrl'] ?? '',
+                        'viewerCount': data['viewerCount'] ?? 0,
+                      };
+                    }),
+                    ..._livesDemo,
+                    ..._content,
+                  ];
+
+                  // Filtrar según el botón seleccionado
+                  List<Map<String, dynamic>> filteredContent = allContent;
+                  if (_selectedFilter == 0) {
+                    // Solo Lives
+                    filteredContent = allContent
+                        .where((item) => item['type'] == 'EN VIVO')
+                        .toList();
+                  } else if (_selectedFilter == 1) {
+                    // Solo Salas (contenido estático)
+                    filteredContent = allContent
+                        .where((item) => item['type'] != 'EN VIVO')
+                        .toList();
+                  }
+
+                  print(
+                    '🎯 Contenido filtrado: ${filteredContent.length} items (filtro: $_selectedFilter)',
+                  );
+
+                  if (filteredContent.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.live_tv_outlined,
+                            size: 60,
+                            color: Colors.grey[400],
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            _selectedFilter == 0
+                                ? 'No hay lives activos'
+                                : 'No hay contenido disponible',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          if (_selectedFilter == 0) ...[
+                            const SizedBox(height: 8),
+                            Text(
+                              'Espera a que tus favoritas inicien live',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey[500],
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    );
+                  }
+
+                  return GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.7,
+                        ),
+                    itemCount: filteredContent.length,
+                    itemBuilder: (context, index) {
+                      final item = filteredContent[index];
+                      return _buildContentCard(item);
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -519,10 +601,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         decoration: BoxDecoration(
           color: isSelected ? Tok.superficieAlta : Colors.transparent,
           borderRadius: BorderRadius.circular(Tok.rPill),
-          border: Border.all(
-            color: isSelected ? Tok.oro : Tok.borde,
-            width: 1,
-          ),
+          border: Border.all(color: isSelected ? Tok.oro : Tok.borde, width: 1),
         ),
         child: Text(
           label.toUpperCase(),

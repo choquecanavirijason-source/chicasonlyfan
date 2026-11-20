@@ -112,11 +112,19 @@ class _VideoCallScreenState extends State<VideoCallScreen>
     }
 
     try {
-      _videoController = VideoPlayerController.networkUrl(
-        Uri.parse(widget.playbackUrl!),
-      );
+      // Un live de demostración apunta a un video del propio APK, así la
+      // demo funciona sin servidor ni conexión. Un live real sigue siendo
+      // una URL de red y no cambia nada.
+      _videoController = widget.playbackUrl!.startsWith('assets/')
+          ? VideoPlayerController.asset(widget.playbackUrl!)
+          : VideoPlayerController.networkUrl(
+              Uri.parse(widget.playbackUrl!),
+            );
 
       await _videoController!.initialize();
+      if (widget.playbackUrl!.startsWith('assets/')) {
+        await _videoController!.setLooping(true);
+      }
 
       _conectando = false;
 

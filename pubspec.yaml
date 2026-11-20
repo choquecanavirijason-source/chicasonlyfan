@@ -8,6 +8,7 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
+  google_fonts: ^6.2.1
   video_player: ^2.8.1
   http: ^1.2.0
   webview_flutter: ^4.4.4
@@ -63,12 +64,30 @@ flutter:
   generate: true
 
   assets:
+    # Las tipografías empaquetadas: google_fonts las encuentra acá
+    # y deja de bajarlas de internet.
+    - google_fonts/
     - assets/profile1.jpg
     - assets/profile2.jpg
     - assets/profile3.jpg
     - assets/profile4.jpg
     - assets/profile5.jpg
+    - assets/model.jpg
     - assets/filtro.png
     - assets/filtro1.jpg
     - assets/filtro2.jpg
     - assets/images/profiles/
+    - assets/images/usuarios/
+    - assets/images/galeria/carla/
+    - assets/images/galeria/maria/
+    - assets/images/galeria/sofia/
+    - assets/images/galeria/laura/
+    - assets/images/galeria/paula/
+    - assets/images/galeria/camila/
+    - assets/images/galeria/valentina/
+    - assets/images/galeria/antonella/
+    - assets/images/galeria/daniela/
+    - assets/images/contenido/
+    - assets/images/feed/
+    - assets/videos/
+    - assets/videos/feed/

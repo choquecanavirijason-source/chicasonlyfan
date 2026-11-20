@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:video_player/video_player.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../shared/services/streaming_service.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class VideoCallScreen extends StatefulWidget {
   final String name;
@@ -36,6 +37,18 @@ class _VideoCallScreenState extends State<VideoCallScreen>
   bool _isVideoInitialized = false;
   final StreamingService _streamingService = StreamingService();
   Timer? _viewerUpdateTimer;
+
+  /// Intentos de conexión al stream ya realizados.
+  int _intentos = 0;
+
+  /// Máximo de reintentos antes de rendirse y mostrar el error real.
+  static const int _maxIntentos = 5;
+
+  /// Último error de conexión, para poder mostrarlo en pantalla.
+  String? _errorConexion;
+
+  /// Evita que dos reintentos corran a la vez.
+  bool _conectando = false;
 
   @override
   void initState() {
@@ -74,18 +87,49 @@ class _VideoCallScreenState extends State<VideoCallScreen>
       return;
     }
 
-    debugPrint('🎬 Inicializando video player con URL: ${widget.playbackUrl}');
+    // Un reintento no debe pisar al anterior: sin esto, dos intentos en vuelo
+    // dejan controladores huérfanos consumiendo sesiones del servidor.
+    if (_conectando) return;
+    _conectando = true;
+    _intentos++;
+
+    debugPrint(
+      '🎬 Inicializando video player (intento $_intentos/$_maxIntentos) '
+      'con URL: ${widget.playbackUrl}',
+    );
+
+    // Soltar el controlador del intento anterior ANTES de crear otro.
+    // Cada uno abre su propia sesión HLS contra el servidor; si no se
+    // liberan, los reintentos se acumulan indefinidamente.
+    final anterior = _videoController;
+    _videoController = null;
+    if (anterior != null) {
+      try {
+        await anterior.dispose();
+      } catch (e) {
+        debugPrint('⚠️ Error al liberar el reproductor anterior: $e');
+      }
+    }
 
     try {
-      _videoController = VideoPlayerController.networkUrl(
-        Uri.parse(widget.playbackUrl!),
-      );
+      // Un live de demostración apunta a un video del propio APK, así la
+      // demo funciona sin servidor ni conexión. Un live real sigue siendo
+      // una URL de red y no cambia nada.
+      _videoController = widget.playbackUrl!.startsWith('assets/')
+          ? VideoPlayerController.asset(widget.playbackUrl!)
+          : VideoPlayerController.networkUrl(Uri.parse(widget.playbackUrl!));
 
       await _videoController!.initialize();
+      if (widget.playbackUrl!.startsWith('assets/')) {
+        await _videoController!.setLooping(true);
+      }
+
+      _conectando = false;
 
       if (mounted) {
         setState(() {
           _isVideoInitialized = true;
+          _errorConexion = null;
         });
       }
 
@@ -104,25 +148,37 @@ class _VideoCallScreenState extends State<VideoCallScreen>
         }
       });
     } catch (e) {
-      debugPrint('❌ Error al inicializar video: $e');
+      _conectando = false;
+      debugPrint('❌ Error al inicializar video (intento $_intentos): $e');
 
-      // Reintentar después de 3 segundos
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Conectando al stream... Esto puede tardar unos segundos',
-            ),
-            duration: Duration(seconds: 2),
-          ),
-        );
+      if (!mounted) return;
 
-        Future.delayed(const Duration(seconds: 3), () {
-          if (mounted) {
-            _initializeVideoPlayer();
-          }
+      // Rendirse tras varios intentos en vez de reintentar para siempre:
+      // un bucle infinito deja al espectador mirando "Conectando..." sin
+      // saber nunca qué pasó.
+      if (_intentos >= _maxIntentos) {
+        setState(() {
+          _errorConexion =
+              'No se pudo conectar al stream después de $_maxIntentos '
+              'intentos.\n\n${widget.playbackUrl}\n\n$e';
         });
+        return;
       }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Conectando al stream... intento $_intentos de $_maxIntentos',
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) {
+          _initializeVideoPlayer();
+        }
+      });
     }
   }
 
@@ -171,6 +227,56 @@ class _VideoCallScreenState extends State<VideoCallScreen>
                         width: _videoController!.value.size.width,
                         height: _videoController!.value.size.height,
                         child: VideoPlayer(_videoController!),
+                      ),
+                    )
+                  : _errorConexion != null
+                  // Se agotaron los reintentos: mostrar el motivo real en vez
+                  // de dejar girando un indicador para siempre.
+                  ? Container(
+                      color: Colors.grey[900],
+                      padding: const EdgeInsets.all(24),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.videocam_off_outlined,
+                              color: Colors.white54,
+                              size: 56,
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'No se pudo conectar al stream',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              _errorConexion!,
+                              style: const TextStyle(
+                                color: Colors.white60,
+                                fontSize: 11,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 20),
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                setState(() {
+                                  _intentos = 0;
+                                  _errorConexion = null;
+                                });
+                                _initializeVideoPlayer();
+                              },
+                              icon: const Icon(Icons.refresh),
+                              label: const Text('Reintentar'),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   : Container(
@@ -388,8 +494,8 @@ class _VideoCallScreenState extends State<VideoCallScreen>
                           ),
                         ),
                       )
-                    : Image.network(
-                        'https://randomuser.me/api/portraits/men/32.jpg',
+                    : Image.asset(
+                        'assets/images/profiles/chico1.jpg',
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -539,7 +645,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
                 child: Container(
                   width: 240,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Tok.superficie,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
@@ -651,7 +757,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
               width: MediaQuery.of(context).size.width * 0.85,
               constraints: const BoxConstraints(maxWidth: 350),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Tok.superficie,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -792,7 +898,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Solicitud enviada: $minutes por $price'),
-            backgroundColor: const Color(0xFFE991C5),
+            backgroundColor: Tok.oro,
             duration: const Duration(seconds: 2),
           ),
         );
@@ -800,7 +906,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Tok.superficie,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.grey[300]!, width: 1),
         ),
@@ -830,7 +936,7 @@ class _VideoCallScreenState extends State<VideoCallScreen>
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFFE991C5),
+                color: Tok.oro,
               ),
             ),
           ],

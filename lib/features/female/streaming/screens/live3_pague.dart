@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chicas_app/features/female/streaming/screens/liveLinea_page.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ConfiguracionSalaPanel extends StatefulWidget {
   const ConfiguracionSalaPanel({super.key});
@@ -22,7 +23,7 @@ class _ConfiguracionSalaPanelState extends State<ConfiguracionSalaPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A0623),
+      backgroundColor: Tok.fondo,
       body: Center(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(28),
@@ -30,7 +31,7 @@ class _ConfiguracionSalaPanelState extends State<ConfiguracionSalaPanel> {
             width: 330,
             padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
-              color: const Color(0xFF2A0C39),
+              color: Tok.superficie,
               borderRadius: BorderRadius.circular(28),
             ),
             child: SingleChildScrollView(
@@ -169,14 +170,9 @@ class _ConfiguracionSalaPanelState extends State<ConfiguracionSalaPanel> {
                             privacidad = value ? "aprobacion" : "aprovacion";
                           });
                         },
-                        activeTrackColor: const Color.fromARGB(
-                          255,
-                          242,
-                          185,
-                          236,
-                        ),
+                        activeTrackColor: Tok.champan,
 
-                        activeColor: const Color.fromARGB(255, 245, 82, 223),
+                        activeColor: Tok.oro,
                       ),
                     ),
                   ),
@@ -187,7 +183,7 @@ class _ConfiguracionSalaPanelState extends State<ConfiguracionSalaPanel> {
                   Center(
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF084D3),
+                        backgroundColor: Tok.oro,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 42,
                           vertical: 14,
@@ -274,13 +270,11 @@ class _ConfiguracionSalaPanelState extends State<ConfiguracionSalaPanel> {
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         color: isSelected
-            ? const Color(0xFFF084D3).withOpacity(0.22)
+            ? Tok.oro.withOpacity(0.22)
             : Colors.white.withOpacity(0.07),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected
-              ? const Color(0xFFF084D3)
-              : Colors.white.withOpacity(0.15),
+          color: isSelected ? Tok.oro : Colors.white.withOpacity(0.15),
           width: isSelected ? 2 : 1.2,
         ),
       ),
@@ -318,13 +312,11 @@ class _ConfiguracionSalaPanelState extends State<ConfiguracionSalaPanel> {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: isSelected
-            ? const Color(0xFFF084D3).withOpacity(0.22)
+            ? Tok.oro.withOpacity(0.22)
             : Colors.white.withOpacity(0.07),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected
-              ? const Color(0xFFF084D3)
-              : Colors.white.withOpacity(0.15),
+          color: isSelected ? Tok.oro : Colors.white.withOpacity(0.15),
           width: isSelected ? 2 : 1.2,
         ),
       ),

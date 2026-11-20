@@ -8,6 +8,7 @@ import 'package:chicas_app/features/female/content/screens/contenido_screen.dart
 import 'package:chicas_app/shared/services/streaming_service.dart';
 import 'package:chicas_app/core/config/aws_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class LiveScreen extends StatefulWidget {
   final String? existingStreamId;
@@ -36,17 +37,17 @@ class _LiveScreenState extends State<LiveScreen> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   List<Map<String, String>> mensajes = [
     {
-      "img": "assets/user1.jpg",
+      "img": "assets/images/usuarios/u1.jpg",
       "nombre": "Mario Castro",
       "mensaje": "Hola a todos 👋",
     },
     {
-      "img": "assets/user2.jpg",
+      "img": "assets/images/usuarios/u2.jpg",
       "nombre": "Sofía Ramirez",
       "mensaje": "Bienvenidos al Live!",
     },
     {
-      "img": "assets/user3.jpg",
+      "img": "assets/images/usuarios/u3.jpg",
       "nombre": "Laura Torres",
       "mensaje": "Qué bonita cámara 😍",
     },
@@ -129,37 +130,76 @@ class _LiveScreenState extends State<LiveScreen> {
   // ===== AWS IVS STREAMING =====
   Future<void> _iniciarStreaming() async {
     try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null) {
-        debugPrint('❌ Usuario no autenticado');
+      // Sin credenciales de AWS no hay nada que intentar: avisar claro en vez
+      // de fallar con un error de red indescifrable.
+      final configError = AWSConfig.getConfigError();
+      if (configError != null) {
+        debugPrint(configError);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Debes estar autenticado para iniciar un live'),
+            SnackBar(
+              content: Text(
+                'Falta configurar AWS IVS: ${AWSConfig.faltantes.join(', ')}',
+              ),
               backgroundColor: Colors.red,
+              duration: const Duration(seconds: 6),
             ),
           );
         }
         return;
       }
 
-      debugPrint('✅ Usuario autenticado: ${user.uid}');
+      // El registro en Firestore es OPCIONAL: solo sirve para que el stream
+      // aparezca en la lista "Lives en Vivo" y para contar espectadores.
+      // La transmisión en sí va directa a AWS IVS y no necesita sesión, así
+      // que si no hay usuario autenticado seguimos igual en modo demo.
+      final user = FirebaseAuth.instance.currentUser;
 
-      // Si no existe un streamId, crear sesión en Firestore
-      if (_streamId == null) {
-        final streamId = await _streamingService.startStreaming(
-          userId: user.uid,
-          userName: '@maria_gz', // TODO: Get from user profile
-          userAvatar: 'assets/model.jpg', // TODO: Get from user profile
+      if (user == null) {
+        debugPrint(
+          'ℹ️ Sin sesión de Firebase: se transmite en modo demo '
+          '(sin registro en Firestore ni contador de espectadores).',
         );
+      } else if (_streamId == null) {
+        debugPrint('✅ Usuario autenticado: ${user.uid}');
+        try {
+          final streamId = await _streamingService.startStreaming(
+            userId: user.uid,
+            userName: '@maria_gz', // TODO: Get from user profile
+            userAvatar: 'assets/model.jpg', // TODO: Get from user profile
+          );
 
-        debugPrint('✅ Stream registrado en Firestore: $streamId');
+          debugPrint('✅ Stream registrado en Firestore: $streamId');
 
-        setState(() {
-          _streamId = streamId;
-        });
+          if (mounted) {
+            setState(() {
+              _streamId = streamId;
+            });
+          }
+        } catch (e) {
+          // Un fallo de Firestore no debe impedir la transmisión.
+          debugPrint('⚠️ No se pudo registrar el stream en Firestore: $e');
+        }
       } else {
         debugPrint('📺 Usando stream existente: $_streamId');
+      }
+
+      // Soltar la cámara antes de que la tome el encoder.
+      //
+      // La vista previa usa un CameraController del plugin `camera`, y el
+      // streaming usa el suyo propio. En un celular real la cámara solo
+      // admite un consumidor: si no se libera aquí, el encoder se conecta al
+      // servidor y registra la pista H264, pero no recibe ni un frame, así
+      // que publica un stream vacío (width=0, height=0) mientras la UI dice
+      // "EN VIVO". En el emulador no se nota porque la cámara virtual sí
+      // admite dos lectores.
+      if (camaraLista) {
+        try {
+          await _controller.dispose();
+        } catch (e) {
+          debugPrint('⚠️ Error al liberar la cámara de la vista previa: $e');
+        }
+        if (mounted) setState(() => camaraLista = false);
       }
 
       // Inicializar LiveStreamController
@@ -270,7 +310,7 @@ class _LiveScreenState extends State<LiveScreen> {
     _timer = Timer.periodic(const Duration(seconds: 3), (_) {
       _contadorMensajes++;
       Map<String, String> nuevo = {
-        "img": "assets/user${(_contadorMensajes % 5) + 1}.jpg",
+        "img": "assets/images/usuarios/u${(_contadorMensajes % 5) + 1}.jpg",
         "nombre": "Usuario $_contadorMensajes",
         "mensaje": "Mensaje automático $_contadorMensajes ✨",
       };
@@ -336,12 +376,14 @@ class _LiveScreenState extends State<LiveScreen> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: const LinearGradient(
-                            colors: [Colors.pinkAccent, Colors.orange],
+                            colors: [Tok.oro, Colors.orange],
                           ),
                         ),
                         child: const CircleAvatar(
                           radius: 22,
-                          backgroundImage: AssetImage("assets/model.jpg"),
+                          backgroundImage: AssetImage(
+                            "assets/images/profiles/avatar_model.jpg",
+                          ),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -415,8 +457,8 @@ class _LiveScreenState extends State<LiveScreen> {
                         );
                       },
                       child: _miniViewer(
-                        "assets/view1.jpg",
-                        Colors.yellow,
+                        "assets/images/usuarios/u6.jpg",
+                        Tok.oro,
                         "1",
                       ),
                     ),
@@ -431,8 +473,8 @@ class _LiveScreenState extends State<LiveScreen> {
                         );
                       },
                       child: _miniViewer(
-                        "assets/view2.jpg",
-                        Colors.purple,
+                        "assets/images/usuarios/u7.jpg",
+                        Tok.champan,
                         "2",
                       ),
                     ),
@@ -447,8 +489,8 @@ class _LiveScreenState extends State<LiveScreen> {
                         );
                       },
                       child: _miniViewer(
-                        "assets/view3.jpg",
-                        Colors.orange,
+                        "assets/images/usuarios/u8.jpg",
+                        Tok.oroHondo,
                         "3",
                       ),
                     ),
@@ -464,13 +506,13 @@ class _LiveScreenState extends State<LiveScreen> {
             left: 10,
             child: Column(
               children: [
-                _avatar("assets/profile1.png"),
+                _avatar("assets/images/usuarios/u1.jpg"),
                 const SizedBox(height: 10),
-                _avatar("assets/a2.png"),
+                _avatar("assets/images/usuarios/u2.jpg"),
                 const SizedBox(height: 10),
-                _avatar("assets/a3.png"),
+                _avatar("assets/images/usuarios/u3.jpg"),
                 const SizedBox(height: 10),
-                _avatar("assets/a4.png"),
+                _avatar("assets/images/usuarios/u4.jpg"),
                 const SizedBox(height: 20),
 
                 // Botón "+"
@@ -580,7 +622,7 @@ class _LiveScreenState extends State<LiveScreen> {
                   height: 45,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [Colors.pinkAccent, Colors.orange],
+                      colors: [Tok.oro, Colors.orange],
                     ),
                     shape: BoxShape.circle,
                   ),
@@ -613,10 +655,7 @@ class _LiveScreenState extends State<LiveScreen> {
                 ),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 84, 21, 89),
-                      Color.fromARGB(255, 249, 101, 177),
-                    ],
+                    colors: [Tok.superficie, Tok.oro],
                   ),
                   borderRadius: BorderRadius.circular(40),
                 ),
@@ -666,9 +705,7 @@ class _LiveScreenState extends State<LiveScreen> {
             width: 55,
             height: 55,
             decoration: BoxDecoration(
-              color: activo
-                  ? Colors.pinkAccent
-                  : Colors.white.withOpacity(0.20),
+              color: activo ? Tok.oro : Colors.white.withOpacity(0.20),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: Colors.white, size: 28),

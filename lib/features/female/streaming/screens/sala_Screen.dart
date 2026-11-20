@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:chicas_app/features/female/streaming/screens/live3_pague.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class SalaScreen extends StatefulWidget {
   const SalaScreen({super.key});
@@ -109,7 +110,7 @@ class _SalaScreenState extends State<SalaScreen> {
                     padding: const EdgeInsets.all(12),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 156, 67, 151),
+                        color: Tok.superficieAlta,
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: IconButton(
@@ -183,12 +184,7 @@ class _SalaScreenState extends State<SalaScreen> {
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: selectedImage == i
-                                                    ? const Color.fromARGB(
-                                                        255,
-                                                        241,
-                                                        50,
-                                                        104,
-                                                      )
+                                                    ? Tok.oro
                                                     : Colors.transparent,
                                                 width: 3,
                                               ),
@@ -248,12 +244,14 @@ class _SalaScreenState extends State<SalaScreen> {
                       width: 270,
                       height: 55,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 250, 142, 234),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: const Color.fromARGB(255, 244, 94, 144),
-                          width: 1,
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Tok.oro, Tok.oroHondo],
                         ),
+                        boxShadow: const [Tok.glowOro],
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.transparent, width: 0),
                       ),
                       child: TextButton(
                         onPressed: () {
@@ -265,10 +263,13 @@ class _SalaScreenState extends State<SalaScreen> {
                           );
                         },
                         child: const Text(
-                          "Iniciar Sala",
+                          "INICIAR SALA",
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
+                            // Sobre el oro el texto va en tinta: blanco
+                            // sobre oro no llega al contraste minimo.
+                            color: Tok.tinta,
+                            letterSpacing: 1.4,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -321,9 +322,7 @@ class _SalaScreenState extends State<SalaScreen> {
             duration: const Duration(milliseconds: 200),
             padding: padding ?? const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: active
-                  ? Colors.pinkAccent
-                  : Colors.white.withValues(alpha: 0.15),
+              color: active ? Tok.oro : Colors.white.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -338,9 +337,7 @@ class _SalaScreenState extends State<SalaScreen> {
           Text(
             label,
             style: TextStyle(
-              color: active
-                  ? const Color.fromARGB(255, 244, 94, 144)
-                  : const Color.fromARGB(255, 255, 255, 255),
+              color: active ? Tok.oro : Tok.marfil,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),

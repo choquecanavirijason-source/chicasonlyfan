@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:chicas_app/features/female/content/screens/contn_screen.dart';
 import 'package:chicas_app/features/female/content/screens/contenido_screen.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -15,7 +16,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff3b0a42),
+      backgroundColor: Tok.superficie,
       bottomNavigationBar: _bottomNavBar(context, 2),
       body: SafeArea(
         child: Padding(
@@ -74,21 +75,21 @@ class _ChatPageState extends State<ChatPage> {
                 child: ListView(
                   children: [
                     _chatItem(
-                      img: "assets/user1.jpg",
+                      img: "assets/images/usuarios/u1.jpg",
                       nombre: "Mario Castro",
                       online: true,
                       mensaje: "Gracias por el regalo! 💕",
                       notificaciones: 2,
                     ),
                     _chatItem(
-                      img: "assets/user2.jpg",
+                      img: "assets/images/usuarios/u2.jpg",
                       nombre: "Sofía Ramirez",
                       online: true,
                       mensaje: "Nos vemos mañana en la transmisión",
                       notificaciones: 1,
                     ),
                     _chatItem(
-                      img: "assets/user3.jpg",
+                      img: "assets/images/usuarios/u3.jpg",
                       nombre: "Laura Torres",
                       online: false,
                       vip: true,
@@ -96,7 +97,7 @@ class _ChatPageState extends State<ChatPage> {
                       notificaciones: 0,
                     ),
                     _chatItem(
-                      img: "assets/user4.jpg",
+                      img: "assets/images/usuarios/u4.jpg",
                       nombre: "Eduardo Sanc",
                       online: false,
                       mensaje: "Estoy esperando en la sala",
@@ -104,7 +105,7 @@ class _ChatPageState extends State<ChatPage> {
                       notificaciones: 2,
                     ),
                     _chatItem(
-                      img: "assets/user5.jpg",
+                      img: "assets/images/usuarios/u5.jpg",
                       nombre: "Carmen López",
                       online: true,
                       mensaje: "¿Dónde está la transmisión?",
@@ -229,13 +230,10 @@ class _ChatPageState extends State<ChatPage> {
           if (notificaciones > 0)
             Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.purpleAccent,
-                shape: BoxShape.circle,
-              ),
+              decoration: BoxDecoration(color: Tok.oro, shape: BoxShape.circle),
               child: Text(
                 "$notificaciones",
-                style: const TextStyle(color: Colors.white, fontSize: 12),
+                style: const TextStyle(color: Tok.tinta, fontSize: 12),
               ),
             ),
         ],
@@ -247,7 +245,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget _bottomNavBar(BuildContext context, int currentIndex) {
     return BottomNavigationBar(
       currentIndex: currentIndex,
-      backgroundColor: const Color(0xff4c2050),
+      backgroundColor: Tok.superficie,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white60,
       showSelectedLabels: false,

@@ -7,6 +7,8 @@ import '../../../male/packages/screens/packages_screen.dart';
 import '../../../chat/presentation/screens/chats_screen.dart';
 import '../../../male/home/screens/favorites_screen.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
+import 'package:chicas_app/core/widgets/foto.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -14,7 +16,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Tok.fondo,
       body: SafeArea(
         child: Column(
           children: [
@@ -61,7 +63,7 @@ class ProfileScreen extends ConsumerWidget {
   Widget _buildProfileHeader() {
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Tok.superficie,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(30),
           bottomRight: Radius.circular(30),
@@ -76,12 +78,21 @@ class ProfileScreen extends ConsumerWidget {
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFFE991C5), width: 3),
+                  border: Border.all(color: Tok.oro, width: 3),
                 ),
-                child: const CircleAvatar(
-                  radius: 45,
-                  backgroundImage: AssetImage(
-                    'assets/images/profiles/chico1.jpg',
+                // La foto es de cuerpo entero: un recorte circular centrado
+                // dejaba fuera la cara y mostraba el pecho. Alineando la
+                // imagen hacia arriba, la cara queda dentro del círculo.
+                child: Container(
+                  width: 90,
+                  height: 90,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/profiles/chico1.jpg'),
+                      fit: BoxFit.cover,
+                      alignment: Alignment(0, -0.85),
+                    ),
                   ),
                 ),
               ),
@@ -94,13 +105,13 @@ class ProfileScreen extends ConsumerWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE991C5),
+                    color: Tok.oro,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Text(
                     'ELITE',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Tok.tinta,
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
                     ),
@@ -118,7 +129,7 @@ class ProfileScreen extends ConsumerWidget {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF333333),
+              color: Tok.marfil,
             ),
           ),
 
@@ -167,7 +178,7 @@ class ProfileScreen extends ConsumerWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF333333),
+              color: Tok.marfil,
             ),
           ),
 
@@ -179,7 +190,7 @@ class ProfileScreen extends ConsumerWidget {
             title: 'Minutos Live',
             minutes: 45,
             remaining: '45 minutos restantes',
-            color: const Color(0xFFE991C5),
+            color: Tok.oro,
           ),
 
           const SizedBox(height: 16),
@@ -190,7 +201,9 @@ class ProfileScreen extends ConsumerWidget {
             title: 'Minutos Salas',
             minutes: 120,
             remaining: '120 minutos restantes',
-            color: const Color(0xFF4A1A4A),
+            // Las salas se distinguen del live por el tono del sistema,
+            // no por un morado suelto.
+            color: Tok.vino,
           ),
         ],
       ),
@@ -204,17 +217,17 @@ class ProfileScreen extends ConsumerWidget {
     required String remaining,
     required Color color,
   }) {
+    final esLive = color == Tok.oro;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: Tok.superficie,
+        borderRadius: BorderRadius.circular(Tok.rL),
+        // La de minutos de live es la caja principal de la pantalla:
+        // lleva el hilo de oro y el resplandor. La de salas, no.
+        border: esLive ? Tok.hiloOro : Tok.hiloTenue,
+        boxShadow: esLive
+            ? const [Tok.glowOroCarta, Tok.sombraCarta]
+            : const [Tok.sombraCarta],
       ),
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -237,7 +250,7 @@ class ProfileScreen extends ConsumerWidget {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF333333),
+                    color: Tok.marfil,
                   ),
                 ),
               ),
@@ -280,16 +293,21 @@ class ProfileScreen extends ConsumerWidget {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: color,
-                foregroundColor: Colors.white,
+                // Sobre el oro el texto va en tinta; sobre el vino, en marfil.
+                foregroundColor: esLive ? Tok.tinta : Tok.marfil,
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(Tok.rPill),
                 ),
                 elevation: 0,
               ),
               child: const Text(
-                'Comprar',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                'COMPRAR',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1.4,
+                ),
               ),
             ),
           ),
@@ -309,7 +327,7 @@ class ProfileScreen extends ConsumerWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF333333),
+              color: Tok.marfil,
             ),
           ),
           const SizedBox(height: 16),
@@ -365,15 +383,12 @@ class ProfileScreen extends ConsumerWidget {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: Tok.superficie,
+        borderRadius: BorderRadius.circular(Tok.rL),
+        // La de minutos de live es la caja principal de la pantalla:
+        // lleva el hilo de oro y el resplandor. La de salas, no.
+        border: Tok.hiloTenue,
+        boxShadow: const [Tok.sombraCarta],
       ),
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -381,7 +396,7 @@ class ProfileScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Icon(icon, color: const Color(0xFFE991C5), size: 20),
+              Icon(icon, color: Tok.oro, size: 20),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -389,7 +404,7 @@ class ProfileScreen extends ConsumerWidget {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF333333),
+                    color: Tok.marfil,
                   ),
                 ),
               ),
@@ -399,13 +414,13 @@ class ProfileScreen extends ConsumerWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE991C5),
+                  color: Tok.oro,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   '$count',
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Tok.tinta,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
@@ -419,10 +434,10 @@ class ProfileScreen extends ConsumerWidget {
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 20,
-                    backgroundImage: NetworkImage(
-                      'https://randomuser.me/api/portraits/women/1.jpg',
+                    backgroundImage: fotoProvider(
+                      'assets/images/profiles/avatar1.jpg',
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -435,7 +450,7 @@ class ProfileScreen extends ConsumerWidget {
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF333333),
+                            color: Tok.marfil,
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -453,7 +468,7 @@ class ProfileScreen extends ConsumerWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFE991C5),
+                        backgroundColor: Tok.oro,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 16,
                           vertical: 8,
@@ -502,15 +517,12 @@ class ProfileScreen extends ConsumerWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: Tok.superficie,
+        borderRadius: BorderRadius.circular(Tok.rL),
+        // La de minutos de live es la caja principal de la pantalla:
+        // lleva el hilo de oro y el resplandor. La de salas, no.
+        border: Tok.hiloTenue,
+        boxShadow: const [Tok.sombraCarta],
       ),
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -518,14 +530,14 @@ class ProfileScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.history, color: Color(0xFF4A1A4A), size: 20),
+              const Icon(Icons.history, color: Tok.superficie, size: 20),
               const SizedBox(width: 8),
               const Text(
                 'Historial VIP',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF333333),
+                  color: Tok.marfil,
                 ),
               ),
             ],
@@ -536,10 +548,10 @@ class ProfileScreen extends ConsumerWidget {
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 18,
-                    backgroundImage: NetworkImage(
-                      'https://randomuser.me/api/portraits/women/4.jpg',
+                    backgroundImage: fotoProvider(
+                      'assets/images/profiles/avatar4.jpg',
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -552,7 +564,7 @@ class ProfileScreen extends ConsumerWidget {
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF333333),
+                            color: Tok.marfil,
                           ),
                         ),
                         Text(
@@ -570,7 +582,7 @@ class ProfileScreen extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF4A1A4A),
+                      color: Tok.superficie,
                     ),
                   ),
                 ],
@@ -593,14 +605,14 @@ class ProfileScreen extends ConsumerWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF333333),
+              color: Tok.marfil,
             ),
           ),
           const SizedBox(height: 16),
 
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Tok.superficie,
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -628,8 +640,8 @@ class ProfileScreen extends ConsumerWidget {
                     icon: const Icon(Icons.add, size: 18),
                     label: const Text('Agregar tarjeta'),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: const Color(0xFFE991C5),
-                      side: const BorderSide(color: Color(0xFFE991C5)),
+                      foregroundColor: Tok.oro,
+                      side: const BorderSide(color: Tok.oro),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                   ),
@@ -662,11 +674,7 @@ class ProfileScreen extends ConsumerWidget {
             color: const Color(0xFFF5F5F5),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(
-            Icons.credit_card,
-            color: Color(0xFF4A1A4A),
-            size: 20,
-          ),
+          child: const Icon(Icons.credit_card, color: Tok.superficie, size: 20),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -680,7 +688,7 @@ class ProfileScreen extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF333333),
+                      color: Tok.marfil,
                     ),
                   ),
                   if (isPrincipal) ...[
@@ -691,13 +699,13 @@ class ProfileScreen extends ConsumerWidget {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE991C5),
+                        color: Tok.oro,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
                         'Principal',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Tok.tinta,
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                         ),
@@ -732,13 +740,13 @@ class ProfileScreen extends ConsumerWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF333333),
+                  color: Tok.marfil,
                 ),
               ),
               const SizedBox(height: 16),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Tok.superficie,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -833,15 +841,12 @@ class ProfileScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(
               children: [
-                Icon(icon, color: color ?? const Color(0xFFE991C5), size: 20),
+                Icon(icon, color: color ?? Tok.oro, size: 20),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: color ?? const Color(0xFF333333),
-                    ),
+                    style: TextStyle(fontSize: 14, color: color ?? Tok.marfil),
                   ),
                 ),
                 Icon(
@@ -859,11 +864,14 @@ class ProfileScreen extends ConsumerWidget {
 
   Widget _buildBottomNavigation(BuildContext context) {
     return Container(
+      // Una barra no es un color de marca: es una superficie. El oro
+      // aparece solo en el icono activo.
       decoration: const BoxDecoration(
-        color: AppColors.primary,
+        color: Tok.superficie,
+        border: Border(top: BorderSide(color: Tok.borde, width: 1)),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radius.circular(Tok.rL),
+          topRight: Radius.circular(Tok.rL),
         ),
       ),
       child: SafeArea(

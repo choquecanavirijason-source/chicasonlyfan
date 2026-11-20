@@ -4,6 +4,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/widgets/atoms/custom_back_button.dart';
 import '../../../../../core/widgets/atoms/primary_button.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ErrorScreen extends StatelessWidget {
   final String? phoneNumber;
@@ -20,7 +21,7 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.textWhite,
+      backgroundColor: Tok.fondo,
       appBar: AppBar(
         leading: CustomBackButton(color: AppColors.textSecondary),
         backgroundColor: Colors.transparent,

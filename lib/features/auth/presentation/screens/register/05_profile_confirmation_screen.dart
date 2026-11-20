@@ -8,6 +8,7 @@ import '../../../../../core/widgets/atoms/custom_back_button.dart';
 import '../../../../../core/widgets/atoms/primary_button.dart';
 import '../../../../../core/enums/user_type.dart';
 import '../../controllers/auth_controller.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ProfileConfirmationScreen extends ConsumerStatefulWidget {
   final String phoneNumber;
@@ -159,7 +160,7 @@ class _ProfileConfirmationScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.textWhite,
+      backgroundColor: Tok.fondo,
       appBar: AppBar(
         leading: CustomBackButton(color: AppColors.textSecondary),
         backgroundColor: Colors.transparent,
@@ -267,7 +268,7 @@ class _ProfileConfirmationScreenState
                   style: const TextStyle(fontSize: 16, color: Colors.black),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Tok.superficieAlta,
                     hintText: 'Nombre completo',
                     hintStyle: const TextStyle(color: Colors.grey),
                     contentPadding: const EdgeInsets.all(18),
@@ -292,7 +293,7 @@ class _ProfileConfirmationScreenState
                   style: const TextStyle(fontSize: 16, color: Colors.black),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Tok.superficieAlta,
                     hintText: 'Nombre de usuario',
                     hintStyle: const TextStyle(color: Colors.grey),
                     contentPadding: const EdgeInsets.all(18),
@@ -317,7 +318,7 @@ class _ProfileConfirmationScreenState
                   style: const TextStyle(fontSize: 16, color: Colors.black),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Tok.superficieAlta,
                     hintText: 'Fecha de nacimiento',
                     hintStyle: const TextStyle(color: Colors.grey),
                     suffixIcon: const Icon(
@@ -436,7 +437,7 @@ class _ProfileConfirmationScreenState
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Tok.superficie,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: _isContentCreator

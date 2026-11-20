@@ -43,3 +43,16 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Credenciales locales: nunca commitear
+aws_config.json
+.env
+
+# Certificado y clave autofirmados de las pruebas locales de streaming
+auto.crt
+auto.key
+
+# Artefactos de las demos (se regeneran al compilar)
+*.apk
+ChicasApp-capturas.zip
+ChicasApp-live-funcionando.zip

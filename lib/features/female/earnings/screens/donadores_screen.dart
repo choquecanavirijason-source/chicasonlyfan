@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:chicas_app/core/widgets/foto.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class RankingDonadores extends StatelessWidget {
   const RankingDonadores({super.key});
@@ -6,13 +8,13 @@ class RankingDonadores extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF2A0C3A),
+      backgroundColor: Tok.superficie,
       body: Center(
         child: Container(
           width: 340,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFF3C1251),
+            color: Tok.superficie,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
@@ -55,8 +57,8 @@ class RankingDonadores extends StatelessWidget {
                 puesto: "#1 - 450 Bs",
                 badgeColor: Colors.yellow,
                 botonTexto: "Acceso VIP",
-                botonColor: Color(0xFFF38AE0),
-                bordeColor: Color(0xFFFA8AD2),
+                botonColor: Tok.oro,
+                bordeColor: Tok.oro,
               ),
 
               const SizedBox(height: 12),
@@ -126,7 +128,7 @@ class RankingDonadores extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF512165),
+        color: Tok.superficie,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: bordeColor, width: 1.8),
       ),
@@ -135,7 +137,7 @@ class RankingDonadores extends StatelessWidget {
         children: [
           Row(
             children: [
-              CircleAvatar(radius: 25, backgroundImage: NetworkImage(avatar)),
+              CircleAvatar(radius: 25, backgroundImage: fotoProvider(avatar)),
               const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,12 +200,12 @@ class RankingDonadores extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
       decoration: BoxDecoration(
-        color: const Color(0xFF462055),
+        color: Tok.superficie,
         borderRadius: BorderRadius.circular(14),
       ),
       child: Row(
         children: [
-          CircleAvatar(radius: 22, backgroundImage: NetworkImage(avatar)),
+          CircleAvatar(radius: 22, backgroundImage: fotoProvider(avatar)),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

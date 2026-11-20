@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class LiveFinalizada extends StatelessWidget {
   const LiveFinalizada({super.key});
@@ -13,11 +14,7 @@ class LiveFinalizada extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.emoji_events,
-                color: Color(0xFFE6B6FF),
-                size: 70,
-              ),
+              const Icon(Icons.emoji_events, color: Tok.champan, size: 70),
 
               const SizedBox(height: 10),
 
@@ -56,8 +53,8 @@ class LiveFinalizada extends StatelessWidget {
                         // AVATAR
                         ClipRRect(
                           borderRadius: BorderRadius.circular(50),
-                          child: Image.network(
-                            "https://i.postimg.cc/XYNTR7zK/avatar.jpg", // Cambia esto
+                          child: Image.asset(
+                            "assets/model.jpg",
                             width: 65,
                             height: 65,
                             fit: BoxFit.cover,
@@ -175,7 +172,7 @@ Widget _metricTile({
       children: [
         Row(
           children: [
-            Icon(icon, color: Color(0xFFE6B6FF)),
+            Icon(icon, color: Tok.champan),
             const SizedBox(width: 15),
             Text(
               title,
@@ -211,7 +208,7 @@ Widget _smallMetric({
     ),
     child: Column(
       children: [
-        Icon(icon, color: Color(0xFFE6B6FF)),
+        Icon(icon, color: Tok.champan),
         const SizedBox(height: 10),
         Text(
           value,

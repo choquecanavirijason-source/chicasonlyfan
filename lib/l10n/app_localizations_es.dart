@@ -9,5 +9,5 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'Chicas App';
+  String get appTitle => 'Hot Spot';
 }

@@ -7,6 +7,7 @@ import '../../../../../core/widgets/atoms/custom_back_button.dart';
 import '../../../../../core/widgets/atoms/primary_button.dart';
 import '../../../../../core/enums/user_type.dart';
 import '../../controllers/auth_controller.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class FollowProfilesScreen extends ConsumerStatefulWidget {
   final String phoneNumber;
@@ -175,7 +176,7 @@ class _FollowProfilesScreenState extends ConsumerState<FollowProfilesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: Tok.fondo,
       appBar: AppBar(
         leading: CustomBackButton(color: AppColors.textSecondary),
         backgroundColor: Colors.transparent,
@@ -230,7 +231,7 @@ class _FollowProfilesScreenState extends ConsumerState<FollowProfilesScreen> {
                     color: AppColors.textHint,
                   ),
                   filled: true,
-                  fillColor: AppColors.background,
+                  fillColor: Tok.superficieAlta,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,

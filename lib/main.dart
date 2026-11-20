@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,8 +10,13 @@ import 'firebase_options.dart';
 import 'core/theme/app_theme.dart';
 import 'app_module.dart';
 import 'features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 void main() async {
+  // Las tipografías viajan dentro del APK. Sin esto, google_fonts las
+  // bajaría de internet en el primer arranque y, sin conexión, la app
+  // caería a la fuente del sistema.
+  GoogleFonts.config.allowRuntimeFetching = false;
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -28,7 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Chicas App',
+      title: 'Hot Spot',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       localizationsDelegates: const [
@@ -85,7 +91,7 @@ class AuthWrapper extends StatelessWidget {
         // Mientras se verifica el estado de autenticación
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
-            backgroundColor: Color(0xFF4A148C),
+            backgroundColor: Tok.fondo,
             body: Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),

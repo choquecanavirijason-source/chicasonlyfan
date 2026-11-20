@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../auth/presentation/controllers/auth_controller.dart';
 import '../../../../core/config/auth_config.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 /// Layout persistente para el módulo Female (Creadoras)
 /// Contiene el BottomNavigationBar que se mantiene cargado
@@ -85,13 +86,13 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff7e9f5),
+      backgroundColor: Tok.fondo,
       appBar: AppBar(
-        backgroundColor: const Color(0xfff7e9f5),
+        backgroundColor: Tok.fondo,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout, color: Color(0xff4c3a57)),
+            icon: const Icon(Icons.logout, color: Tok.oro),
             tooltip: authenticationEnabled ? 'Cerrar Sesión' : 'Cambiar perfil',
             onPressed: _handleLogout,
           ),
@@ -105,7 +106,7 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
   Widget _buildBottomNavigationBar() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Tok.superficie,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -118,9 +119,9 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xff4c3a57),
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Tok.fondo,
+        selectedItemColor: Tok.oro,
+        unselectedItemColor: Tok.humo,
         showUnselectedLabels: true,
         selectedFontSize: 12,
         unselectedFontSize: 12,
@@ -147,11 +148,7 @@ class _FemaleLayoutState extends ConsumerState<FemaleLayout> {
   }
 
   Widget _buildNavIcon(IconData icon, bool isActive) {
-    return Icon(
-      icon,
-      color: isActive ? const Color(0xff4c3a57) : Colors.grey,
-      size: 24,
-    );
+    return Icon(icon, color: isActive ? Tok.oro : Tok.humo, size: 24);
   }
 
   /// Determina el índice del tab basándose en la ruta actual

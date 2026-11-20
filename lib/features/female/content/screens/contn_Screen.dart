@@ -1,6 +1,7 @@
 import 'package:chicas_app/features/female/content/screens/contenido_screen.dart';
 import 'package:chicas_app/features/female/streaming/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:chicas_app/core/theme/chicas_tokens.dart';
 
 class ContnScreen extends StatelessWidget {
   const ContnScreen({super.key});
@@ -8,7 +9,7 @@ class ContnScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Tok.fondo,
       bottomNavigationBar: _bottomNavBar(context, 0),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,7 +29,7 @@ class ContnScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff4c3a57),
+                  color: Tok.oro,
                 ),
               ),
 
@@ -41,7 +42,7 @@ class ContnScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff4c3a57),
+                  color: Tok.oro,
                 ),
               ),
 
@@ -78,7 +79,7 @@ class ContnScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xff4c3a57),
+                color: Tok.oro,
               ),
             ),
             Text(
@@ -90,9 +91,9 @@ class ContnScreen extends StatelessWidget {
         const Spacer(),
         Row(
           children: const [
-            Icon(Icons.notifications_none, color: Color(0xff4c3a57)),
+            Icon(Icons.notifications_none, color: Tok.oro),
             SizedBox(width: 14),
-            Icon(Icons.settings, color: Color(0xff4c3a57)),
+            Icon(Icons.settings, color: Tok.oro),
           ],
         ),
       ],
@@ -115,9 +116,9 @@ class ContnScreen extends StatelessWidget {
       width: 105,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: Colors.purple.shade100),
-        color: Colors.white,
+        borderRadius: BorderRadius.circular(Tok.rL),
+        border: Tok.hiloTenue,
+        color: Tok.superficie,
         boxShadow: [
           BoxShadow(
             color: Colors.black12.withValues(alpha: 0.05),
@@ -128,20 +129,17 @@ class ContnScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Icon(Icons.person_outline, color: Colors.purple.shade200, size: 28),
+          Icon(Icons.person_outline, color: Tok.oro, size: 28),
           const SizedBox(height: 5),
           Text(
             number,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Color(0xff4c3a57),
+              color: Tok.oro,
             ),
           ),
-          Text(
-            label,
-            style: TextStyle(fontSize: 12, color: Colors.purple.shade300),
-          ),
+          Text(label, style: TextStyle(fontSize: 12, color: Tok.humo)),
         ],
       ),
     );
@@ -151,9 +149,9 @@ class ContnScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
-        border: Border.all(color: Colors.purple.shade100),
+        borderRadius: BorderRadius.circular(Tok.rL),
+        color: Tok.superficie,
+        border: Tok.hiloTenue,
         boxShadow: [
           BoxShadow(
             color: Colors.black12.withValues(alpha: 0.06),
@@ -179,7 +177,7 @@ class ContnScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xff4c3a57),
+                      color: Tok.oro,
                     ),
                   ),
                   Text(
@@ -208,7 +206,7 @@ class ContnScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff4c2050),
+                backgroundColor: Tok.superficie,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
@@ -245,17 +243,17 @@ class ContnScreen extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.purple.shade100),
+        border: Tok.hiloTenue,
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.purple.shade50,
+              color: Tok.superficieAlta,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(Icons.star, color: Colors.purple.shade300),
+            child: Icon(Icons.star, color: Tok.humo),
           ),
           const SizedBox(width: 12),
           Column(
@@ -265,7 +263,7 @@ class ContnScreen extends StatelessWidget {
                 title,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff4c3a57),
+                  color: Tok.oro,
                 ),
               ),
               const Text("Hace 6 horas", style: TextStyle(color: Colors.grey)),
@@ -279,8 +277,8 @@ class ContnScreen extends StatelessWidget {
   Widget _bottomNavBar(BuildContext context, int currentIndex) {
     return BottomNavigationBar(
       currentIndex: currentIndex,
-      backgroundColor: const Color(0xff4c2050),
-      selectedItemColor: Colors.white,
+      backgroundColor: Tok.superficie,
+      selectedItemColor: Tok.oro,
       unselectedItemColor: Colors.white60,
       showSelectedLabels: false,
       showUnselectedLabels: false,

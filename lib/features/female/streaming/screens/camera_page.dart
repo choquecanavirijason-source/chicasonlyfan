@@ -4,6 +4,8 @@ import 'package:camera/camera.dart';
 import 'liveLinea_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../../../shared/services/streaming_service.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../../../core/theme/chicas_tokens.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -110,7 +112,7 @@ class _CameraPageState extends State<CameraPage> {
                     padding: const EdgeInsets.all(12),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 156, 67, 151),
+                        color: Tok.superficieAlta,
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: IconButton(
@@ -184,12 +186,7 @@ class _CameraPageState extends State<CameraPage> {
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: selectedImage == i
-                                                    ? const Color.fromARGB(
-                                                        255,
-                                                        241,
-                                                        50,
-                                                        104,
-                                                      )
+                                                    ? Tok.oro
                                                     : Colors.transparent,
                                                 width: 3,
                                               ),
@@ -249,12 +246,15 @@ class _CameraPageState extends State<CameraPage> {
                       width: 270,
                       height: 55,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 250, 142, 234),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: const Color.fromARGB(255, 244, 94, 144),
-                          width: 1,
+                        // La acción principal de la pantalla: degradado de oro
+                        // y el resplandor. Es la única que brilla acá.
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Tok.oro, Color(0xFF9D7C14)],
                         ),
+                        borderRadius: BorderRadius.circular(Tok.rPill),
+                        boxShadow: const [Tok.glowOro],
                       ),
                       child: TextButton(
                         onPressed: () async {
@@ -297,12 +297,13 @@ class _CameraPageState extends State<CameraPage> {
                             }
                           }
                         },
-                        child: const Text(
-                          "Iniciar Live",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                        child: Text(
+                          "INICIAR LIVE",
+                          style: GoogleFonts.jost(
+                            color: const Color(0xFF140F02),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.4,
                           ),
                         ),
                       ),
@@ -354,9 +355,7 @@ class _CameraPageState extends State<CameraPage> {
             duration: const Duration(milliseconds: 200),
             padding: padding ?? const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: active
-                  ? Colors.pinkAccent
-                  : Colors.white.withValues(alpha: 0.15),
+              color: active ? Tok.oro : Colors.white.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -371,9 +370,7 @@ class _CameraPageState extends State<CameraPage> {
           Text(
             label,
             style: TextStyle(
-              color: active
-                  ? const Color.fromARGB(255, 244, 94, 144)
-                  : const Color.fromARGB(255, 255, 255, 255),
+              color: active ? Tok.oro : Tok.marfil,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),

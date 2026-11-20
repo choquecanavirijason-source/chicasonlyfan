@@ -75,21 +75,21 @@ class _ChatPageState extends State<ChatPage> {
                 child: ListView(
                   children: [
                     _chatItem(
-                      img: "assets/user1.jpg",
+                      img: "assets/images/usuarios/u1.jpg",
                       nombre: "Mario Castro",
                       online: true,
                       mensaje: "Gracias por el regalo! 💕",
                       notificaciones: 2,
                     ),
                     _chatItem(
-                      img: "assets/user2.jpg",
+                      img: "assets/images/usuarios/u2.jpg",
                       nombre: "Sofía Ramirez",
                       online: true,
                       mensaje: "Nos vemos mañana en la transmisión",
                       notificaciones: 1,
                     ),
                     _chatItem(
-                      img: "assets/user3.jpg",
+                      img: "assets/images/usuarios/u3.jpg",
                       nombre: "Laura Torres",
                       online: false,
                       vip: true,
@@ -97,7 +97,7 @@ class _ChatPageState extends State<ChatPage> {
                       notificaciones: 0,
                     ),
                     _chatItem(
-                      img: "assets/user4.jpg",
+                      img: "assets/images/usuarios/u4.jpg",
                       nombre: "Eduardo Sanc",
                       online: false,
                       mensaje: "Estoy esperando en la sala",
@@ -105,7 +105,7 @@ class _ChatPageState extends State<ChatPage> {
                       notificaciones: 2,
                     ),
                     _chatItem(
-                      img: "assets/user5.jpg",
+                      img: "assets/images/usuarios/u5.jpg",
                       nombre: "Carmen López",
                       online: true,
                       mensaje: "¿Dónde está la transmisión?",

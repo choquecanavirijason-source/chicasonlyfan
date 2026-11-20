@@ -74,6 +74,7 @@ flutter:
     - assets/filtro1.jpg
     - assets/filtro2.jpg
     - assets/images/profiles/
+    - assets/images/usuarios/
     - assets/images/galeria/carla/
     - assets/images/galeria/maria/
     - assets/images/galeria/sofia/

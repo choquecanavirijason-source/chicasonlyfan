@@ -6,6 +6,8 @@ import '../../../../core/theme/chicas_tokens.dart';
 import '../../../../shared/services/streaming_service.dart';
 import '../../../videocall/presentation/screens/videocall_screen.dart';
 import 'contenido_video_screen.dart';
+import 'package:chicas_app/core/widgets/fondo_video.dart';
+import 'package:chicas_app/core/widgets/foto.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -25,26 +27,36 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   final List<Map<String, dynamic>> _favorites = [
     {
       'name': 'Ana',
+      'video': 'assets/videos/contenido1.mp4',
+      'portada': 'assets/images/contenido/portada1.jpg',
       'image': 'assets/images/profiles/avatar1.jpg',
       'fav': true,
     },
     {
       'name': 'María',
+      'video': 'assets/videos/contenido3.mp4',
+      'portada': 'assets/images/contenido/portada3.jpg',
       'image': 'assets/images/profiles/avatar2.jpg',
       'fav': true,
     },
     {
       'name': 'Sofia',
+      'video': 'assets/videos/contenido5.mp4',
+      'portada': 'assets/images/contenido/portada5.jpg',
       'image': 'assets/images/profiles/avatar3.jpg',
       'fav': true,
     },
     {
       'name': 'Laura',
+      'video': 'assets/videos/contenido7.mp4',
+      'portada': 'assets/images/contenido/portada7.jpg',
       'image': 'assets/images/profiles/avatar4.jpg',
       'fav': false,
     },
     {
       'name': 'Paula',
+      'video': 'assets/videos/contenido9.mp4',
+      'portada': 'assets/images/contenido/portada9.jpg',
       'image': 'assets/images/profiles/avatar5.jpg',
       'fav': false,
     },
@@ -112,8 +124,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       'video': 'assets/videos/contenido8.mp4',
     },
     {
-      'type': 'FOTO',
-      'title': 'Nueva foto subida',
+      // Decía FOTO pero reproducía video: la etiqueta tiene que decir
+      // la verdad sobre lo que se abre al tocarla.
+      'type': 'VIDEO',
+      'title': 'Charlando un rato',
       'subtitle': '@ana · hace 2 días',
       'image': 'assets/images/contenido/portada9.jpg',
       'video': 'assets/videos/contenido9.mp4',
@@ -268,9 +282,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(3),
-                              child: CircleAvatar(
-                                backgroundImage: AssetImage(
-                                  favorite['image'] as String,
+                              // El estado se ve en movimiento, como en
+                              // cualquier app de historias.
+                              child: ClipOval(
+                                child: FondoVideo(
+                                  video: favorite['video'] as String,
+                                  portada: favorite['image'] as String,
                                 ),
                               ),
                             ),
@@ -396,6 +413,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       'image':
                           data['userAvatar'] ??
                           'assets/model.jpg',
+                      // Para la demo la miniatura del live va en movimiento,
+                      // que es lo que un live debería parecer.
+                      'video': 'assets/videos/contenido4.mp4',
                       'isLive': true,
                       'streamId': doc.id,
                       'playbackUrl': data['playbackUrl'] ?? '',
@@ -563,41 +583,20 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         ),
         child: Stack(
           children: [
-            // Imagen de fondo
+            // El fondo de la tarjeta. Si hay video, se reproduce en bucle
+            // y sin sonido: para la demo, la grilla se ve viva en vez de
+            // ser un muro de fotos quietas.
             ClipRRect(
               borderRadius: BorderRadius.circular(Tok.rL),
-              child: item['image'].startsWith('http')
-                  ? Image.network(
-                      item['image'],
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey[300],
-                          child: const Icon(
-                            Icons.image,
-                            size: 50,
-                            color: Colors.grey,
-                          ),
-                        );
-                      },
+              child: item['video'] != null
+                  ? FondoVideo(
+                      video: item['video'] as String,
+                      portada: item['image'] as String,
                     )
-                  : Image.asset(
-                      item['image'],
-                      fit: BoxFit.cover,
+                  : foto(
+                      item['image'] as String,
                       width: double.infinity,
                       height: double.infinity,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Tok.superficieAlta,
-                          child: const Icon(
-                            Icons.image,
-                            size: 50,
-                            color: Colors.grey,
-                          ),
-                        );
-                      },
                     ),
             ),
 

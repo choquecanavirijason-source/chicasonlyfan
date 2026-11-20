@@ -37,17 +37,17 @@ class _LiveScreenState extends State<LiveScreen> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   List<Map<String, String>> mensajes = [
     {
-      "img": "assets/user1.jpg",
+      "img": "assets/images/usuarios/u1.jpg",
       "nombre": "Mario Castro",
       "mensaje": "Hola a todos 👋",
     },
     {
-      "img": "assets/user2.jpg",
+      "img": "assets/images/usuarios/u2.jpg",
       "nombre": "Sofía Ramirez",
       "mensaje": "Bienvenidos al Live!",
     },
     {
-      "img": "assets/user3.jpg",
+      "img": "assets/images/usuarios/u3.jpg",
       "nombre": "Laura Torres",
       "mensaje": "Qué bonita cámara 😍",
     },
@@ -310,7 +310,7 @@ class _LiveScreenState extends State<LiveScreen> {
     _timer = Timer.periodic(const Duration(seconds: 3), (_) {
       _contadorMensajes++;
       Map<String, String> nuevo = {
-        "img": "assets/user${(_contadorMensajes % 5) + 1}.jpg",
+        "img": "assets/images/usuarios/u${(_contadorMensajes % 5) + 1}.jpg",
         "nombre": "Usuario $_contadorMensajes",
         "mensaje": "Mensaje automático $_contadorMensajes ✨",
       };
@@ -455,7 +455,7 @@ class _LiveScreenState extends State<LiveScreen> {
                         );
                       },
                       child: _miniViewer(
-                        "assets/view1.jpg",
+                        "assets/images/usuarios/u6.jpg",
                         Tok.oro,
                         "1",
                       ),
@@ -471,7 +471,7 @@ class _LiveScreenState extends State<LiveScreen> {
                         );
                       },
                       child: _miniViewer(
-                        "assets/view2.jpg",
+                        "assets/images/usuarios/u7.jpg",
                         Tok.champan,
                         "2",
                       ),
@@ -487,7 +487,7 @@ class _LiveScreenState extends State<LiveScreen> {
                         );
                       },
                       child: _miniViewer(
-                        "assets/view3.jpg",
+                        "assets/images/usuarios/u8.jpg",
                         Tok.oroHondo,
                         "3",
                       ),
@@ -504,13 +504,13 @@ class _LiveScreenState extends State<LiveScreen> {
             left: 10,
             child: Column(
               children: [
-                _avatar("assets/profile1.png"),
+                _avatar("assets/images/usuarios/u1.jpg"),
                 const SizedBox(height: 10),
-                _avatar("assets/a2.png"),
+                _avatar("assets/images/usuarios/u2.jpg"),
                 const SizedBox(height: 10),
-                _avatar("assets/a3.png"),
+                _avatar("assets/images/usuarios/u3.jpg"),
                 const SizedBox(height: 10),
-                _avatar("assets/a4.png"),
+                _avatar("assets/images/usuarios/u4.jpg"),
                 const SizedBox(height: 20),
 
                 // Botón "+"
